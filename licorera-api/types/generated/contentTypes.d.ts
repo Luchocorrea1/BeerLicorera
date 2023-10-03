@@ -362,6 +362,69 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiMenuMenu extends Schema.CollectionType {
+  collectionName: 'menus';
+  info: {
+    singularName: 'menu';
+    pluralName: 'menus';
+    displayName: 'Menu';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Descripcion: Attribute.String;
+    URL: Attribute.String;
+    Orden: Attribute.Integer;
+    PadreId: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::menu.menu', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::menu.menu', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProductoProducto extends Schema.CollectionType {
+  collectionName: 'productos';
+  info: {
+    singularName: 'producto';
+    pluralName: 'productos';
+    displayName: 'Productos';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Nombre: Attribute.String;
+    FechaCreacion: Attribute.DateTime;
+    UsuarioCreacion: Attribute.String;
+    MaquinaCreacion: Attribute.String;
+    FechaActualizacion: Attribute.DateTime;
+    UsuarioActualizacion: Attribute.String;
+    MaquinaActualizacion: Attribute.String;
+    Activo: Attribute.Boolean;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::producto.producto',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::producto.producto',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -677,69 +740,6 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
-export interface ApiMenuMenu extends Schema.CollectionType {
-  collectionName: 'menus';
-  info: {
-    singularName: 'menu';
-    pluralName: 'menus';
-    displayName: 'Menu';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Descripcion: Attribute.String;
-    URL: Attribute.String;
-    Orden: Attribute.Integer;
-    PadreId: Attribute.Integer;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::menu.menu', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::menu.menu', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface ApiProductoProducto extends Schema.CollectionType {
-  collectionName: 'productos';
-  info: {
-    singularName: 'producto';
-    pluralName: 'productos';
-    displayName: 'Productos';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Nombre: Attribute.String;
-    FechaCreacion: Attribute.DateTime;
-    UsuarioCreacion: Attribute.String;
-    MaquinaCreacion: Attribute.String;
-    FechaActualizacion: Attribute.DateTime;
-    UsuarioActualizacion: Attribute.String;
-    MaquinaActualizacion: Attribute.String;
-    Activo: Attribute.Boolean;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::producto.producto',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::producto.producto',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -750,14 +750,14 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::menu.menu': ApiMenuMenu;
+      'api::producto.producto': ApiProductoProducto;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
-      'api::menu.menu': ApiMenuMenu;
-      'api::producto.producto': ApiProductoProducto;
     }
   }
 }
