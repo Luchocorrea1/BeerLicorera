@@ -1,0 +1,66 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">Crear nueva comunicación</h4>
+    <button type="button" class="close" ng-click="CloseModalComunication()" data-dismiss="modal">&times;</button>
+</div>
+<div class="modal-body">
+    <ng-form name="frmOb" class="container" novalidate>
+        <div class="row">
+            <div class="col-sm-6">
+            
+                <combo-box control-name="TiposComunicacion" titulo="Tipos de comunicación" opciones="Lists.TiposComunicacion" 
+                field-model="Comunicacion.TipoComunicacion" ng-model="Comunicacion.TipoComunicacion"  is-required="true"
+                form-reference="frmOb">
+            </combo-box>
+            </div> 
+            <div class="col-sm-6">
+                <date-box  control-name="FechaComunicacion" titulo="Fecha de comunicación" ng-model="Comunicacion.FechaComunicacion" field-model="Comunicacion.FechaComunicacion"
+                is-required="true"  form-reference="frmOb">
+           </date-box>
+            </div>
+            
+        </div>
+        <div class="row">
+        
+            <div class="col-sm-12">
+                <text-box control-name="Title" titulo="Nombre de comunicado" field-model="Comunicacion.Title" is-required="true" 
+                    form-reference="frmOb">
+                </text-box>
+            </div>  
+        </div>
+        <div class="row">          
+            <div class="col-sm-12">
+                <multiline-box control-name="Descripcion" titulo="Descripción" rows="2" field-model="Comunicacion.Descripcion" is-required="true"
+                    form-reference="frmOb">
+                </multiline-box>
+            </div>
+            <div class="col-sm-12">
+                <multiline-box control-name="Compromisos" titulo="Compromisos" rows="2" field-model="Comunicacion.Compromisos"
+                          form-reference="frmOb">
+                </multiline-box>
+            </div>
+            <div class="col-sm-12">
+                <multiline-box control-name="Observaciones" titulo="Observaciones" rows="2" field-model="Comunicacion.Observaciones"
+                          form-reference="frmOb">
+                </multiline-box>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Archivo </label>
+                <input type="file" class="form-control ng-pristine ng-untouched ng-valid ng-scope ng-empty" name="Archivo" id="Archivo"
+                    data-custom-file-change="Comunicacion.Documento" ng-model="Comunicacion.Documento"
+                    form-reference="frmOb" filestyle />
+            </div>
+        </div>
+    </ng-form>
+</div>
+<div class="modal-footer">
+    <button type="button" ng-disabled="!frmOb.$valid" ng-click="OpenModalMensajeComunicacion()" class="btn btnFormgray"
+            data-dismiss="modal">
+        Guardar
+    </button>
+    <button type="button" ng-click="CloseModalComunication()" class="btnFormINGEPModal"
+        data-dismiss="modal">
+        Cerrar
+    </button>
+</div>

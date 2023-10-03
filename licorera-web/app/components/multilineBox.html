@@ -1,0 +1,22 @@
+﻿<div class="form-group">
+    <label ng-if="$ctrl.titulo" for="{{$ctrl.controlName}}">{{$ctrl.titulo}}: 
+        <span ng-if="$ctrl.isRequired" style="color: red;">*</span>
+    </label>
+    
+    <span ng-if="$ctrl.showIcon" id="iconAyuda" class="fa fa-info-circle" aria-hidden="true" title="{{$ctrl.titleIcon}}"></span>
+
+	<history ng-if="$ctrl.showHistory" history-name="{{$ctrl.historyName}}" show-history="$ctrl.showHistory" is-disabled="$ctrl.isDisabledHistory"></history>
+
+    <textarea titulo="{{$ctrl.titulo || $ctrl.subtitulo}}" class="form-control" id="{{$ctrl.controlName}}" rows="{{$ctrl.rows}}" name="{{$ctrl.controlName}}" ng-model="$ctrl.fieldModel" onkeydown="KeyEnterTextArea(event)"
+    maxlength="{{$ctrl.maxLength}}" ng-maxlength="$ctrl.maxLength" ng-required="$ctrl.isRequired" ng-disabled="$ctrl.isDisabled"></textarea>
+
+	
+    <div ng-if="$ctrl.showError" ng-messages="$ctrl.error()" style="color:red;" role="alert">
+        <div ng-message="required">El campo {{$ctrl.titulo ? "'" + $ctrl.titulo + "'" : ""}} es requerido</div>
+    </div>
+
+    
+    <requerimiento show-error="$ctrl.showError" ng-if="$ctrl.isRevision" control-name="{{$ctrl.controlName}}" titulo="{{$ctrl.titulo || $ctrl.subtitulo}}" is-revision="$ctrl.isRevision" field-model-requerimiento="$ctrl.fieldModelRequerimiento" is-disabled="$ctrl.isDisabledRequerimiento"
+	is-respuesta-requerimiento="$ctrl.isRespuestaRequerimiento" is-disabled-respuesta="$ctrl.isDisabledRespuesta"></requerimiento>
+    
+</div>

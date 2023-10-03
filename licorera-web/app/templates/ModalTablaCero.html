@@ -1,0 +1,65 @@
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal"
+                    aria-hidden="true">&times;
+
+                </button>
+                <h4 class="modal-title">{{Pagina.Titulo}}</h4>
+            </div>
+            <div class="modal-body">
+                <ng-form name="frmOb" class="container" novalidate>
+                   
+                    <text-box control-name="MPropositoRGS" titulo="Proposito de la RGS"  field-model="model.MPropositoRGS"
+                        is-required="true" form-reference="frmOb">
+                    </text-box>
+
+                    <text-box control-name="MNumeroRGS" titulo="# RGS" field-model="model.MNumeroRGS" is-required="true"
+                        form-reference="frmOb">
+                    </text-box>
+
+                  <date-box control-name="MFechaSolicitud" titulo="Fecha de solicitud" field-model="model.MFechaSolicitud"
+                        is-required="true" form-reference="frmOb">
+                    </date-box>
+
+                        <combo-box control-name="MCiudad" titulo="Ciudad" opciones="Lists.MCiudad"
+                        field-model="model.MCiudad" is-required="true" form-reference="frmOb">
+                        </combo-box>
+
+                        <combo-box control-name="MProyecto" titulo="Proyecto" opciones="Lists.MProyecto"
+                        field-model="model.MProyecto" is-required="true" form-reference="frmOb">
+                        </combo-box>
+
+                        <combo-box control-name="MRol" titulo="Rol" opciones="Lists.MRol"
+                        field-model="model.MRol" is-required="true" form-reference="frmOb">
+                        </combo-box>
+
+                        <number-box control-name="MCTC" titulo="CTC" 
+                        field-model="model.MCTC" is-required="true" form-reference="frmOb">
+                        </number-box>
+
+                        <combo-box control-name="MAniosExperiencia" titulo="Años de experiencia" opciones="Lists.MAniosExperiencia"
+                        field-model="model.MAniosExperiencia" is-required="true" form-reference="frmOb">
+                        </combo-box>
+
+                        <multiline-box control-name="MDescripcionPerfil" titulo="Descripción del perfil" field-model="model.MDescripcionPerfil"
+                        is-required="true" form-reference="frmOb" rows="6">
+                        </multiline-box>
+
+                        <multiline-box control-name="MObservacionesGenerales " titulo="Observaciones Generales " field-model="model.MObservacionesGenerales"
+                        is-required="true" form-reference="frmOb" rows="6">
+                        </multiline-box>
+
+                  
+                </ng-form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-disabled="!frmOb.$valid" ng-click="Guardar()" class="btn btn-green"
+                    data-dismiss="modal">Guardar</button>
+                <button type="button" ng-click="close(false)" class="btn btn-light"
+                    data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal"
+                        aria-hidden="true">&times;
+    
+                    </button>
+                    <h4 class="modal-title">{{Pagina.tituloPagina}}</h4>
+                </div>
+                <div class="modal-body">
+                    <ng-form name="frmOb" class="container" novalidate>
+                        <text-box control-name="Titulo" titulo="Titulo" field-model="model.Titulo"
+                            is-required="true" form-reference="frmOb"></text-box>
+
+                            <multiline-box control-name="Descripcion" titulo="Descripción"
+                        field-model="model.Descripcion" is-required="true" form-reference="frmOb" rows="6">
+                    </multiline-box>
+
+    
+                        <div class="form-group">
+                            <label style="width: 100%;">Cargar Imagen: <span style="color: red;">*</span></label><br />
+                            <input type="file" class="form-control" name="Imagen" id="Imagen" validatextension="jpg,png"
+                                data-custom-file-change="model.Imagen" ng-model="model.Imagen" accept=".jpg,.png"
+                                ng-required="Insertar" title="El tipo de archivo permitido en este campo es .jpg .png"
+                                form-reference="frmOb" />
+                        </div>
+
+                    </ng-form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ng-disabled="!frmOb.$valid" ng-click="Guardar()" class="btn btn-green"
+                        data-dismiss="modal">Guardar</button>
+                    <button type="button" ng-click="close(false)" class="btn btn-light"
+                        data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>

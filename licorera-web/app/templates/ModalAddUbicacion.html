@@ -1,0 +1,86 @@
+﻿<div class="modal-header headerINGEP">
+    <h4 class="modal-title titleModalForm">{{Pagina.Titulo}}</h4>
+    <button type="button" class="close closeButtonModal" ng-click="closeModal()" data-dismiss="modal">&times;</button>
+</div>
+<div class="modal-body">
+    <ng-form name="frmOb" class="container" novalidate>
+
+
+        <text-box control-name="NombreMuseo" titulo="Nombre de museo/area/dependencia" on-blur="validarNombreMuseo()" max-length="240"
+            field-model="Ubicacion.NombreMuseo" is-required="true" form-reference="frmOb" is-disabled="DisabledUbicaciones"  show-icon="true" title-icon={{HelpNombreMuseo}}  max-length="240">
+        </text-box>
+        <span ng-show="ExisteNombreMuseo" style="color: red;">El nombre que intenta ingresar ya existe</span>
+        <P class="textFormBold">Ubicación de la colección</P>
+        <P class="textFormBold">Registre cada una de las ubicaciónes físicas donde se encuentran almacenadas las piezas de la colección</P>
+
+        <combo-box control-name="Pais" titulo="País" opciones="Lists.Paises" field-model="Ubicacion.pais"
+            is-required="true" form-reference="frmOb" is-disabled="DisabledUbicaciones"></combo-box>
+
+        <div class="row" ng-if="Ubicacion.pais !== 'Colombia'">
+            <div class="col-sm-6">
+                <text-box control-name="Ciudad" titulo="Ciudad" field-model="Ubicacion.Ciudad" is-required="true" max-length="240"
+                    form-reference="frmOb" is-disabled="DisabledUbicaciones">
+                </text-box>
+            </div>
+            <div class="col-sm-6">
+                <number-box control-name="CodigoPostal" titulo="Código postal" field-model="Ubicacion.CodigoPostal" max-length="240"
+                    is-required="true" form-reference="frmOb" is-disabled="DisabledUbicaciones" >
+                </number-box>
+            </div>
+        </div>
+
+        <div class="row" ng-if="Ubicacion.pais == 'Colombia'" >
+            <div class="col-sm-6">
+                <combo-box control-name="Departamento" titulo="Departamento" opciones="Lists.Departamento" is-disabled="DisabledUbicaciones"
+                    field-model="Ubicacion.Departamento" on-select="consultarCiudades()" is-required="true" form-reference="frmOb"></combo-box>
+            </div>
+            <div ng-if="model.Pantalla == '1'"class="col-sm-6">
+                <combo-box control-name="Ciudad" titulo="Ciudad/Municipio" opciones="Lists.Ciudad"
+                 field-model="Ubicacion.Ciudad" is-required="true" form-reference="frmOb" is-disabled="DisabledUbicaciones"></combo-box>
+            </div>
+
+            <div ng-if="model.Pantalla !== '1'" class="col-sm-6">
+                <text-box control-name="Ciudad" titulo="Ciudad/Municipio" 
+                 field-model="model.Ciudad" is-required="true" form-reference="frmOb" is-disabled="DisabledUbicaciones"
+                 max-length="240"></text-box>
+            </div>
+        </div>
+        <div class="row" ng-if="Ubicacion.pais == 'Colombia'">
+            <div class="col-sm-12">
+                <number-box control-name="CodigoPostal" titulo="Código postal" field-model="Ubicacion.CodigoPostal"
+                    is-required="false" form-reference="frmOb" is-disabled="DisabledUbicaciones" max-length="240">
+                </number-box>
+            </div>
+        </div>
+
+        <text-box control-name="DireccionUbicacion" titulo="Direccion" field-model="Ubicacion.Direccion"
+            is-required="true" form-reference="frmOb" is-disabled="DisabledUbicaciones" max-length="200">
+        </text-box>
+    
+        <input type="text" ng-model="Ubicacion.Modalidad" style="display:none">
+
+        <div class="row align-items-center">
+            <div class="col-sm-5">
+                <number-box control-name="Latitud" titulo="Latitud" field-model="Ubicacion.Latitud" is-required="true"
+                    form-reference="frmOb" is-disabled="DisabledUbicaciones" max-length="240">
+                </number-box>
+            </div>
+            <div class="col-sm-5">
+                <number-box control-name="Longitud" titulo="Longitud" field-model="Ubicacion.Longitud"
+                    is-required="true" form-reference="frmOb" is-disabled="DisabledUbicaciones" max-length="240">
+                </number-box>
+            </div>
+            <div class="col-sm-2 text-center">
+                <a id="imgMapa" class="ImgIconmuseo" ng-click="showMapInTooltipDialog(this)"> <span class="glyphicon glyphicon-map-marker" id="iconoMapa"></span></a>
+              </div>
+        </div>
+
+
+
+
+    </ng-form>
+</div>
+<div class="modal-footer">
+    <button ng-if="model.Pantalla == '1'" type="button" ng-disabled="!frmOb.$valid" ng-click="GuardarUbicacionesPre(Ubicacion)" class="btnFormINGEPModal"
+        data-dismiss="modal" >Continuar</button>
+</div>

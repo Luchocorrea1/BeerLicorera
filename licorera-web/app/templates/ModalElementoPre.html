@@ -1,0 +1,69 @@
+﻿<div class="modal-header headerINGEP">
+    <h4 class="modal-titleTenencia titleModalFormTenencia">{{Pagina.Titulo}}</h4>
+    <button type="button" class="close closeButtonModal" ng-click="CancelYesNo('closeModalTwo()')" data-dismiss="modal">&times;</button>
+</div>
+<div class="modal-body">
+    <ng-form name="frmOb" novalidate>   
+        <div class="row">
+            <div class="col-12 m-3">
+                {{HelpRotulo(SelElemento.IdElemento)}}
+            </div>
+            <div class="col-sm-6" ng-if="!SelElemento.esMantenimiento">
+                <div>
+                    <input type="hidden" ng-model="SelElemento.Gui" />
+                    <combo-box control-name="ElementoEspacioMuseo" titulo="{{ SelElemento.esMantenimiento ? 'Tipo Frecuencia' : 'Elemento' }}" opciones="Lists.TipoSeccion" is-required="true" field-model="SelElemento.IdSubElemento" is-disabled="false" on-select="" form-reference="frmOb" show-icon="true" title-icon="{{HelpElemento(SelElemento.IdElemento)}}"></combo-box>
+                </div>
+                <div ng-if="SelElemento.IdSubElemento == 17 || SelElemento.IdSubElemento == 23 || SelElemento.IdSubElemento == 28 || SelElemento.IdSubElemento == 32">
+                    <text-box control-name="Otro" titulo="¿Cuál?"
+                        field-model="SelElemento.Otro" form-reference="frmOb" is-required="true" is-disabled="false" show-icon="true" title-icon="{{helpOtro}}"></text-box>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div>
+                    <text-box control-name="DescripcionEspacioMuseo" titulo="Descripción" field-model="SelElemento.Descripcion" is-required="true" form-reference="frmOb" is-disabled="false" show-icon="true" title-icon="{{HelpDescripcion(SelElemento.IdElemento)}}"></text-box>
+                </div>
+            </div>
+
+            <div class="col-sm-6" ng-if="SelElemento.esMantenimiento">
+                <div>
+                    <text-box control-name="MaterialesEspacioMuseo" titulo="Materiales" field-model="SelElemento.Materiales" is-required="true" form-reference="frmOb" is-disabled="false" show-icon="true" title-icon="{{helpMateriales}}"></text-box>
+                </div>
+            </div>        
+            <div class="col-sm-6" ng-if="SelElemento.esMantenimiento">
+                <div>
+                    <input type="hidden" ng-model="SelElemento.Gui" />
+                    <combo-box control-name="ElementoEspacioMuseo" titulo="{{ SelElemento.esMantenimiento ? 'Frecuencia' : 'Elemento' }}" opciones="Lists.TipoSeccion" is-required="true" field-model="SelElemento.IdSubElemento" is-disabled="false" on-select="" form-reference="frmOb" show-icon="true" title-icon="{{helpFrecuencia}}"></combo-box>
+                </div>
+                <div ng-if="SelElemento.IdSubElemento == 34">
+                    <text-box control-name="Otro" titulo="¿Cuál?"
+                        field-model="SelElemento.Otro" form-reference="frmOb" is-required="true" is-disabled="false" show-icon="true" title-icon="{{helpOtro}}"></text-box>
+                </div>
+            </div>
+            <div class="col-sm-6" ng-if="SelElemento.esMantenimiento">
+                <div>
+                    <number-box control-name="NoFrecuenciaEspacioMuseo" titulo="Número de veces"
+                        field-model="SelElemento.NroFrecuencia" form-reference="frmOb" is-required="true" is-disabled="false" show-icon="true" title-icon="{{helpNumeroVeces}}"></number-box>
+                </div>
+            </div>
+        </div>     
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div ng-if="SelElemento.base64Img != null || SelElemento.FotoElementosSeccion.Url !=null">
+                    <img ng-if="SelElemento.FotoElementosSeccion.Url != null && SelElemento.FotoElementosSeccion.Url != ''" style="width: 100px;" ng-src="{{SelElemento.FotoElementosSeccion.Url}}" alt="Foto" />
+                    <img ng-if="SelElemento.base64Img != null" style="width: 100px;" ng-src="{{ SelElemento.base64Img }}" alt="Foto" />
+                </div>
+                <label style="width: 100%;">Cargar Imagen: 
+                <span ng-if="!(SelElemento.base64Img != null || SelElemento.FotoElementosSeccion.Url !=null)" style="color: red;">*</span></label><br />
+                <input type="file" class="form-control" name="Imagen" id="Imagen" validatextension="jpg,png,jpeg" is-required="ElementoRequerido" data-custom-file-change="SelElemento.Imagen" ng-model="SelElemento.Imagen" 
+                    accept=".jpg,.png,.jpeg" ng-required="!(SelElemento.base64Img != null || SelElemento.FotoElementosSeccion.Url !=null)" title="El tipo de archivo permitido en este campo es .jpg .png"
+                    form-reference="frmOb" filestyle />
+            </div>
+        </div>
+    </ng-form>
+</div>
+<div class="modal-footer">
+    <button type="button" ng-disabled="!frmOb.$valid" ng-click="GuardarElementoEspacioPre()" class="btn-green ng-scope" data-dismiss="modal">Guardar</button>
+    <button type="button" ng-click="CancelarElementoEspacioPre()" class="btn-grey ng-scope" data-dismiss="modal">Cancelar</button>
+</div>

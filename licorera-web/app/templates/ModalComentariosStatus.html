@@ -1,0 +1,29 @@
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal"
+                    aria-hidden="true">&times;
+
+                </button>
+                <h4 class="modal-title">{{Pagina.Titulo}}</h4>
+            </div>
+            <div class="modal-body">
+                <ng-form name="frmOb" class="container" novalidate>
+                    <multiline-box control-name="Comentarios" titulo="Comments" field-model="model.Comments"
+                        is-required="true" form-reference="frmOb" rows="6"></multiline-box>
+                    <combo-box control-name="Reason" titulo="Reason" opciones="Lists.Reason" field-model="model.Reason"
+                        is-required="IsRejected" form-reference="frmOb" ng-show="IsRejected"></combo-box>
+                    <date-box control-name="DateAllocation" titulo="Date Allocation" field-model="model.DateAllocation"
+                        is-required="IsConfirmed" form-reference="frmOb" ng-show="IsConfirmed"></date-box>
+                </ng-form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-disabled="!frmOb.$valid" ng-click="GuardarComentarios()" class="btn btn-green"
+                    data-dismiss="modal">Guardar</button>
+                <button type="button" ng-click="close(false)" class="btn btn-light"
+                    data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

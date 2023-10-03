@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "productos",
+  "info": {
+    "singularName": "producto",
+    "pluralName": "productos",
+    "displayName": "Productos"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Nombre": {
+      "type": "string"
+    },
+    "FechaCreacion": {
+      "type": "datetime"
+    },
+    "UsuarioCreacion": {
+      "type": "string"
+    },
+    "MaquinaCreacion": {
+      "type": "string"
+    },
+    "FechaActualizacion": {
+      "type": "datetime"
+    },
+    "UsuarioActualizacion": {
+      "type": "string"
+    },
+    "MaquinaActualizacion": {
+      "type": "string"
+    },
+    "Activo": {
+      "type": "boolean"
+    }
+  }
+}

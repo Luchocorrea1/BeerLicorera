@@ -1,0 +1,18 @@
+﻿<div class="form-group radiobutton">
+    <label ng-if="$ctrl.titulo">{{$ctrl.titulo ? $ctrl.titulo + ':' : ''}} <span ng-if="$ctrl.isRequired" style="color: red;">*</span>
+    <span ng-if="$ctrl.showIcon" id="iconAyuda" class="fa fa-info-circle" aria-hidden="true" title="{{$ctrl.titleIcon}}"></span></label>
+	<history ng-if="$ctrl.showHistory" history-name="{{$ctrl.historyName}}" show-history="$ctrl.showHistory" is-disabled="$ctrl.isDisabledHistory"></history>
+    <div class="form-check" >
+        <label class="{{$ctrl.controlClass}}" ng-repeat="op in $ctrl.options">
+            <input type="radio" id="{{$ctrl.controlName + '_' + op.Id}}" name="{{$ctrl.controlName}}"
+             ng-model="$ctrl.fieldModel" value="{{op.Id}}" ng-change="$ctrl.onSelect()"  ng-required="$ctrl.isRequired" 
+             ng-disabled="$ctrl.isDisabled">
+            {{op.Nombre}}
+            <span id="iconAyuda" ng-if="op.ShowIcon" class="fa fa-info-circle" aria-hidden="true" title="{{op.Title}}"></span>
+        </label>
+    </div>
+    
+    <div ng-if="$ctrl.showError" ng-messages="$ctrl.error()" style="color:red;" role="alert">
+        <div ng-message="required">Debe seleccionar una opción</div>
+    </div>
+</div>

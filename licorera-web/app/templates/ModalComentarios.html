@@ -1,0 +1,42 @@
+<div class="modal fade in" style="display: block; padding-left: 17px; opacity: 1;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal"
+                    aria-hidden="true">&times;
+                </button>
+                <h4 class="modal-title">{{Pagina.Titulo}}</h4>
+            </div>
+            <div class="modal-body">
+                <ng-form name="frmOb" class="container" novalidate>
+                    <multiline-box control-name="Comentario" titulo="Comentario" field-model="model.Comentario"
+                        is-required="true" form-reference="frmOb" rows="6"></multiline-box>
+                </ng-form>
+
+                <table ng-if="Lists.Comentarios.length>0" class="table table-bordered" datatable="ng" dt-options="vm.dtOptions" dt-instance="vm.dtInstance"
+                     dt-column-defs="vm.dtColumnDefs">
+                    <caption> </caption>
+                    <thead id="ColorTabla">
+                        <tr>
+                            <th scope="col" class="th-sm text-center">Comentario</th>
+                            <th scope="col" class="th-sm text-center">Usuario</th>
+                            <th scope="col" class="th-sm text-center">Fecha de creación</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in Lists.Comentarios">
+                            <td>{{x.Comentario}}</td>
+                            <td>{{x.Author.Title}}</td>
+                            <td>{{x.Created}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-disabled="!frmOb.$valid" ng-click="GuardarComentarios()"
+                    class="btn btn-green" data-dismiss="modal">Guardar</button>
+                <button type="button" ng-click="close(false)" class="btn btn-light"
+                    data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

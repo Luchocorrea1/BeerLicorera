@@ -1,0 +1,29 @@
+<div class="form-group">
+  
+    <label ng-if="$ctrl.titulo" style="width: 100%;">{{$ctrl.titulo}}: <span ng-if="$ctrl.isRequired" style="color: red;">*</span></label>
+    
+    <br />
+
+    <label for="{{$ctrl.controlName}}" style="float: left;width: 20%;"><span class="btn btn-primary" style="width: 100%;">Examinar</span></label>
+    <input ng-show="false" class="form-control" type="file" id="{{$ctrl.controlName}}" fileread>
+    <input class="form-control" type="text" id="{{$ctrl.controlName + 'NombreArchivo'}}" name="{{$ctrl.controlName + 'NombreArchivo'}}" ng-model="$ctrl.fileName" ng-required="$ctrl.isRequired" ng-readonly="true" style="float: right; width: 80%;">
+
+    <br /> 
+
+    <a class="btn btn-info btn-md">
+        <span class="glyphicon glyphicon-cloud"> </span> Ver Documento "{{$ctrl.fileName}}"
+    </a>
+
+    <a class="btn btn-info btn-md">
+        <span class="glyphicon glyphicon-trash"></span> Eliminar Documento "{{$ctrl.fileName}}"
+    </a>
+
+    <div ng-messages="$ctrl.error()" style="color:red;" role="alert">
+        <div ng-message="required">El campo {{$ctrl.titulo ? "'" + $ctrl.titulo + "'" : ""}} es requerido</div>
+    </div>
+ 
+    <br ng-if="!$ctrl.error().required" />
+    
+    <br />
+
+</div>

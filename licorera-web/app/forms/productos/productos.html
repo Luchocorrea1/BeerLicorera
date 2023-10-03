@@ -1,0 +1,25 @@
+<div class="container">
+    <h3>Productos de Licorera</h3>
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>Nombre del Producto</th>
+                <th>fecha</th>
+                <th>usuario</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in Lists.Productos">
+                <td>{{x.attributes.Nombre}}</td>
+                <td>{{x.attributes.FechaCreacion}}</td>
+                <td>{{x.attributes.UsuarioCreacion}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('.striped').DataTable(); // Inicializa la tabla con Materialize CSS
+    });
+</script>

@@ -1,0 +1,21 @@
+﻿<div class="modal-header headerINGEP">
+    <h4 class="modal-title ">{{Pagina.Titulo}}</h4>
+    <button type="button" class="close closeButtonModal" ng-click="closeModalModalidad()" data-dismiss="modal">&times;</button>
+</div>
+<div class="modal-body">
+
+    <ng-form name="frmOb" class="container" novalidate>
+
+
+        <text-box control-name="CodigoM3" titulo="Digite el Código " 
+            field-model="model.CodigoM3" is-required="true" form-reference="frmOb">
+        </text-box>
+        <p ng-if="mensajeErrorM3" style="color:red">El código que ingreso es invalido favor intentar de nuevo de lo contrario contacte con el administrador.</p>
+        <p ng-if="mensajeErrorNotDocM3" style="color:red">El archivo de piezas para la modalidad 3 aún no se encuentra cargado, por favor contacte con el administrador.</p>
+        <p ng-if="mensajeErrorConceptoEnUso" style="color:red">El concepto técnico previo ya está en uso.</p>
+    </ng-form>
+</div>
+<div class="modal-footer">
+    <button type="button" ng-disabled="!frmOb.$valid" ng-click="consultarM3()" class="btnFormINGEPModal"
+        data-dismiss="modal">Continuar</button>
+</div>

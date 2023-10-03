@@ -1,0 +1,26 @@
+<div class="form-group">
+    <label ng-if="$ctrl.titulo">{{$ctrl.titulo ? $ctrl.titulo + ':' : ''}} <span ng-if="$ctrl.isRequired" style="color: red;">*</span></label>
+    <div class="form-check" ng-repeat="op in $ctrl.options">
+        <div class="row">
+            <div class="col-md-2 text-left col-lg-offset-2">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" id="{{$ctrl.controlName + '_' + op.Id}}" name="{{$ctrl.controlName}}" ng-model="names['val' + $index]" ng-checked="names['val' + $index]" ng-required="$ctrl.isRequired && !$ctrl.fieldModel.length" ng-true-value="{{op.Id}}" ng-false-value="false" value="{{op.Id}}" ng-change="updateVal(op, $index)">
+                    {{op.Nombre}}
+                </label>
+            </div>
+            <div class="col-md-6 col-sm-offset-right-2">
+                <label for="{{$ctrl.controlName + $index}}" style="float: left;width: 20%;"><span class="btn btn-primary" style="width: 100%;">Examinar</span></label>
+                <input ng-show="false" class="form-control" type="file" id="{{$ctrl.controlName + $index}}" checkfileread>
+                <input class="form-control" type="text" id="{{$ctrl.controlName + 'NombreArchivo' + $index}}" name="{{$ctrl.controlName + 'NombreArchivo' + $index}}" ng-model="$ctrl.fileName[$index].fileName" ng-required="$ctrl.isRequiredFile" ng-readonly="true" style="float: right; width: 80%;">
+
+                <div ng-messages="$ctrl.error()" style="color:red;" role="alert">
+                    <div ng-message="required">El campo {{$ctrl.titulo ? "'" + $ctrl.titulo + "'" : ""}} es requerido</div>
+                </div>
+                <br ng-if="!$ctrl.error().required" /><br />
+            </div>
+        </div>
+    </div>
+    <div ng-messages="$ctrl.error()" style="color:red;" role="alert">
+        <div ng-message="required">El campo {{$ctrl.titulo ? "'" + $ctrl.titulo + "'" : ""}} es requerido</div>
+    </div>
+</div>

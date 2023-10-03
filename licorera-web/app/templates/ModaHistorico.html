@@ -1,0 +1,182 @@
+<div class="modal-header">
+    <h4 class="modal-title">Histórico</h4>
+    <button type="button" class="close" ng-click="CloseMasComentarios()" data-dismiss="modal">&times;</button>
+</div>
+
+<div class="modal-body">
+    <ng-form name="frmOb" class="container" novalidate>
+        <div class="row">
+            <div class="page-menu-container">
+                <div class="container">
+                    <div class="page-menu">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" data-target="#Tab1">Historial de cambios</a></li>
+                            <li><a data-toggle="tab" data-target="#Tab2" ng-if="Lists.ComentariosHistorico && Lists.ComentariosHistorico.length>0">Comentarios</a></li>
+                            <li><a data-toggle="tab" data-target="#Tab3" ng-if="(Lists.ObservacionesRequerimientos && Lists.ObservacionesRequerimientos.length>0) || (Lists.RespuestaRequerimientos && Lists.RespuestaRequerimientos.length > 0)">Requerimientos</a></li>
+                            <li><a data-toggle="tab" data-target="#Tab4">Todos</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content">
+                <div id="Tab1" class="tab-pane fade in active">
+                    <div style="padding-top: 2%;">
+                        <!-- contenido de histórico -->
+                        <table class="table table-bordered table-striped" ng-if="!HideHistorial">
+                            <caption> </caption>
+                            <thead id="ColorTablaCero">
+                                <tr>
+                                    <th scope="col" class="th-sm text-center">Usuario</th>
+                                    <th scope="col" class="th-sm text-center">Fecha</th>
+                                    <th scope="col" class="th-sm text-center">Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in Lists.Historicos">
+                                    <td class="text-center">{{x.Editor}}</td>
+                                    <td class="text-center">{{x.Modified}}</td>
+                                    <!-- <td class="text-center" ng-if="!x.EsTabla">{{x.Valorcampo}}</td> -->
+                                    <!-- <td class="text-center" ng-if="x.EsTabla"> -->
+                                        <td class="text-center" ng-if="!x.EsTabla">{{x.Valorcampo | date:'yyyy-MM-dd'}}</td>
+                                        <!-- <span style="font-size:20px;cursor:pointer" class="icontable far fa-eye" ng-click="$ctrl.OpenTable(x.Valorcampo)" title="Ver detalle" style="cursor: pointer; margin-right: 10px"></span> -->
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered table-striped" ng-if="HideHistorial">
+                            <caption> </caption>
+                            <thead id="ColorTablaCero">
+                                <tr>
+                                    <th scope="col" ng-repeat="x in TableHeader" class="th-sm text-center">{{x.value}}</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in Tablebody">
+                                    <td ng-repeat="y in x.campos" class="text-center">
+                                        <p ng-if="y.NombreCampo!='Imagen'&& !y.isHref">
+                                            {{y.value}}
+                                        </p>
+                                        <a ng-if="y.isHref" href="{{y.value}}" target="_blank" rel="noopener">{{y.NombreArchivo}}</a>
+                                        <span ng-if="y.NombreCampo=='Imagen'" style="font-size:20px;cursor:pointer"
+                                            class="glyphicon glyphicon-picture" ng-click="verImagen(y.value)"
+                                            style="cursor: pointer; display: inline;"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="Tab2" class="tab-pane fade">
+                    <div style="padding-top: 2%;">
+                        <!-- contenido de histórico -->
+                        <table class="table table-bordered table-striped">
+                            <caption> </caption>
+                            <thead id="ColorTablaCero">
+                                <tr>
+                                    <th scope="col" class="th-sm text-center">Usuario</th>
+                                    <th scope="col" class="th-sm text-center">Fecha</th>
+                                    <th scope="col" class="th-sm text-center">Comentario</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in Lists.ComentariosHistorico">
+                                    <td class="text-center">{{x.Author.Title}}</td>
+                                    <td class="text-center">{{GetFormatDate(x.Created)}}</td>
+                                    <td class="text-center" ng-bind-html="ComentarioLargo(ReplaceEnter(x.Comentario))"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="Tab3" class="tab-pane fade">
+                    <div style="padding-top: 2%;" ng-if="Lists.ObservacionesRequerimientos && Lists.ObservacionesRequerimientos.length>0">
+                        <!-- contenido de histórico -->
+                        <h4>Observaciones o requerimientos</h4>
+                        <table class="table table-bordered table-striped">
+                            <caption> </caption>
+                            <thead id="ColorTablaCero">
+                                <tr>
+                                    <th scope="col" class="th-sm text-center">Usuario</th>
+                                    <th scope="col" class="th-sm text-center">Fecha</th>
+                                    <th scope="col" class="th-sm text-center">Requerimiento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in Lists.ObservacionesRequerimientos">
+                                    <td class="text-center">{{x.Editor.LookupValue}}</td>
+                                    <td class="text-center">{{GetFormatDate(x.Created)}}</td>
+                                    <td class="text-justify" ng-bind-html="ComentarioLargo(ReplaceEnter(x.Requerimiento))">
+                                        
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="padding-top: 2%;" ng-if="Lists.RespuestaRequerimientos && Lists.RespuestaRequerimientos.length>0">
+                        <h4>{{(!Lists.ObservacionesRequerimientos || Lists.ObservacionesRequerimientos.length==0)? 'Respuesta a campo de verificación': 'Respuesta a requerimientos'}}</h4>
+                        <!-- contenido de histórico -->
+                        <table class="table table-bordered table-striped">
+                            <caption> </caption>
+                            <thead id="ColorTablaCero">
+                                <tr>
+                                    <th scope="col" class="th-sm text-center">Usuario</th>
+                                    <th scope="col" class="th-sm text-center">Fecha</th>
+                                    <th scope="col" class="th-sm text-center">Requerimiento</th>
+                                    <th scope="col" class="th-sm text-center">Respuesta</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in Lists.RespuestaRequerimientos">
+                                    <td class="text-center">{{x.Editor.LookupValue}}</td>
+                                    <td class="text-center">{{GetFormatDate(x.Created)}}</td>
+                                    <td class="text-justify" ng-bind-html="ComentarioLargo(ReplaceEnter(x.Requerimiento))">
+                                    </td>
+                                    <td class="text-justify" ng-bind-html="ComentarioLargo(ReplaceEnter(x.Respuesta))">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div id="Tab4" class="tab-pane fade">
+                    <div style="padding-top: 2%;">
+                        <!-- contenido de histórico -->
+                        <table class="table table-bordered table-striped">
+                            <caption> </caption>
+                            <thead id="ColorTablaCero">
+                                <tr>
+                                    <th scope="col" class="th-sm text-center">Tipo</th>
+                                    <th scope="col" class="th-sm text-center">Usuario</th>
+                                    <th scope="col" class="th-sm text-center">Fecha</th>
+                                    <th scope="col" class="th-sm text-center">Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in Lists.Todos">
+                                    <td class="text-center">{{x.Tipo}}</td>
+                                    <td class="text-center">{{x.Editor}}</td>
+                                    <td class="text-center">{{GetFormatDate(x.Modified)}}</td>
+                                    <td class="text-justify" ng-if="!x.isHref" >
+                                        <div ng-if="!x.EsTabla" ng-bind-html="ReplaceEnter(x.Valorcampo)"></div>
+                                        <!-- <td class="text-center" ng-if="!x.EsTabla">{{x.Valorcampo | date:'yyyy-MM-dd'}}</td> -->
+                                        <span ng-if="x.EsTabla" style="font-size:20px;cursor:pointer" class="icontable far fa-eye" ng-click="$ctrl.OpenTable(x.Valorcampo)" title="Ver detalle" style="cursor: pointer; margin-right: 10px"></span>
+                                        <!-- <div ng-if="x.EsTabla">Este valor solamente se puede observar en historial de cambios.</div> -->
+                                    </td>
+                                    <td class="text-justify" ng-if="x.isHref" >
+                                        <a href="{{x.Valorcampo.Url}}" target="_blank" rel="noopener">{{x.Valorcampo.NombreArchivo}}</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-form>
+</div>
+<div class="modal-footer">
+    <button type="button" ng-click="CloseMasComentarios()" class="btnFormINGEPModal" data-dismiss="modal">
+        Cerrar
+    </button>
+</div>

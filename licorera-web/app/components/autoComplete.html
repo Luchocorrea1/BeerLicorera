@@ -1,0 +1,8 @@
+<div class="form-group">
+    <label ng-if="$ctrl.titulo" for="{{$ctrl.controlName}}">{{$ctrl.titulo}}: <span ng-if="$ctrl.isRequired" style="color: red;">*</span></label>
+    <input class="form-control" autocomplete type="text" Data="$ctrl.lista" onkeydown="KeyEnter(event)" id="{{$ctrl.controlName}}" name="{{$ctrl.controlName}}" ng-model="$ctrl.fieldModel" ng-required="$ctrl.isRequired" ng-disabled="$ctrl.isDisabled">
+
+    <div ng-if="$ctrl.showError" ng-messages="$ctrl.error()" style="color:red;" role="alert">
+        
+    </div>
+</div>

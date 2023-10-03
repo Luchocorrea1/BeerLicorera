@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+  <!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>My AngularJS App</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+  <!-- <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="app.css">
+  <script src="lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script> -->
+  <link rel="stylesheet" href="lib/materialize-css/dist/css/normalize.css">
+  <link rel="stylesheet" href="lib/materialize-css/dist/css/materialize.min.css">
+	<link rel="stylesheet" href="lib/materialize-css/dist/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" href="lib/materialize-css/dist/css/jquery.mCustomScrollbar.css">
+  <link rel="stylesheet" href="lib/materialize-css/dist/css/sweetalert.css">
+  <link rel="stylesheet" href="app.css">
+
+  
+	<!-- <link rel="Stylesheet" type="text/css" href="lib/ng-style/css/bootstrap.min.css" />
+	<link rel="Stylesheet" type="text/css" href="lib/ng-style/css/bootstrap-theme.min.css" />
+	<link rel="Stylesheet" type="text/css" href="lib/ng-style/css/bootstrap-datepicker.css" /> -->
+	<!-- <link rel="Stylesheet" type="text/css" href="lib/ng-style/css/dev-resources/ngDialog/ngDialog.min.css" />
+	<link rel="Stylesheet" type="text/css" href="lib/ng-style/css/dev-resources/ngDialog/ngDialog-custom-width.css" />
+	<link rel="Stylesheet" type="text/css" href="lib/ng-style/css/jquery.webui-popover.min.css" />
+	<link rel="Stylesheet" type="text/css" href="lib/ng-style/css/dev-resources/ngDialog/ngDialog-theme-default.min.css" />
+	<link rel="Stylesheet" type="text/css" href="lib/ng-style/css/dev-resources/ngDialog/ngDialog-theme-plain.min.css" />
+	<link rel="Stylesheet" type="text/css" href="lib/ng-style/css/angular-datepicker.css" /> -->
+	<!-- <link rel="Stylesheet" type="text/css" href="lib/ng-style/css/angular-material.css" /> -->
+<!-- 
+	<link rel="Stylesheet" type="text/css" href="lib/ng-style/css/datatable/jquery.dataTables.min.css" />
+	<link rel="Stylesheet" type="text/css" href="lib/ng-style/css/datatable/buttons.dataTables.min.css" />
+
+	<link rel="Stylesheet" type="text/css" href="lib/ng-style/css/MultipleSelect/multiple-select.min.css" />
+
+	<link rel="stylesheet" type="text/css" href="lib/ng-style/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="lib/ng-style/css/style.css"> -->
+</head>
+<body>
+  
+  <body ng-app="appPrueba">
+        <menu></menu>
+
+    <section class="ContentPage full-width">
+      <!-- Nav Info -->
+      <div class="ContentPage-Nav full-width">
+          <ul class="full-width">
+              <li class="btn-MobileMenu ShowHideMenu"><a href="#" class="tooltipped waves-effect waves-light" data-position="bottom" data-delay="50" data-tooltip="Menu"><i class="zmdi zmdi-more-vert"></i></a></li>
+              <li><figure><img src="lib/materialize-css/dist/assets/img/user.png" alt="UserImage"></figure></li>
+              <li style="padding:0 5px;">User Name</li>
+              <li><a href="#" class="tooltipped waves-effect waves-light btn-ExitSystem" data-position="bottom" data-delay="50" data-tooltip="Logout"><i class="zmdi zmdi-power"></i></a></li>
+              <li><a href="#" class="tooltipped waves-effect waves-light btn-Search" data-position="bottom" data-delay="50" data-tooltip="Search"><i class="zmdi zmdi-search"></i></a></li>
+              <li>
+                  <a href="#" class="tooltipped waves-effect waves-light btn-Notification" data-position="bottom" data-delay="50" data-tooltip="Notifications">
+                      <i class="zmdi zmdi-notifications"></i>
+                      <span class="ContentPage-Nav-indicator bg-danger">2</span>
+                  </a>
+              </li>
+          </ul>   
+      </div>
+
+      <!-- Notifications area -->
+      <section class="z-depth-3 NotificationArea">
+          <div class="full-width center-align NotificationArea-title">Notifications <i class="zmdi zmdi-close btn-Notification"></i></div>
+          <a href="#" class="waves-effect Notification">
+              <div class="Notification-icon"><i class="zmdi zmdi-accounts-alt bg-info"></i></div>
+              <div class="Notification-text">
+                  <p>
+                      <i class="zmdi zmdi-circle tooltipped" data-position="left" data-delay="50" data-tooltip="Notification as UnRead"></i>
+                      <strong>New User Registration</strong> 
+                      <br>
+                      <small>Just Now</small>
+                  </p>
+              </div>
+          </a>  
+          <a href="#" class="waves-effect Notification">
+              <div class="Notification-icon"><i class="zmdi zmdi-cloud-download bg-primary"></i></div>
+              <div class="Notification-text">
+                  <p>
+                      <i class="zmdi zmdi-circle-o tooltipped" data-position="left" data-delay="50" data-tooltip="Notification as Read"></i>
+                      <strong>New Updates</strong> 
+                      <br>
+                      <small>30 Mins Ago</small>
+                  </p>
+              </div>
+          </a>
+          <a href="#" class="waves-effect Notification">
+              <div class="Notification-icon"><i class="zmdi zmdi-upload bg-success"></i></div>
+              <div class="Notification-text">
+                  <p>
+                      <i class="zmdi zmdi-circle tooltipped" data-position="left" data-delay="50" data-tooltip="Notification as UnRead"></i>
+                      <strong>Archive uploaded</strong> 
+                      <br>
+                      <small>31 Mins Ago</small>
+                  </p>
+              </div>
+          </a> 
+          <a href="#" class="waves-effect Notification">
+              <div class="Notification-icon"><i class="zmdi zmdi-mail-send bg-danger"></i></div>
+              <div class="Notification-text">
+                  <p>
+                      <i class="zmdi zmdi-circle-o tooltipped" data-position="left" data-delay="50" data-tooltip="Notification as Read"></i>
+                      <strong>New Mail</strong> 
+                      <br>
+                      <small>37 Mins Ago</small>
+                  </p>
+              </div>
+          </a>
+          <a href="#" class="waves-effect Notification">
+              <div class="Notification-icon"><i class="zmdi zmdi-folder bg-primary"></i></div>
+              <div class="Notification-text">
+                  <p>
+                      <i class="zmdi zmdi-circle-o tooltipped" data-position="left" data-delay="50" data-tooltip="Notification as Read"></i>
+                      <strong>Folder delete</strong> 
+                      <br>
+                      <small>1 hours Ago</small>
+                  </p>
+              </div>
+          </a>  
+      </section>
+
+      <div class="row">
+        <div ng-view></div>
+      </div>
+
+      <!-- Footer -->   
+      <footer class="footer-MaterialDark">
+          <div class="container">
+              <div class="row">
+                  <div class="col l6 s12">
+                      <h5 class="white-text">Footer Content</h5>
+                      <p class="grey-text text-lighten-4">
+                          To better support on CSS components and icons, please visit the official websites of the technologies used.
+                          <br>
+                          Para mejor soporte sobre los componentes CSS e iconos, por favor visite los sitios web oficiales de las tecnologias usadas
+                      </p>
+                  </div>
+                  <div class="col l4 offset-l2 s12">
+                      <h5 class="white-text">Technologies used</h5>
+                      <ul>
+                          <li><a class="grey-text text-lighten-3" href="http://materializecss.com/">Materialize</a></li>
+                          <li><a class="grey-text text-lighten-3" href="http://zavoloklom.github.io/material-design-iconic-font/icons.html">Material Design Iconic Font</a></li>
+                          <li><a class="grey-text text-lighten-3" href="http://t4t5.github.io/sweetalert/">Sweet Alert</a></li>
+                          <li><a class="grey-text text-lighten-3" href="http://manos.malihu.gr/jquery-custom-content-scroller/">jQuery custom content scroller</a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <div class="NavLateralDivider"></div>
+          <div class="footer-copyright">
+              <div class="container center-align">
+                  © 2016 Carlos Eduardo Alfaro Orellana
+              </div>
+          </div>
+      </footer>
+  </section>
+</body>
+
+	<!-- <script src="lib/ng-style/js/jquery.webui-popover.min.js"></script>
+	<script src="lib/ng-style/js/jquery.base64.js"></script>
+	<script src="lib/ng-style/js/xmlToJSON.min.js"></script>
+	 -->
+	
+
+	<!-- <script src="lib/ng-style/js/bootstrap.min.js"></script>
+	<script src="lib/ng-style/js/angular-ui/ui-bootstrap-tpls.min.js"></script>
+
+	<script src="lib/ng-style/js/bootstrap-filestyle.min.js"></script>
+	<script src="lib/ng-style/js/bootstrap-datepicker.min.js"></script> -->
+	<!-- <script src="lib/ng-style/js/datatable/jquery.dataTables.min.js"></script>
+	<script src="lib/ng-style/js/datatable/dataTables.buttons.min.js"></script>
+	<script src="lib/ng-style/js/datatable/buttons.flash.min.js"></script>
+	<script src="lib/ng-style/js/datatable/jszip.min.js"></script>
+	<script src="lib/ng-style/js/datatable/pdfmake.min.js"></script>
+	<script src="lib/ng-style/js/datatable/vfs_fonts.js"></script>
+	<script src="lib/ng-style/js/datatable/buttons.html5.min.js"></script>
+	<script src="lib/ng-style/js/datatable/buttons.print.min.js"></script>
+	<script src="lib/ng-style/js/MultipleSelect/multiple-select.js"></script> -->
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+
+	<script src="lib/ng-style/js/jquery-3.1.1.min.js"></script>
+  <script src="lib/materialize-css/dist/js/sweetalert.min.js"></script>
+
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/angular-route/angular-route.js"></script>
+  
+	<script src="lib/ng-style/js/LinqJs/linq.min.js"></script>
+  <script src="lib/materialize-css/dist/js/materialize.min.js"></script>
+	<!-- <script src="lib/materialize-css/dist/js/jquery.mCustomScrollbar.concat.min.js"></script> -->
+  <!-- <script src="lib/materialize-css/dist/js/materialize.min.js"></script> -->
+
+	<script src="baseEnum.js"></script>
+	<script src="extensionMethod.js"> </script>
+	<script src="baseSvc.js"></script>
+	<script src="componentes.js"> </script>
+  
+
+	<script src="directives.js"></script>
+  <script src="app.js"></script>
+	<script src="helper.js"> </script>
+
+  <script src="forms/productos/productosController.js"></script>
+  <!-- <script src="view2/view2.js"></script>
+  <script src="core/version/version.js"></script>
+  <script src="core/version/version-directive.js"></script>
+  <script src="core/version/interpolate-filter.js"></script> -->
+</body>
+</html>

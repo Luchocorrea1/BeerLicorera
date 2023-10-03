@@ -1,0 +1,19 @@
+<div class="form-group checkbox-gestion">
+    <label class="form-check-label" ng-if="$ctrl.selectAll">
+        <input class="form-check-input" type="checkbox" id="SeleccioneTodos{{$ctrl.controlName}}" name="SeleccioneTodos{{$ctrl.controlName}}" ng-model="$ctrl.AprobarTodos" ng-change="selectAll()" ng-false-value="false">
+        Aprobar todos
+    </label>
+    
+    <label ng-if="$ctrl.titulo">{{$ctrl.titulo ? $ctrl.titulo + ':' : ''}} <span ng-if="$ctrl.isRequired" style="color: red;">*</span></label>
+    <div class="form-check" ng-repeat="op in $ctrl.options">
+
+        <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" id="{{$ctrl.controlName + '_' + op.Id}}" name="{{$ctrl.controlName + '_' + op.Id}}" ng-model="$ctrl.fieldModel[$index].Checkbox" ng-checked="$ctrl.fieldModel[$index].Checked" ng-disabled="$ctrl.fieldModel[$index].disabled" ng-required="$ctrl.isRequired && !$ctrl.fieldModel.length" ng-true-value="{{op.Id}}" ng-false-value="false" value="{{op.Id}}" ng-click="updateVal(op, $index)">
+            {{op.Nombre}}
+        </label>
+    </div>
+
+    <div ng-messages="$ctrl.error()" style="color:red;" role="alert">
+        <div ng-message="required">El campo {{$ctrl.titulo ? "'" + $ctrl.titulo + "'" : ""}} es requerido</div>
+    </div>
+</div>

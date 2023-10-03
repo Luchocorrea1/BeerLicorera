@@ -1,0 +1,73 @@
+﻿<div class="modal-header headerINGEP">
+    <h4 class="modal-titleTenencia titleModalFormTenencia">{{Pagina.Titulo}}</h4>
+    <button type="button" class="close closeButtonModal" ng-click="CancelYesNo('closeModalOne()')" data-dismiss="modal">&times;</button>
+</div>
+<div class="modal-body">
+    <ng-form name="frmOb" novalidate>
+        <div class="mb-3">
+            Incluya la información solicitada para cada una de las siguientes secciones. Tenga en cuenta que puede agregar más de una opción por cada sección, es recomendable incluir la mayor cantidad de información, para así permitir una correcta evaluación de las condiciones de conservación de cada espacio. 
+        </div>
+        <table class="table table-bordered TablaTenencia" datatable="ng" dt-options="vm.dtOptions4" dt-instance="vm.dtInstance2" dt-column-defs="vm.dtColumnDefs">
+            <caption>Secciones</caption>
+            <thead id="ColorTablaCero" class="TablaTenencia-header">
+                <tr>
+                    <th id="a1" class="th-sm text-center">#</td>
+                    <th id="a2" class="th-sm text-center">Secciones</th>
+                    <th id="a3" class="th-sm text-center">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in Lists.TipoSeccionGeneral">
+                    <td class="text-center">{{$index+1}}</td>
+                    <td class="text-center">
+                        {{x.Title}} 
+                        <span ng-if="VerificarEspacioCompletoPre(x.Id)" class="fas fa-check verdeClarito margin-left-7"></span>
+                    </td>
+                    <td class="text-center">
+                        <button type="button" style="cursor:pointer" id="btnNuevoTablaCero" class="btnFormINGEP" style="cursor:pointer" ng-if="!DisabledForm" onclick="return false" ng-click="ModalAgregarElementoEspacio(x)">+ Agregar elemento</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br />
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="mb-3">
+                    Consulte los elementos ingresados en las diferentes secciones (Muros exteriores, Interior, Mobiliario o estantería, tipo de contenedores, elementos de seguridad, Mantenimiento o seguridad).
+                </div>
+                <combo-box control-name="SelectSeccion1" titulo="Seleccione la sección" opciones="Lists.TipoSeccionGeneral" is-required="false" field-model="Seccion" is-disabled="false" form-reference="frmOb">
+                </combo-box>
+            </div>
+        </div>
+        <div class="row" style="padding: 15px;">            
+            <table class="table table-bordered">
+                <caption>Elementos</caption>
+                <thead id="TablaConConDos" class="TablaTenencia-header">
+                    <tr>
+                        <th id="b1" class="th-sm text-center">#</th>
+                        <th id="b2" class="th-sm text-center">Elemento</th>
+                        <th id="b3" class="th-sm text-center">Descripción</th>
+                        <th id="b4" class="th-sm text-center">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in Lists.ElementosEspacio | filter:{ IdElemento: Seccion }">
+                        <td class="text-center">{{x.OrdenId+1}}</td>
+                        <td class="text-center">{{x.Elemento}} - {{x.SubElemento}}</td>
+                        <td class="text-center">{{x.Descripcion}}</td>
+                        <td class="text-center">
+                            <span style="font-size:20px;cursor:pointer" class="glyphicon glyphicon-picture" ng-click="verImagenElementospre(x, $index)" style="cursor: pointer; display: inline;"></span>
+                            <span style="font-size:20px;cursor:pointer" class="glyphicon glyphicon-pencil icontableForm" ng-click="EditarElementoPre(x, $index)" style="cursor: pointer;"></span>
+                            <span ng-if="!DisabledForm" style="font-size:20px;cursor:pointer" , class="glyphicon glyphicon-remove icontableForm" ng-click="ConfirmarEliminarElementoPre(x, $index)" style="cursor: pointer;"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </ng-form>
+</div>
+<div class="modal-footer">
+    <button type="button" ng-click="GuardarEspacioPre()" class="btn-green ng-scope" data-dismiss="modal">Guardar</button>
+    <button type="button" ng-click="CancelYesNo('closeModalOne()')" class="btn-grey ng-scope" data-dismiss="modal">Cancelar</button>
+</div>

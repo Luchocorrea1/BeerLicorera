@@ -1,0 +1,77 @@
+﻿<script>
+    setTimeout(function(){
+        document.getElementById("Codigo").focus();
+    },500);
+</script>
+<div class="modal-header headerINGEP">
+    <h4 class="modal-title titleModalForm">{{Pagina.Titulo}}</h4>
+    <button type="button" class="close closeButtonModal" ng-click="closeModal()" data-dismiss="modal">&times;</button>
+</div>
+<div class="modal-body">
+
+    <ng-form name="frmOb" class="container" novalidate>
+        <div class="row">
+        
+            <div class="col-sm-6">
+                <text-box control-name="Codigo" titulo="Código" field-model="piezas.Codigo" is-required="true"
+                    is-disabled="(piezas.Id !== undefined || piezas.Index !== undefined) ? true : false" show-icon="true" max-length="240"
+                    title-icon={{helpCodigo}} on-blur="validarCodigo()" form-reference="frmOb">
+                </text-box>
+                <span ng-show="ExisteCodigo" style="color: red;">El código que intenta ingresar ya existe</span>
+            </div>
+            <div class="col-sm-6">
+                <combo-box control-name="Categoria" titulo="Categoría" opciones="Lists.Categoria" show-icon="true"
+                    title-icon={{helpCategoria}} field-model="piezas.Categoria" is-required="true" form-reference="frmOb">
+                </combo-box>
+        
+            </div>
+        </div>
+        <radio-box control-class="radio-inline" control-name="optradioSiNoEspecimen" titulo="¿Es un espécimen tipo?"
+            field-model="piezas.EsEspecimenTipo" is-required="true" form-reference="frmOb" options="Lists.SiNo"
+            show-icon="true" title-icon={{helpEspecimen}}>
+        </radio-box>
+        
+    <p style="text-align: justify;">
+        <combo-box ng-if="model.Pantalla !== '5'" control-name="UbicacionPiezas" titulo="Ubicación"
+            opciones="Lists.SelectUbicacionPiezas" field-model="piezas.UbicacionPiezas" is-required="true"
+            form-reference="frmOb" is-disabled="(model.Pantalla == '5') ? true : false">
+        </combo-box>
+
+        <text-box ng-if="model.Pantalla == '5'" control-name="UbicacionPiezas" titulo="Ubicación"
+            field-model="model.UbicacionPiezas" is-required="true" is-disabled="true" show-icon="true"
+            title-icon={{helpCodigo}} on-blur="validarCodigo()" form-reference="frmOb">
+        </text-box>
+
+        <combo-box control-name="FormaAdquisicion" titulo="Forma de adquisición" opciones="Lists.FormaAdquisicion"
+            show-icon="true" title-icon={{helpFormaAdquisicion}} field-model="piezas.FormaAdquisicion"
+            is-required="true" form-reference="frmOb" is-disabled="(model.Pantalla == '5') ? true : false">
+        </combo-box>
+
+        <div class="form-group" ng-if="model.Pantalla !== '5'">
+            <label style="width: 100%;">Cargar Imagen: <span style="color: red;" ng-if="(piezas.FotoPieza !== undefined) ? false : true">*</span>
+                <span id="iconAyuda" class="fa fa-info-circle" aria-hidden="true" title={{helpImagen}}></span>
+            </label><br />
+            <input type="file"
+                class="form-control" name="Imagen" id="Imagen" validatextension="jpeg,jpg,png,tiff,tif"
+                data-custom-file-change="piezas.Imagen"
+                ng-model="piezas.Imagen"
+                accept=".jpeg,.jpg,.png,.tiff,.tif"
+                ng-required="(piezas.FotoPieza !== undefined) ? false : true"
+                title="El tipo de archivo permitido en este campo es .jpeg .jpg .png .tiff .tif"
+                form-reference="frmOb" filestyle />
+        </div>
+        <div class="form-group" ng-if="piezas.FotoPieza.Url">
+            <a href="{{piezas.FotoPieza.Url}}"
+                class="btn-base"
+                role="button"
+                aria-pressed="true" target="_blank" rel="noopener">
+                    <i class="fa fa-eye" aria-hidden="true"></i> 
+                    Ver imagen de la pieza
+                </a>
+        </div>
+    </ng-form>
+</div>
+<div class="modal-footer">
+    <button  ng-if="model.Pantalla == '1' ||  model.Pantalla == '5'" type="button" ng-disabled="!frmOb.$valid" ng-click="GuardarPiezasPre(piezas)" class="btnFormINGEPModal"
+        data-dismiss="modal">Continuar</button>
+</div>

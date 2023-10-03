@@ -1,0 +1,22 @@
+﻿<div class="ModalCrearEspacios">
+    <div class="modal-header headerINGEP">
+        <h4 class="modal-titleTenencia titleModalFormTenencia">{{Pagina.Titulo}}</h4>
+        <button type="button" class="close closeButtonModal" ng-click="CancelYesNo('closeModal()')" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body">
+        <ng-form name="frmOb" class="container" novalidate>
+            
+            <div ng-if="model.Pantalla !== '1'" class="col-sm-12">
+                <div class="mb-4">
+                    Por favor asigne un nombre al espacio. Ejemplo: Sala de exhibición, Depósito, Litoteca, Laboratorio, entre otros.
+                </div>
+                <text-box control-name="EspacioMuseoTenencia" titulo="Nombre del espacio" field-model="SelEspacio.Espacio" is-required="true" form-reference="frmOb">
+                </text-box>
+            </div>
+        </ng-form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" id="continuarEspaciosBtn" ng-disabled="!frmOb.$valid" ng-click="ContinuarEspacioPre($event.target.checked)" class="btnFormINGEPModal" data-dismiss="modal">Continuar</button>
+        <button type="button" ng-click="CancelYesNo('closeModal()')" class="btn-grey ng-scope" data-dismiss="modal">Cancelar</button>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+﻿<div class="modal-header headerINGEP">
+    <h4 class="modal-title">{{Pagina.Titulo}}</h4>
+    <button type="button" class="close closeButtonModal" ng-click="closeModal()" data-dismiss="modal">&times;</button>
+</div>
+<div class="modal-body">
+
+    <ng-form name="frmDetalle" class="container" novalidate>
+        <div class="row">
+            <div class="col-sm-6">
+                <text-box control-name="IdPago" titulo="Id pago" field-model="DetallePago.IdPago" is-required="false"
+                    is-disabled="true" form-reference="frmDetalle"></text-box>
+            </div>
+            <div class="col-sm-6">
+                <!-- <date-box 
+                    control-name="FechaPago" 
+                    titulo="Fecha de pago"
+                    field-model="DetallePago.FechaPago"
+                    is-required="false"
+                    is-disabled="true"
+                    form-reference="frmDetalle"></date-box> -->
+                <text-box control-name="FechaPago" titulo="Fecha de pago" field-model="DetallePago.FechaPago"
+                    is-required="false" is-disabled="true" form-reference="frmDetalle"></text-box>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <text-box control-name="AprobacionPago" titulo="CUS"
+                    field-model="DetallePago.AprobacionPago" is-required="false" is-disabled="true"
+                    form-reference="frmDetalle"></text-box>
+            </div>
+            <div class="col-sm-6">
+                <text-box control-name="CantidadPagada" titulo="Valor pagado"
+                    field-model="DetallePago.CantidadPagada" is-required="false" is-disabled="true"
+                    form-reference="frmDetalle"></text-box>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <text-box control-name="Concepto" titulo="Concepto" field-model="DetallePago.Concepto"
+                    is-required="false" is-disabled="true" form-reference="frmDetalle"></text-box>
+            </div>
+            <div class="col-sm-6">
+                <text-box control-name="EstadoPago" titulo="Estado del pago" field-model="DetallePago.EstadoPago"
+                    is-required="false" is-disabled="true" form-reference="frmDetalle"></text-box>
+            </div>
+        </div>
+    </ng-form>
+</div>
+<div class="modal-footer">
+    <button type="button" ng-click="closeModal()" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+</div>

@@ -1,0 +1,25 @@
+﻿<div ng-if="$ctrl.isRevision">
+    <span class="form-check form-switch">
+        <input type="checkbox" name="cbx{{$ctrl.controlName}}" id="cbx{{$ctrl.controlName}}"
+            ng-disabled="$ctrl.isDisabled" class="form-check-input" ng-model="$ctrl.fieldModelRequerimiento.Check">
+    </span>
+    <br>
+    <div class="form-group" ng-if="$ctrl.fieldModelRequerimiento.Check">
+        <label>Observación o requerimiento: <span ng-if="$ctrl.fieldModelRequerimiento.Check"
+                style="color: red;">*</span></label>
+        <textarea class="form-control" id="Req{{$ctrl.controlName}}" rows="3" name="Requerimiento{{$ctrl.controlName}}"
+            ng-disabled="$ctrl.isRespuestaRequerimiento||$ctrl.isDisabled"
+            ng-model="$ctrl.fieldModelRequerimiento.Comentario" ng-required="$ctrl.fieldModelRequerimiento.Check" titulo="Observación o requerimiento {{$ctrl.titulo || ''}}"
+            placeholder="{{$ctrl.fieldModelRequerimiento.UltimoComentario}}"></textarea>
+        <span style="color:red" ng-if="!$ctrl.fieldModelRequerimiento.Comentario && $ctrl.showError">El campo observación o requerimiento es requerido.</span>
+    </div>
+    <div class="form-group"
+        ng-if="($ctrl.fieldModelRequerimiento.Check && $ctrl.isRespuestaRequerimiento) || ($ctrl.fieldModelRequerimiento.Check && $ctrl.fieldModelRequerimiento.RespuestaComentario)">
+        <label>Respuesta requerimiento: <span ng-if="$ctrl.fieldModelRequerimiento.Check"
+                style="color: red;">*</span></label>
+        <textarea class="form-control" id="ResReq{{$ctrl.controlName}}" rows="3" name="RespuestaRequerimiento{{$ctrl.controlName}}"
+            ng-disabled="!$ctrl.isRespuestaRequerimiento" ng-model="$ctrl.fieldModelRequerimiento.RespuestaComentario" titulo="Respuesta requerimiento {{$ctrl.titulo || ''}}"
+            ng-required="$ctrl.fieldModelRequerimiento.Check"></textarea>
+        <span style="color:red" ng-if="!$ctrl.fieldModelRequerimiento.RespuestaComentario && $ctrl.showError">El campo respuesta requerimiento es requerido.</span>
+    </div>
+</div>

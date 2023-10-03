@@ -1,0 +1,15 @@
+﻿<div class="form-group">
+    <label ng-if="$ctrl.titulo" for="{{$ctrl.controlName}}">{{$ctrl.titulo}}: 
+        <span ng-if="$ctrl.isRequired" style="color: red;">*</span>
+    </label>
+
+    <select class="form-control" id="{{$ctrl.controlName}}" name="{{$ctrl.controlName}}" multiple="multiple">
+      <option value="php">PHP</option>
+      <option value="javascript">JavaScript</option>
+      <option value="java">Java</option>
+      <option value="sql">SQL</option>
+      <option value="jquery">Jquery</option>
+      <option value=".net">.Net</option>
+    </select>
+    <div ng-messages="$ctrl.error()" style="color:red;" role="alert"></div>
+</div>

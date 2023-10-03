@@ -1,0 +1,35 @@
+﻿
+
+    <div class="modal-header headerINGEP">
+      <h4 class="modal-title titleModalForm">{{Pagina.Titulo}}</h4>
+      <button type="button" class="close closeButtonModal" ng-click="closeModalDetallePiezas()" data-dismiss="modal">&times;</button>
+  </div>
+  <div class="modal-body">
+    <table class="table table-bordered" datatable="ng" dt-options="vm3.dtOptions" dt-instance="vm3.dtInstance" dt-column-defs="vm3.dtColumnDefs">
+      <caption>Código INGEP</caption>
+      <thead id="ColorTablaCero">
+        <tr>
+          <th id="a1" class="th-sm text-center">#</th>
+          <th id="a2" class="th-sm text-center">Código INGEP</th> 
+          <th id="a3" class="th-sm text-center">Categoría</th>
+          <th id="a4" class="th-sm text-center">Espécimen tipo</th>
+          <th id="a5" class="th-sm text-center">Forma de adquisición</th>
+          <th id="a6" class="th-sm text-center">Ubicación</th>
+          <th id="a7" class="th-sm text-center">Acciones</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="x in Lists.piezasDetalles">
+          <td class="text-center">{{$index+1}}</td>
+          <td class="text-center">{{x.Codigo}}</td>
+          <td class="text-center">{{x.Categoria}}</td>
+          <td class="text-center">{{x.EsEspecimenTipo}}</td>
+          <td class="text-center">{{x.FormaAdquisicion}}</td>
+          <td class="text-center">{{x.Ubicacion.NombreMuseo}}</td>
+          <td class="text-center">
+            <span style="font-size:20px;cursor:pointer" , class="glyphicon glyphicon-picture icontableForm"
+              ng-click="verImagenPiezaspreDetalles($index)" style="cursor: pointer;"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>       
+  </div>

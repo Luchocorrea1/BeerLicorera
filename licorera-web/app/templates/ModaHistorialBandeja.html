@@ -1,0 +1,194 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">Historial de la solicitud</h4>
+    <button type="button" class="close" ng-click="closeModalHistory()" data-dismiss="modal">&times;</button>
+</div>
+<div class="modal-body">
+    <ng-form name="frmOb" class="container" novalidate>
+        <h2 class="modal-info">{{Historial.Codigo}}</h2>
+        <h4 id="TTipoSolicitud" class="modal-info">{{Historial.TipoSolicitud}}</h4>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6">
+                <text-box control-name="TipoSolicitud" titulo="Tipo Solicitud" field-model="Historial.TipoSolicitud"
+                    is-disabled="true" form-reference="frmOb">
+                </text-box>
+            </div>
+            <div class="col-sm-6">
+                <text-box control-name="NumeroSolicitud" titulo="Número Solicitud" field-model="Historial.Codigo"
+                    is-disabled="true" form-reference="frmOb">
+                </text-box>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <text-box control-name="NombreRazonSocial" titulo="Nombre o razón social" field-model="Historial.Nombre"
+                    is-disabled="true" form-reference="frmOb">
+                </text-box>
+            </div>
+            <div class="col-sm-6">
+                <text-box control-name="NumeroIdentificacion" titulo="Número de identificación"
+                    field-model="Historial.DataSolicitud.IdUsuarioFba.NumeroDocumento" is-disabled="true"
+                    form-reference="frmOb">
+                </text-box>
+            </div>
+        </div>
+        <button type="button" class="btn btn-secondary" ng-click="MostrarExpediente()" >Ver Expediente</button>
+    </ng-form>
+</div>
+
+<div class="modal-body">
+    <div style="padding-top: 2%;">
+        <div ng-if="IsExterno == false"> 
+            <div id="HomeTys">
+                <a class="btn btn-link" ng-click="ShowComunicationForm()">
+                    <ul>
+                        <li class="s4-breadcrumbCurrentNode" style="color: dimgray; padding-right: 11px">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-plus-circle-fill" viewBox="0 0 16 16" style="color: #3366cc;">
+                                <path
+                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z">
+                                </path>
+                            </svg>
+                        </li>
+
+                        <li class="s4-breadcrumbCurrentNode"
+                            style="color: rgb(83, 82, 82); padding-right: 11px; padding-top: 5px;">
+                            <strong>Insertar comunicación</strong>
+                        </li>
+                    </ul>
+                </a>
+            </div>
+        </div>
+        <!-- Botones del tab -->
+        <ul class="nav nav-tabs" id="tabModal" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link tabbtn btn btn-selected" id="historial-tab" data-toggle="tab"
+                    ng-click="OpenCloseTabs(0,0)" role="tab">Historial</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link tabbtn btn-tab" id="comunicaciones-tab" data-toggle="tab"
+                    ng-click="OpenCloseTabs(1,1)" role="tab">Reuniones y otras comunicaciones</a>
+            </li>
+        </ul>
+
+        <!-- contenido de histórico -->
+        <div style="padding-top: 2%;" class="tabdata" id="historial" role="tabpanel" aria-labelledby="historial-tab">
+            <table class="table table-bordered table-striped" datatable="ng" dt-options="hs.dtOptions"
+                dt-instance="hs.dtInstance" dt-column-defs="hs.dtColumnDefs">
+                <caption> </caption>
+                <thead id="ColorTablaCero">
+                    <tr>
+                        <th scope="col" class="th-sm text-center">#</th>
+                        <th scope="col" class="th-sm text-center">Número radicado</th>
+                        <th scope="col" class="th-sm text-center" ng-if="IsExterno == false">Responsable</th>
+                        <th scope="col" class="th-sm text-center">Fecha Inicio</th>
+                        <th scope="col" class="th-sm text-center">Fecha Cierre</th>
+                        <th scope="col" class="th-sm text-center">Estado</th>
+                        <th scope="col" class="th-sm text-center noExport"  ng-if="MuestraAbrirTarea == true" style=" width: 90px;">Acciones</th>
+  
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in Lists.Historial">
+                        <td class="text-center">{{x.Index}}</td>
+                        <td class="text-center">{{x.Radicado}}</td>
+                        <td class="text-center"  ng-if="IsExterno == false">{{x.Responsable}}</td>
+                        <td class="text-center">{{x.FechaInicio}}</td>
+                        <td class="text-center">{{x.FechaCierre}}</td>
+                        <td class="text-center">{{x.Estado}}</td>
+                        <td class="text-center" ng-if="MuestraAbrirTarea == true" >
+                            <a ng-if="MuestraAbrirTarea == true && x.AbrirTarea == true && x.FechaCierre !='En curso' " href="" ng-click="AbrirSolicitudHistorico($index)" target="_blank">
+                                <ul>
+                                    <li class="s4-breadcrumbCurrentNode" style="padding-left: 5px;">
+                                        <button
+                                            title="Abrir tarea" type="button" class="btn btn-secondary"
+                                            style="min-width:20px!important;background: grey;border-radius: 50px;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M.54 3.87L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </a>
+                            <a href="" title="Ver información de notificación" ng-if="(x.EstadoHistorial == 'ConsultarPronunciamiento') && IsExterno == false" ng-click="MostrarConsultaIp($index)"> 
+                            <!-- <a href="" title="Ver información de notificación" ng-if="(x.EstadoHistorial == 'DiligenciarRespuestaRequerimiento'
+                                || x.EstadoHistorial == 'DiligenciarRespuestaDocumentos'
+                                || x.EstadoHistorial == 'ConsultarPronunciamiento') && IsExterno == false" ng-click="MostrarConsultaIp($index)">       -->
+                                <ul>
+                                    <li class="s4-breadcrumbCurrentNode" style="padding-left: 5px;">
+                                        <button title="Ver información de notificación"
+                                            title="Ver detalle pronunciamiento" type="button" class="btn btn-secondary"
+                                            style="min-width:20px!important;background: grey;border-radius: 50px;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                            </svg>    
+                                        </button>
+                                    </li>
+                                </ul>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- contenido de comunicaciones -->
+        <div style="padding-top: 2%;" class="tabdata hide-tab" id="comunicaciones" role="tabpanel"
+            aria-labelledby="comunicaciones-tab">
+            <table class="table table-bordered table-striped" datatable="ng" dt-options="vm.dtOptions"
+                dt-instance="vm.dtInstance" dt-column-defs="vm.dtColumnDefs">
+                <caption> </caption>
+                <thead id="ColorTablaCero">
+                    <tr>
+                        <th scope="col" class="th-sm text-center">#</th>
+                        <th scope="col" class="th-sm text-center">Tipo de comunicación</th>
+                        <th scope="col" class="th-sm text-center">Fecha de comunicación</th>
+                        <th scope="col" class="th-sm text-center">Nombre de la comuninación</th>
+                        <th scope="col" class="th-sm text-center noExport">Acciones</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="com in Lists.Comunicaciones">
+                        <td class="text-center">{{com.Index}}</td>
+                        <td class="text-center">{{com.TipoComunicacion}}</td>
+                        <td class="text-center">{{com.FechaComunicacion}}</td>
+                        <td class="text-center">{{com.Nombre}}</td>
+                        <td class="text-center">
+                            <a  width="16" height="16" href=""ng-click="ShowComunicationDetalle($index)">
+                                <ul>
+                                    <li class="s4-breadcrumbCurrentNode" style="padding-left: 5px;">
+                                        <button title="Ver detalle" type="button" class="btn btn-secondary" style="min-width:20px!important;background: grey;border-radius: 50px;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16">
+                                                <path d="M.54 3.87L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z">
+    
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </a>
+                            <ul>
+                                <li ng-if="com.Creador" class="s4-breadcrumbCurrentNode" style="padding-left: 5px;">
+                                    <button title="Eliminar comunicación"
+                                        type="button" class="btn btn-secondary"
+                                        ng-click="OpenModalEliminarComunicacion($index)"
+                                        style="min-width:20px!important;background: grey;border-radius: 30px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                        </svg>
+                                    </button>
+                                </li>
+                            </ul>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" ng-disabled="!frmOb.$valid" ng-click="closeModalHistory()" class="btnFormINGEPModal"
+        data-dismiss="modal">
+        Cerrar
+    </button>
+</div>

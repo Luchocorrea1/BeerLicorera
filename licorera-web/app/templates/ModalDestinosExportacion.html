@@ -1,0 +1,48 @@
+<ng-form name="frmUbi" novalidate>
+    <div class="modal-header headerINGEP">
+        <h4 class="">{{ModalTitulo}}</h4>
+        <button type="button" class="close closeButtonModal" ng-click="closeModal()" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body">
+    
+        <div class="row">
+            <div class="col-sm-12">
+                <text-box show-error="ShowErrorUbi" control-name="Nombre" titulo="Nombre de la institución" field-model="SelUbicacion.lugDestNombre" form-reference="frmUbi" is-required="true" ng-required="true" is-disabled="OnlyRead"></text-box>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <combo-box  show-error="ShowErrorUbi" control-name="Pais" titulo="País" opciones="Lists.Paises" is-required="true" ng-required="true" field-model="SelUbicacion.lugDestPais" is-disabled="OnlyRead" form-reference="frmUbi"></combo-box>
+            </div>
+            <div class="col-sm-6">
+                <text-box  show-error="ShowErrorUbi" control-name="Ciudad" titulo="Ciudad" field-model="SelUbicacion.lugDestCiudad" form-reference="frmUbi" is-required="true" ng-required="true" is-disabled="OnlyRead"></text-box>
+            </div>
+            
+        </div>
+        <div class="row"> 
+            <div class="col-sm-6">
+                <text-box  show-error="ShowErrorUbi" control-name="Codigo" titulo="Código postal" field-model="SelUbicacion.lugDestCodigo" form-reference="frmUbi" is-required="true" ng-required="true" is-disabled="OnlyRead"></text-box>
+            </div>
+            <div class="col-sm-6">
+                <text-box  show-error="ShowErrorUbi" control-name="Direccion" titulo="Dirección" field-model="SelUbicacion.lugDestDireccion" form-reference="frmUbi" is-required="true" ng-required="true" is-disabled="OnlyRead"></text-box>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <text-box  show-error="ShowErrorUbi" control-name="Latitud" titulo="Latitud" field-model="SelUbicacion.Latitud" form-reference="frmUbi" is-required="true" ng-required="true" is-disabled="OnlyRead"></text-box>
+            </div>
+            <div class="col-sm-4">
+                <text-box  show-error="ShowErrorUbi" control-name="Longitud" titulo="Longitud" field-model="SelUbicacion.Longitud" form-reference="frmUbi" is-required="true" ng-required="true" is-disabled="OnlyRead"></text-box>
+            </div>
+            <div class="col-sm-2 text-left">
+                <a id="imgMapa" class="ImgIconmuseo" ng-click="showMapInTooltipDialog(SelUbicacion.Latitud, SelUbicacion.Longitud)" title="Coordenadas"> <span class="glyphicon glyphicon-map-marker" id="iconoMapa"></span></a>
+            </div>
+        </div>
+    
+    </div>
+    <div ng-if="!OnlyRead" class="modal-footer">        
+        <button ng-disabled="!frmUbi.$valid" type="button" data-dismiss="modal" style="cursor:pointer;" class="ng-scope btn-green" ng-click="GuardarUbicacionPre()">
+            <span class="fas fa-save"></span> Guardar
+        </button>
+    </div>
+</ng-form>

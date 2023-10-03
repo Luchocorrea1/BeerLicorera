@@ -1,0 +1,49 @@
+﻿<i ng-if="$ctrl.showHistory" id="history{{$ctrl.historyName}}"
+    class="fa {{$ctrl.showIconVersion ? 'fa-refresh' : ($ctrl.fieldModelHistory.Comentarios.length > 0) ? 'fa-commenting' : 'fa-history'}}"
+    style="cursor: help; {{$ctrl.showIconVersion ? 'color: #3366CC;' : ($ctrl.fieldModelHistory.Comentarios.length > 0) ? 'color: #3366CC;' : ''}}" aria-hidden="true"></i>
+
+<div id="popover{{$ctrl.historyName}}" style="display:none" ng-if="$ctrl.showHistory">
+    <div class="row ContentPopover" style="padding: 16PX; padding-top: 1px;">
+        <div class="col-md-6" ng-if="$ctrl.fieldModelHistory.Valorcampo && !$ctrl.historyName.includes('Verificacion')" >
+            <label>{{$ctrl.fieldModelHistory.Editor}}</label>
+        </div>
+        <div class="col-md-6" ng-if="$ctrl.fieldModelHistory.Valorcampo && !$ctrl.historyName.includes('Verificacion')">
+            {{$ctrl.fieldModelHistory.Modified}}
+        </div>
+        <div class="col-md-12" style="max-height: 300px;overflow: auto;" ng-if="$ctrl.fieldModelHistory.ShowTable">
+            Valor anterior del campo: 
+            <span style="font-size:20px;cursor:pointer" class="icontable far fa-eye" ng-click="$ctrl.OpenTable($ctrl.fieldModelHistory.Valorcampo, $ctrl.fieldModelHistory.Valorcampo.Documentos?true:false)" title="Ver detalle" style="cursor: pointer; margin-right: 10px"></span>
+            <br>
+        </div>
+        <div class="col-md-12">
+            <label></label>
+        </div>
+        <div  style="padding: 0px;" ng-if="$ctrl.fieldModelHistory.Comentarios.length>0">
+
+            <p><label>Último comentario:</label></p>
+            <div class="col-md-6">
+            <label>{{$ctrl.fieldModelHistory.Comentarios[0].Author}}</label>
+            </div>
+            <div class="col-md-6">
+            <p>{{GetFormatDate($ctrl.fieldModelHistory.Comentarios[0].Modified)}}</p>
+            </div>
+            <div class="col-md-12"></div>
+            <p style="text-align: justify;">Comentario: {{ComentarioLargo($ctrl.fieldModelHistory.Comentarios[0].Comentario)}}</p>
+            </div>
+
+            <button type="button" ng-click="$ctrl.fieldModelHistory.DeshabilitarBtn()" ng-if="!Hidebtn" class="btn-green">Más información</button>
+        </div>
+        <div class="col-md-12" ng-if="!$ctrl.isDisabled">
+            <label>Nuevo comentario</label>
+            <textarea class="form-control" rows="2" id="textAreahistory{{$ctrl.historyName}}" ng-disabled="$ctrl.isDisabled"
+                ng-model="$ctrl.fieldModelHistory.NuevoComentario"></textarea>
+            <span id="spanGuardarhistory{{$ctrl.historyName}}" style="color: green; display:none">Guardado
+                correctamente.</span>
+            <label></label>
+        </div>
+        <div  style="padding: 0px;" class="col-md-2" ng-if="!$ctrl.isDisabled">
+            <button class="btn btn-green" ng-disabled="!$ctrl.fieldModelHistory.NuevoComentario" type="button" id="btnEnviarComentario{{$ctrl.historyName}}"
+                    ng-click="$ctrl.fieldModelHistory.Insertar()">Insertar</button>
+        </div>
+    </div>
+</div>

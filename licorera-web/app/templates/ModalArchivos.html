@@ -1,0 +1,25 @@
+<div class="modal-header headerINGEP">
+    <h4 class="modal-title">{{Pagina.Titulo}}</h4>
+    <button type="button" class="close closeButtonModal" ng-click="closeModal()" data-dismiss="modal">&times;</button>
+</div>
+<div class="modal-body table table-bordered">
+
+    <table class="table" dt-options="vm.dtOptions" dt-instance="vm.dtInstance" width="100%"
+        dt-column-defs="vm.dtColumnDefs">
+        <thead>
+            <tr>
+                <th class="th-sm ">Nombre Documento</th>
+
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in Lists.DocumentosAdicionales">
+                <td><a href="{{x.UrlArchivo}}" target="_blank">{{x.Nombre}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="modal-footer">
+        <button type="button" ng-click="closeModal()" class="btnFormINGEPModal" data-dismiss="modal">Cerrar</button>
+    </div>
+        
+</div>
+

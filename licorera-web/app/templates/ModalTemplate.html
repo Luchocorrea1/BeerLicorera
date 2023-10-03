@@ -1,0 +1,15 @@
+<div class="modal-header" data-backdrop="static" data-keyboard="false">
+        <h3 class="modal-title" id="modal-title">{{$ctrl.DatosVer.Title}}</h3>
+    </div>
+    <div class="modal-body" id="modal-body" data-backdrop="static" data-keyboard="false">
+    <p style="font-size: 1em;">{{$ctrl.DatosVer.Body}}</p>
+        <ul>
+            <li ng-repeat="(key, prop) in $ctrl.DatosVer.Data">
+                {{key +': '+prop}}
+            </li>
+        </ul>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-green" type="button" ng-click="$ctrl.ok()">Aceptar</button>
+        <button class="btn btn-light" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+    </div>

@@ -1,0 +1,79 @@
+<div class="modal-header">
+    <h4 class="modal-title">Filtro bandeja</h4>
+    <button type="button" class="close" ng-click="closeModal()" data-dismiss="modal">&times;</button>
+</div>
+<div class="modal-body">
+    <ng-form name="frmOb" class="container" novalidate>
+     
+        <div class="row">
+            <div class="col-sm-6">
+                <text-box control-name="Codigo" titulo="Código" field-model="Filtro.Codigo"
+                     form-reference="frmOb" ng-model="Filtro.Codigo">
+                </text-box>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <text-box control-name="Nombre" titulo="Nombre o razón social" field-model="Filtro.Nombre"
+                     form-reference="frmOb" ng-model="Filtro.Nombre">
+                </text-box>
+            </div>
+            <div class="col-sm-6">
+                <text-box control-name="Identificadcion" titulo="Número de identificación" field-model="Filtro.Identificacion"
+                     form-reference="frmOb" ng-model="Filtro.Identificacion">
+                </text-box>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <combo-box control-name="TipoSolicitud" titulo="Tipo de solicitud" opciones="Lists.TiposSolicitud" 
+                    field-model="Filtro.TipoSolicitud" ng-model="Filtro.TipoSolicitud" 
+                    form-reference="frmOb">
+                </combo-box>
+            </div>
+
+            <div class="col-sm-6">
+                <combo-box control-name="Estado" titulo="Estado" opciones="Lists.Estados" 
+                    field-model="Filtro.Estado" ng-model="Filtro.Estado" 
+                    form-reference="frmOb">
+                </combo-box>
+            </div>
+            
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <date-box  control-name="FechaInicialRadicacion" titulo="Fecha inicial de radicación" ng-model="Filtro.FechaInicialRadicacion" field-model="Filtro.FechaInicialRadicacion"
+                     form-reference="frmOb">
+                </date-box>
+            </div>
+            <div class="col-sm-6">
+                <date-box  control-name="FechaFinalRadicacion" titulo="Fecha final de radicación" ng-model="Filtro.FechaFinalRadicacion" field-model="Filtro.FechaFinalRadicacion"
+                     form-reference="frmOb">
+                </date-box>
+            </div>
+        </div>
+
+        <div class="row" ng-if="EsAdmin==true">
+            <div class="col-sm-6">
+                <combo-box control-name="UsuariosAsignados" titulo="Usuario asignado" opciones="Lists.UsuariosAsignados" 
+                    field-model="Filtro.UsuariosAsignados" ng-model="Filtro.UsuariosAsignados" 
+                    form-reference="frmOb">
+                </combo-box>
+            </div>
+
+           
+            
+        </div>
+    </ng-form>
+</div>
+
+<div class="modal-footer">
+    <button type="button"  class="btn btn-green"
+     ng-click="AplicarFiltro()">Aplicar</button>
+    <button type="button" ng-disabled="!frmOb.$valid" ng-click="closeModal()" class="btn btn-green"
+            data-dismiss="modal">
+        Cerrar
+    </button>
+</div>

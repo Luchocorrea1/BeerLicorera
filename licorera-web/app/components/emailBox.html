@@ -1,0 +1,21 @@
+﻿<div class="form-group">
+    <label ng-if="$ctrl.titulo" for="{{$ctrl.controlName}}">{{$ctrl.titulo}}: <span ng-if="$ctrl.isRequired"
+            style="color: red;">*</span></label>
+	<span ng-if="$ctrl.showIcon" id="iconAyuda" class="fa fa-info-circle" aria-hidden="true" title="{{$ctrl.titleIcon}}"></span>
+
+	<history ng-if="$ctrl.showHistory" history-name="{{$ctrl.historyName}}" show-history="$ctrl.showHistory" is-disabled="$ctrl.isDisabledHistory"></history>
+    
+    <input titulo="{{$ctrl.titulo}}" class="form-control" type="{{$ctrl.tipo == 'password' ? 'password' : 'text'}}" onkeydown="KeyEnter(event)"
+        ng-blur="onBlur()" ng-keydown="onKeydown()" id="{{$ctrl.controlName}}" name="{{$ctrl.controlName}}" maxlength="{{$ctrl.maxLength}}" ng-maxlength="$ctrl.maxLength"
+        ng-model="$ctrl.fieldModel" ng-required="$ctrl.isRequired" ng-disabled="$ctrl.isDisabled" ng-pattern="/^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/" />
+        
+    <div ng-if="$ctrl.showError" ng-messages="$ctrl.error()" style="color:red;" role="alert">
+        <div ng-message="required">El campo {{$ctrl.titulo ? "'" + $ctrl.titulo + "'" : ""}} es requerido</div>
+        <div ng-message="pattern">Correo electrónico inválido.</div> 
+    </div>
+
+    
+    <requerimiento show-error="$ctrl.showError" ng-if="$ctrl.isRevision" control-name="{{$ctrl.controlName}}" titulo="{{$ctrl.titulo}}" is-revision="$ctrl.isRevision" field-model-requerimiento="$ctrl.fieldModelRequerimiento" is-disabled="$ctrl.isDisabledRequerimiento"
+	is-respuesta-requerimiento="$ctrl.isRespuestaRequerimiento" is-disabled-respuesta="$ctrl.isDisabledRespuesta"></requerimiento>
+    
+</div>

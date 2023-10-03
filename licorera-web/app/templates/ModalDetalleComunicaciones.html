@@ -1,0 +1,98 @@
+<div class="modal-header">
+    <h4 class="modal-title">Ver detalle comunicación</h4>
+    <button type="button" class="close" ng-click="CloseModalComunication()" data-dismiss="modal">&times;</button>
+</div>
+<div class="modal-body">
+    <ng-form name="frmOb" class="container" novalidate>
+        <div class="row">
+            <div class="col-sm-6">
+            
+                <combo-box ng-if="DetalleComunicaciones.Creador" opciones="Lists.TiposComunicacion"  control-name="TiposComunicacion" titulo="Tipo de comunicado" field-model="DetalleComunicaciones.TiposComunicacion" is-required="true" 
+                  form-reference="frmOb">
+                </combo-box>
+
+                <text-box ng-if="!DetalleComunicaciones.Creador" is-disabled="true"   control-name="TiposComunicacion" titulo="Tipo de comunicado" field-model="DetalleComunicaciones.TiposComunicacion" is-required="true" 
+                form-reference="frmOb">
+              </text-box>
+            </div> 
+            <div class="col-sm-6">
+                <date-box  ng-if="DetalleComunicaciones.Creador" control-name="FechaComunicacion" titulo="Fecha de comunicado" field-model="DetalleComunicaciones.FechaComunicacion" is-required="true" 
+                  form-reference="frmOb">
+                </date-box>
+
+                <date-box ng-if="!DetalleComunicaciones.Creador" is-disabled="true"  control-name="FechaComunicacion" titulo="Fecha de comunicado" field-model="DetalleComunicaciones.FechaComunicacion" is-required="true" 
+                form-reference="frmOb">
+              </date-box>
+            </div>
+            
+        </div>
+        <div class="row">
+        
+            <div class="col-sm-12">
+                <text-box ng-if="DetalleComunicaciones.Creador" control-name="Title" titulo="Nombre de comunicado" field-model="DetalleComunicaciones.Title" is-required="true" 
+                form-reference="frmOb">
+                </text-box>
+                <text-box ng-if="!DetalleComunicaciones.Creador" is-disabled="true" control-name="Title" titulo="Nombre de comunicado" field-model="DetalleComunicaciones.Title" is-required="true" 
+                form-reference="frmOb">
+                </text-box>
+            </div>  
+        </div>
+        <div class="row">          
+            <div class="col-sm-12">
+                <multiline-box ng-if="DetalleComunicaciones.Creador" control-name="Descripcion" titulo="Descripción" rows="2" field-model="DetalleComunicaciones.Descripcion" is-required="true"
+                form-reference="frmOb">
+                </multiline-box>
+
+                <multiline-box ng-if="!DetalleComunicaciones.Creador" is-disabled="true" control-name="Descripcion" titulo="Descripción" rows="2" field-model="DetalleComunicaciones.Descripcion" is-required="true"
+                form-reference="frmOb">
+                </multiline-box>
+
+                
+            </div>
+            <div class="col-sm-12">
+                <multiline-box  ng-if="DetalleComunicaciones.Creador" control-name="Compromisos" titulo="Compromisos" rows="2" field-model="DetalleComunicaciones.Compromisos"
+                 form-reference="frmOb">
+                </multiline-box>
+
+                <multiline-box  ng-if="!DetalleComunicaciones.Creador" is-disabled="true"  control-name="Compromisos" titulo="Compromisos" rows="2" field-model="DetalleComunicaciones.Compromisos"
+                form-reference="frmOb">
+               </multiline-box>
+            </div>
+            <div class="col-sm-12">
+                <multiline-box ng-if="DetalleComunicaciones.Creador" control-name="Observaciones" titulo="Observaciones" rows="2" field-model="DetalleComunicaciones.Observaciones"
+                   form-reference="frmOb">
+                </multiline-box>
+
+                <multiline-box ng-if="!DetalleComunicaciones.Creador" is-disabled="true"  control-name="Observaciones" titulo="Observaciones" rows="2" field-model="DetalleComunicaciones.Observaciones"
+                form-reference="frmOb">
+             </multiline-box>
+            </div>
+        </div>
+        <div class="row" ng-if="DetalleComunicaciones.Adjunto">
+            <div class="col-md-12">
+                <label>Archivo </label>
+                <a ng-href="{{DetalleComunicaciones.Adjunto}}" target="_blank">{{DetalleComunicaciones.FileName}}</a>
+            </div>
+        </div>
+
+        <div class="row"ng-if="DetalleComunicaciones.Creador" >
+            <div class="col-md-12">
+                <label>Cambiar o agregar Archivo </label>
+                <input type="file" class="form-control ng-pristine ng-untouched ng-valid ng-scope ng-empty" name="Archivo" id="Archivo"
+                    data-custom-file-change="DetalleComunicaciones.Documento" ng-model="DetalleComunicaciones.Documento"
+                    form-reference="frmOb" filestyle />
+            </div>
+        </div> 
+    </ng-form>
+</div>
+    <div class="modal-footer">
+        <button ng-if="DetalleComunicaciones.Creador" type="button" ng-disabled="!frmOb.$valid" ng-click="OpenModalMensajeEditarComunicacion()" class="btn btnFormgray"
+                data-dismiss="modal">
+            Guardar
+        </button>
+        <button type="button" ng-click="CloseModalComunication()" class="btnFormINGEPModal"
+            data-dismiss="modal">
+            Cerrar
+        </button>
+    </div>
+

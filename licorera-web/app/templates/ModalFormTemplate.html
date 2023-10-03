@@ -1,0 +1,8 @@
+<div class="modal-header">
+	<h4 class="modal-title" id="modal-title">{{$ctrl.Modal.Title}}</h4>
+</div>
+<div class="modal-body" id="modal-body" ng-bind-html="$ctrl.Modal.Content"></div>
+<div class="modal-footer">
+	<button class="btn btn-green" ng-click="$ctrl.ok()" type="button">Aceptar</button>
+	<button class="btn btn-light" ng-click="$ctrl.cancel()" type="button">Cancelar</button>
+</div>

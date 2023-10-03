@@ -1,0 +1,101 @@
+<div class="modal fade" id="ModalCrearGestionAsociados" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal"
+                    aria-hidden="true">&times;
+
+                </button>
+                <h4 class="modal-title">{{Pagina.Titulo}}</h4>
+            </div>
+            
+            <div class="modal-body">
+                <ng-form name="frmOb" class="container" novalidate>
+                    <combo-box control-name="NuevoEmpleado" titulo="Nuevo Empleado" opciones="Lists.NuevoEmpleado"
+                     field-model="model.NuevoEmpleado"
+                    is-required="true" form-reference="frmOb"></combo-box>
+                   
+                        <div class="form-group" ng-show="model.NuevoEmpleado == 'No'">
+                            <label>Número Empleado: </label>
+                            <input type="text" ng-blur="onFocusNumeroEmpleado()"  ng-model="selected" onkeydown="KeyEnter(event)"
+                                uib-typeahead="Evento as Evento.name for Evento in Lists.Personas | filter:{name:$viewValue}"
+                                class="form-control" typeahead-show-hint="true" typeahead-min-length="4">
+                                <label for="" ng-show="NoExisteUsuario" style="color: red;">El asociado no existe en el sistema</label>
+                                <label for="" ng-show="UsuarioRegistrado" style="color: red;">El Asociado que intenta ingresar ya se encuentra registrado</label>
+                          </div>
+                        <div class="form-group" ng-if="model.NuevoEmpleado == 'Si'">
+                            <label>Número de cédula: </label>
+                            <input type="text" class="form-control" onkeydown="KeyEnter(event)" ng-blur="onFocusNumeroCedula()" number-format ng-model="model.NumeroCedula" ng-required="model.NuevoEmpleado == 'Si'" form-reference="frmOb">  
+                            <label for="" ng-show="UsuarioRegistrado" style="color: red;">El Asociado que intenta ingresar ya se encuentra registrado</label>
+                        </div>
+                       
+                        <text-box ng-if="model.NuevoEmpleado == 'Si'" control-name="NombreCompleto" titulo="Nombre Completo" field-model="model.NombreCompleto" is-required="model.NuevoEmpleado == 'Si'" 
+                        form-reference="frmOb">
+                        </text-box>
+  
+                  
+                    <combo-box control-name="RGS" titulo="RGS" opciones="Lists.RGS" field-model="model.RGS"
+                    is-required="true" form-reference="frmOb"></combo-box>
+
+                    <combo-box control-name="City" titulo="City" opciones="Lists.Citys" field-model="model.City"
+                        is-required="true" form-reference="frmOb"></combo-box>
+                    <text-box control-name="Role" titulo="Role" field-model="model.Role" is-required="true"
+                        form-reference="frmOb"></text-box>
+                    <combo-box control-name="EnglishLevel" titulo="English Level" opciones="Lists.EnglishLevels"
+                        field-model="model.Nivel_Ingles" is-required="true" form-reference="frmOb"></combo-box>
+                    <multiline-box control-name="SkillPrincipal" titulo="Skill 1" field-model="model.SkillPrincipal"
+                        is-required="true" form-reference="frmOb" rows="6">
+                    </multiline-box>
+                    <multiline-box control-name="SkillSecundario" titulo="Skill 2" field-model="model.SkillSecundario"
+                        is-required="false" form-reference="frmOb" rows="6">
+                    </multiline-box>
+                    <multiline-box control-name="SkillTres" titulo="Skill 3" field-model="model.SkillTres"
+                        is-required="false" form-reference="frmOb" rows="6">
+                    </multiline-box>
+                    <text-box control-name="Grade" titulo="Grade" field-model="model.Grade" is-required="true"
+                        form-reference="frmOb"></text-box>
+                    <text-box control-name="LastWON" titulo="Last Account" field-model="model.LastWON" ng-if="model.NuevoEmpleado == 'No'"
+                        is-required="model.NuevoEmpleado == 'No'" form-reference="frmOb"></text-box>
+                        
+                    <text-box control-name="BenchfutureRelease" titulo="Tipo(Bench or future Release)" ng-if="model.NuevoEmpleado == 'No'"
+                        field-model="model.BenchfutureRelease" is-required="model.NuevoEmpleado == 'No'" form-reference="frmOb"></text-box>
+                    <date-box control-name="FechaRelease" titulo="Release Date" field-model="model.FechaRelease" ng-if="model.NuevoEmpleado == 'No'"
+                        is-required="model.NuevoEmpleado == 'No'" form-reference="frmOb"></date-box>
+
+                    <div class="form-group">
+                        <label style="width: 100%;">Hoja de vida: <span style="color: red;">*</span></label><br />
+                        <input type="file" class="form-control" name="Imagen" id="Imagen"
+                            validatextension="doc,docx,pdf" data-custom-file-change="model.Imagen"
+                            ng-model="model.Imagen" accept=".doc,.docx,.pdf"
+                            title="El tipo de archivo permitido en este campo es .doc, .docx, .pdf"
+                            form-reference="frmOb" ng-change="saveFileMemory()" />
+                        <table class="table table-bordered display nowrap">
+                            <caption> </caption>
+                            <thead id="ColorTabla">
+                                <tr>
+                                    <th scope="col" class="th-sm text-center">Nombre Archivo</th>
+                                    <th scope="col" class="th-sm text-center">Eliminar</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in Lists.Files">
+                                    <td ng-if="x.fileName">{{x.fileName }}</td>
+                                    <td ng-if="x.Name"><a href="{{x.ServerRelativeUrl}}" target="_blank" rel="noopener">{{x.Name}}</a></td>
+                                    <td>
+                                        <span style="font-size:20px;cursor:pointer" , class="glyphicon glyphicon-trash"
+                                            ng-click="EliminarFile($index)" style="cursor: pointer;"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ng-form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-disabled="!frmOb.$valid" ng-click="Guardar()" class="btn btn-green"
+                    data-dismiss="modal">Guardar</button>
+                <button type="button" ng-click="close(false)" class="btn btn-light"
+                    data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

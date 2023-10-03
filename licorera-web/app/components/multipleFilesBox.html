@@ -1,0 +1,6 @@
+<div class="form-group">
+	<label>{{$ctrl.titulo}}: <span ng-if="$ctrl.isRequired" style="color: red;">*</span></label><br/>
+	<label for="{{$ctrl.controlName}}"><span class="btn btn-primary">Examinar</span></label>
+	<input ng-show="false" id="{{$ctrl.controlName}}" class="form-control" type="file" multiple id="{{$ctrl.controlName}}" accept="{{$ctrl.fileType}}" multiple-files-read>
+	<small id="{{'help' + $ctrl.controlName}}" class="form-text text-muted">{{$ctrl.consideraciones}}</small>
+</div>

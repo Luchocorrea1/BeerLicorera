@@ -1,0 +1,47 @@
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal"
+                    aria-hidden="true">&times;
+
+                </button>
+                <h4 class="modal-title">{{TituloModal.Titulo}}</h4>
+            </div>
+            <div class="modal-body">
+                <ng-form name="frmOb" class="container" novalidate>
+                    <div class="col-md-12">
+                        <label>Número Empleado: </label>
+                        <input disabled="disabled" type="text" ng-model="selected" onkeydown="KeyEnter(event)"
+                            uib-typeahead="Evento as Evento.name for Evento in Lists.Personas | filter:{name:$viewValue}"
+                            class="form-control" typeahead-show-hint="true" typeahead-min-length="4">
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <table class="table table-bordered display nowrap">
+                            <caption> </caption>
+                            <thead id="ColorTabla">
+                                <tr>
+                                    <th scope="col" class="th-sm text-center">Nombre Archivo</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in Lists.Files">
+                                    <td ng-if="x.fileName">{{x.fileName }}</td>
+                                    <td ng-if="x.Name"><a href="{{x.ServerRelativeUrl}}" target="_blank" rel="noopener">{{x.Name}}</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ng-form>
+            </div>
+            <div class="modal-footer">
+                
+                <button type="button" ng-click="close(false)" class="btn btn-light"
+                    data-dismiss="modal">Salir</button>
+            </div>
+        </div>
+    </div>
+</div>

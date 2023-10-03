@@ -1,0 +1,24 @@
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{Pagina.Titulo}}</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Seleccione el archivo descargado para continuar.</h4>
+                <ng-form name="frmOb" class="container" novalidate>
+                    <div class="form-group">
+                        <label style="width: 100%;">Archivo: <span style="color: red;">*</span></label><br />
+                        <input type="file" class="form-control" name="fileAnexos" id="fileAnexos" validatextension="txt"
+                            data-custom-file-change="model.Documento" ng-model="model.Documento" accept=".txt"
+                            ng-required="true" title="El tipo de archivo permitido en este campo es .txt" form-reference="frmOb" required/>
+                    </div>
+                </ng-form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-disabled="!frmOb.$valid" ng-click="GuardarDocumento()" class="btn btn-green"
+                    data-dismiss="modal">Cargar</button>
+             </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="modal fade" id="ModalCrearGestionAsociados" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;
+                </button>
+                <h4 class="modal-title">{{TituloPruebaTecnica.Titulo}}</h4>
+            </div>
+            <div class="modal-body">
+                <ng-form name="frmOb" class="container" novalidate>
+
+                    <text-box is-disabled="true" control-name="NumeroCedula" titulo="Numero de cedula"
+                        field-model="model.NumeroCedula" is-required="true" form-reference="frmOb"></text-box>
+                    <div class="form-group" ng-if="Lists.Files.length==0">
+                        <label style="width: 100%;">cargar prueba técnica: <span
+                                style="color: red;">*</span></label><br />
+                        <input type="file" class="form-control" name="Imagen" id="Imagen" validatextension=".csv"
+                            data-custom-file-change="model.Imagen" ng-model="model.Imagen" accept=".csv"
+                            title="El tipo de archivo permitido en este campo es .csv" form-reference="frmOb"
+                            ng-change="saveFileMemory()" />
+                    </div>
+                    <div class="form-group" ng-if="Lists.Files.length>0">
+                        <table class="table table-bordered display nowrap">
+                            <caption> </caption>
+                            <thead id="ColorTabla">
+                                <tr>
+                                    <th scope="col" class="th-sm text-center">Nombre Archivo</th>
+                                    <th scope="col" class="th-sm text-center">Eliminar</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in Lists.Files">
+                                    <td ng-if="x.fileName">{{x.fileName }}</td>
+                                    <td ng-if="x.Name"><a href="{{x.ServerRelativeUrl}}" target="_blank" rel="noopener">{{x.Name}}</a>
+                                    </td>
+                                    <td>
+                                        <span style="font-size:20px;cursor:pointer" , class="glyphicon glyphicon-trash"
+                                            ng-click="EliminarFile($index)" style="cursor: pointer;" data-dismiss="modal"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-group" ng-if="Lists.Files.length>0">
+                        <table class="table table-bordered display nowrap">
+                            <caption></caption>
+                            <thead id="ColorTablaCero3">
+                                <tr>
+                                    <th id="empthy" class="th-sm text-left" colspan="2">
+                                        <label></label>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in Lists.Examen">
+                                    <th scope="col" class="th-sm">{{x.Titulo}}:</th>
+                                    <td>{{x.Respuesta}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ng-form>
+            </div>
+            <div class="modal-footer">
+                <button ng-if="!Lists.Examen.length > 0"  type="button" ng-disabled="!frmOb.$valid" ng-click="GuardarPrueba()" class="btn btn-green"
+                    data-dismiss="modal">Guardar</button>
+                <button type="button" ng-click="close(false)" class="btn btn-light"
+                    data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

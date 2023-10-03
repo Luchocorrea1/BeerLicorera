@@ -1,0 +1,51 @@
+﻿<div class="modal-header headerINGEP">
+    <h4 class="modal-title">{{Pagina.Titulo}}</h4>
+    <button type="button" class="close closeButtonModal" ng-click="closeModal()" data-dismiss="modal">&times;</button>
+</div>
+<div class="modal-body">
+
+    <ng-form name="frmConceptoTecnico" class="container" novalidate>
+        <div class="row">
+            <div class="col-sm-12">
+                <text-box 
+                    control-name="Nombre" 
+                    titulo="Nombre"
+                    field-model="modelConceptoTecnico.Nombre"
+                    is-required="true"
+                    is-disabled="false"
+                    form-reference="frmConceptoTecnico"></text-box>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Documento:<span class="text-danger">*</span></label>
+                    <input type="file"
+                        class="form-control"
+                        name="ArchivoConcepto"
+                        id="ArchivoConcepto"
+                        data-custom-file-change="modelConceptoTecnico.ArchivoConcepto"
+                        ng-model="modelConceptoTecnico.ArchivoConcepto"
+                        ng-required="true"
+                        form-reference="frmConceptoTecnico" 
+                        validatextension="jpg,png,jpeg,txt,doc,docx,xls,xlsx,pdf" 
+                        accept=".jpg,.png,.jpeg,.txt,.doc,.docx,.xls,.xlsx,.pdf" 
+                        />
+                        <!-- atributo filestyle no está sirviendo -->
+                </div>
+
+            </div>
+        </div>
+    </ng-form>
+</div>
+<div class="modal-footer">
+    <button type="button"
+        ng-click="closeModal()"
+        class="btn btn-red"
+        data-dismiss="modal">Cancelar</button>
+    <button type="button"
+        ng-click="AgregarConceptoTecnico(modelConceptoTecnico)"
+        ng-disabled="!frmConceptoTecnico.$valid"
+        class="btn btn-green"
+        data-dismiss="modal">Continuar</button>
+</div>
