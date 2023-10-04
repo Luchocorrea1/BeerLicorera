@@ -34,6 +34,12 @@
     },
     "Activo": {
       "type": "boolean"
+    },
+    "producto": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::venta.venta",
+      "inversedBy": "productos"
     }
   }
 }

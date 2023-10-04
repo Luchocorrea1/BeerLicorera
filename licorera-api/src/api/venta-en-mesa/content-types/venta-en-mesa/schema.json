@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "venta_en_mesas",
+  "info": {
+    "singularName": "venta-en-mesa",
+    "pluralName": "venta-en-mesas",
+    "displayName": "Venta en mesa"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Producto": {
+      "type": "string"
+    },
+    "NumeroMesa": {
+      "type": "biginteger"
+    },
+    "PersonaAatendio": {
+      "type": "string"
+    },
+    "PrecioProducto": {
+      "type": "string"
+    },
+    "Cantidad": {
+      "type": "biginteger"
+    }
+  }
+}

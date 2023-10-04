@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tipoproductos",
+  "info": {
+    "singularName": "tipoproducto",
+    "pluralName": "tipoproductos",
+    "displayName": "tipoproducto",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    },
+    "activo": {
+      "type": "boolean"
+    }
+  }
+}

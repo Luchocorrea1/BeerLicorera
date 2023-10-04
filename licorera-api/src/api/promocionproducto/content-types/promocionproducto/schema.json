@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "promocionproductos",
+  "info": {
+    "singularName": "promocionproducto",
+    "pluralName": "promocionproductos",
+    "displayName": "promocionproducto "
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "NombreProductos": {
+      "type": "string"
+    },
+    "Descripcion": {
+      "type": "string"
+    },
+    "Descuento": {
+      "type": "string"
+    },
+    "Activo": {
+      "type": "boolean"
+    }
+  }
+}
