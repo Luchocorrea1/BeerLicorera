@@ -1,5 +1,4 @@
-/*///////////////////////// Estilos generales /////////////////////////*/
-body, html{
+/* body, html{
 	margin: 0;
 	padding: 0;
 	position: relative;
@@ -24,7 +23,6 @@ body, html{
     background-position: center center;
     background-color: #F5F5F5;
 }
-/*====== Backgrouns color*/
 .bg-primary {
     background-color: #2e6da4 !important;
 }
@@ -43,7 +41,6 @@ body, html{
     top: 0;
     height: 100%;
 }
-/*====== Navegación lateral*/
 .NavLateral{
     left: 0;
     width: 20%;
@@ -125,7 +122,6 @@ body, html{
 .NavLateral-Nav > ul > li > ul > li > a{
     padding-left: 19px;
 }
-/*====== Contenido de página*/
 .ContentPage{
     right: 0; 
     width: 80%;
@@ -193,7 +189,6 @@ body, html{
     pointer-events: none;
     opacity: 0;
 }
-/*====== Area de notificacion*/
 .NotificationArea{
     position: fixed;
     background-color: #fff;
@@ -271,7 +266,6 @@ body, html{
 .NotificationArea-show{
     right: 0;
 }
-/*====== Pie de página*/
 .footer-MaterialDark{
     background-color: #263238;
     padding-top: 20px;
@@ -284,7 +278,6 @@ body, html{
     font-weight: 300;
     
 }
-/*///////////////////////// Estilos login.html /////////////////////////*/
 #login{
     background-image: url(../assets/img/MaterialFontLogin.jpg);
 }
@@ -303,8 +296,6 @@ body, html{
 .container-login label{
     color: #333;
 }
-/*///////////////////////// Estilos home.html /////////////////////////*/
-/*====== Tile*/
 .tile,
 .tile-icon,
 .tile-caption,
@@ -369,7 +360,6 @@ body, html{
 .tile-link:focus{
     outline: none;
 }
-/*====== Timeline*/
 .timeline {
     position: relative;
     padding: 20px 0 20px;
@@ -479,9 +469,7 @@ body, html{
 .timeline-body > p + p {
     margin-top: 5px;
 }
-/*///////////////////////// MediaQueries /////////////////////////*/
 @media (max-width: 767px){
-    /*===Timeline*/
      ul.timeline:before {
         left: 40px;
     }
@@ -510,7 +498,6 @@ body, html{
         border-right-width: 14px;
         border-left-width: 0;
     }
-    /*===Generales*/
     .container-login{
         width: 300px;   
     }  
@@ -585,4 +572,4 @@ body, html{
 
 @media (min-width: 1200px) {
     
-}
+} */

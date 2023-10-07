@@ -1,18 +1,3 @@
-// 'use strict';
-
-// // Declare app level module which depends on views, and core components
-// angular.module('myApp', [
-//   'ngRoute',
-//   'myApp.view1',
-//   'myApp.view2',
-//   'myApp.version'
-// ]).
-// config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-//   $locationProvider.hashPrefix('!');
-
-//   $routeProvider.otherwise({redirectTo: '/view1'});
-// }]);
-
 "use strict";
 var ngApp =
     angular.module('appPrueba', [
@@ -30,6 +15,11 @@ var ngApp =
                   controller: 'ProductosController',
                   label: 'Productos'
               })
-              .otherwise('/Productos');
+              .when('/Home', {
+                  templateUrl: '/forms/Home/Home.html',
+                  controller: 'HomeController',
+                  label: 'Home'
+              })
+              .otherwise('/Home');
       });
 
