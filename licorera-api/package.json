@@ -11,19 +11,19 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "@strapi/strapi": "4.14.0",
-    "@strapi/plugin-users-permissions": "4.14.0",
-    "@strapi/plugin-i18n": "4.14.0",
-    "pg": "8.8.0"
+    "@strapi/strapi": "4.15.0",
+    "@strapi/plugin-users-permissions": "4.15.0",
+    "@strapi/plugin-i18n": "4.15.0",
+    "mysql": "2.18.1"
   },
   "author": {
     "name": "A Strapi developer"
   },
   "strapi": {
-    "uuid": "5e3574d7-2dff-40de-91f7-e87e7ed1681e"
+    "uuid": "1997e7dd-be7e-40f3-a51f-6bddaa8830e5"
   },
   "engines": {
-    "node": ">=16.0.0 <=20.x.x",
+    "node": ">=18.0.0 <=20.x.x",
     "npm": ">=6.0.0"
   },
   "license": "MIT"
