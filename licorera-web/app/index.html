@@ -5,15 +5,9 @@
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>My AngularJS App</title>
+  <title>Liquor Bro's</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
- 
-  <link rel="stylesheet" href="scripts/materialize-css/dist/css/normalize.css">
-  <!-- <link rel="stylesheet" href="scripts/materialize-css/dist/css/materialize.min.css">
-	<link rel="stylesheet" href="scripts/materialize-css/dist/css/material-design-iconic-font.min.css">
-	<link rel="stylesheet" href="scripts/materialize-css/dist/css/jquery.mCustomScrollbar.css">
-  <link rel="stylesheet" href="scripts/materialize-css/dist/css/sweetalert.css"> -->
   <link rel="stylesheet" href="scripts/materialize-css/dist/css/owl.carousel.min.css">
   <link rel="stylesheet" href="scripts/materialize-css/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="app.css">
@@ -22,33 +16,32 @@
 </head>
 <body>
   
-  <body ng-app="appPrueba">
-        <menu></menu>
-        <div class="row" ng-view></div>
+<body ng-app="appPrueba" >
+  <menu-items></menu-items>
+       
+  <div ng-view></div>
+
+
 </body>
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-
 	<script src="scripts/ng-style/js/jquery-3.1.1.min.js"></script>
-  <!-- <script src="scripts/materialize-css/dist/js/sweetalert.min.js"></script> -->
+
+  
+  <script src="scripts/bootstrap.bundle.min.js"></script>
+  <script src="scripts/easing.min.js"></script>
+  <script src="scripts/owl.carousel.min.js"></script>
+    <script src="scripts/moment.min.js"></script>
+    <script src="scripts/tempusdominus-bootstrap-4.min.js"></script>
+    
+    <script src="scripts/main.js"></script>
 
   <script src="lib/angular/angular.min.js"></script>
   <script src="lib/angular-route/angular-route.js"></script>
-  
 	<script src="scripts/ng-style/js/LinqJs/linq.min.js"></script>
-  <script src="scripts/materialize-css/dist/js/materialize.min.js"></script>
-
-
-
-
 	<script src="baseEnum.js"></script>
 	<script src="extensionMethod.js"> </script>
 	<script src="baseSvc.js"></script>
 	<script src="componentes.js"> </script>
-  
-
 	<script src="directives.js"></script>
   <script src="app.js"></script>
 	<script src="helper.js"> </script>
@@ -59,11 +52,5 @@
   <script src="core/version/version.js"></script>
   <script src="core/version/version-directive.js"></script>
   <script src="core/version/interpolate-filter.js"></script> -->
-  <script src="scripts/bootstrap.bundle.min.js"></script>
-  <script src="scripts/easing.min.js"></script>
-  <script src="scripts/owl.carousel.min.js"></script>
-    <script src="scripts/moment.min.js"></script>
-    <script src="scripts/tempusdominus-bootstrap-4.min.js"></script>
-    <script src="scripts/main.js"></script>
 </body>
 </html>

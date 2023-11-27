@@ -510,7 +510,7 @@ angular.module('components', [])
             isDisabledHistory: '<'
         }
     })
-    .component('menu', {
+    .component('menuItems', {
         templateUrl: 'components/menu.html',
         controller: function ($scope, $routeParams, $window, $location, spUtility, $timeout) {
             $scope.Persona = "";
