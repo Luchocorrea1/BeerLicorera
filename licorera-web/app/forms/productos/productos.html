@@ -1,96 +1,239 @@
-<div class="page-header mb-5 position-relative overlay-bottom">
-    <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
-        <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Contact</h1>
-        <div class="d-inline-flex mb-lg-5">
-            <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
-            <p class="m-0 text-white px-2">/</p>
-            <p class="m-0 text-white">Contact</p>
-        </div>
-    </div>
-</div>
-
-<div class="py-5">
+<div class="section-1-container section-container">
     <div class="container">
-        <div class="reservation position-relative overlay-top overlay-bottom">
-            <div class="row align-items-center">
-                <div class="col-lg-6 my-5 my-lg-0">
-                    <div class="p-5">
-                        <div class="mb-4">
-                            <h1 class="display-3 text-primary">30% OFF</h1>
-                            <h1 class="text-white">For Online Reservation</h1>
-                        </div>
-                        <p class="text-white">Lorem justo clita erat lorem labore ea, justo dolor lorem ipsum ut sed eos,
-                            ipsum et dolor kasd sit ea justo. Erat justo sed sed diam. Ea et erat ut sed diam sea</p>
-                        <ul class="list-inline text-white m-0">
-                            <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Lorem ipsum dolor sit amet</li>
-                            <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Lorem ipsum dolor sit amet</li>
-                            <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Lorem ipsum dolor sit amet</li>
-                        </ul>
-                    </div>
+        <div class="row">
+            <div class="col section-1 section-description wow fadeIn">
+                <h2>Productos</h2>
+                <div class="divider-1 wow fadeInUp"><span></span></div>
+            </div>
+        </div>
+
+        <style>
+          .video-container {
+            position: relative;
+            width: 100%;
+            max-height: 480px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-top: 10px;
+          }
+
+          .camera-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+          }
+        </style>
+        <button ng-click="iniciarEscaneo()" class="btn btn-primary">
+          <i class="fas fa-camera"></i> Iniciar Escaneo
+        </button>
+        <p>Resultado: {{ resultado }}</p>
+      
+        <div ng-show="VerVideo" class="video-container">
+          <video id="video" style="width: 100%; height: 100%; border-radius: 10px;"></video>
+          <div class="camera-buttons" >
+            <button ng-click="toggleCamera()" class="btn btn-secondary">
+              <i class="fas fa-sync-alt"></i> Cambiar Cámara
+            </button>
+          </div>
+        </div>
+        <!-- <div class="row">
+            <div class="table-responsive">
+                <table class="table" datatable="ng" dt-options="vm.dtOptions" dt-instance="vm.dtInstance"
+                    dt-column-defs="vm.dtColumnDefs">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Código de barras</th>
+                            <th>Precio Venta</th>
+                            <th>Precio Costo</th>
+                            <th>Stock Total</th>
+                            <th>Categoría</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="producto in productos">
+                            <td>{{ producto.codigo }}</td>
+                            <td>{{ producto.nombre }}</td>
+                            <td>{{ producto.codigoBarras }}</td>
+                            <td>{{ producto.precioVenta }}</td>
+                            <td>{{ producto.precioCosto }}</td>
+                            <td>{{ producto.stockTotal }}</td>
+                            <td>{{ producto.categoria }}</td>
+                            <td>
+                                <i class="fas fa-edit"></i>
+                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-eye"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+        </div> -->
+        <style>
+          .product-item {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            border: 2px solid #ddd;
+            margin-bottom: 10px;
+            cursor: grab;
+            transition: box-shadow 0.3s; /* Agregué una transición a la sombra */
+            border-radius: 0 0 10px 10px; /* Redondea las esquinas inferiores derechas */
+          }
+        
+          .product-item:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Agregué una sombra al pasar el mouse */
+          }
+        
+          .product-image {
+              width: 70px;
+              height: 70px;
+              object-fit: cover;
+              margin-right: 10px;
+              border: 2px solid #007bff;
+              border-radius: 5px;
+              transition: transform 0.3s;
+              animation: borderEffect 7s infinite; /* Agregamos la animación */
+          }
+
+          @keyframes borderEffect {
+              0% {
+                  border-color: #007bff;
+              }
+              25% {
+                  border-color: #ff0000; /* Cambia al color que desees en cada porcentaje */
+              }
+              50% {
+                  border-color: #00ff00;
+              }
+              75% {
+                  border-color: #ffff00;
+              }
+              100% {
+                  border-color: #007bff;
+              }
+          }
+
+        
+          .product-image:hover {
+            cursor: pointer;
+            transform: scale(1.2); /* Aumenté el tamaño al pasar el mouse */
+          }
+        
+          .product-details {
+            flex-grow: 1;
+            text-align: left;
+          }
+        
+          .product-details p {
+            margin: 0;
+          }
+        
+          .product-details .product-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+          }
+        
+          .product-details .brand {
+            font-size: 0.9rem;
+          }
+        
+          .product-details .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+          }
+        
+          .product-item i {
+            margin-left: auto;
+            transition: transform 0.3s; /* Agregué una transición de transformación */
+          }
+        
+          .product-item:hover i {
+            transform: scale(1.2); /* Aumenté el tamaño del ícono al pasar el mouse */
+            color: #28a745;
+          }
+        </style>
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="product-item">
+                <img src="../../scripts/Images/beefeater.jpg" alt="Producto 1" class="product-image">
+                <div class="product-details">
+                  <p class="product-name">Nombre del Producto 1</p>
+                  <p class="brand">Marca del Producto 1</p>
+                  <p class="price">Precio: $100.00</p>
                 </div>
-                <div class="col-lg-6">
-                    <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
-                        <h1 class="text-white mb-4 mt-5">Book Your Table</h1>
-                        <form class="mb-5">
-                            <div class="form-group">
-                                <input type="text" class="form-control bg-transparent border-primary p-4" placeholder="Name" required="required">
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control bg-transparent border-primary p-4" placeholder="Email" required="required">
-                            </div>
-                            <div class="form-group">
-                                <div class="date" id="date" data-target-input="nearest">
-                                    <input type="text" class="form-control bg-transparent border-primary p-4 datetimepicker-input" placeholder="Date" data-target="#date" data-toggle="datetimepicker">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="time" id="time" data-target-input="nearest">
-                                    <input type="text" class="form-control bg-transparent border-primary p-4 datetimepicker-input" placeholder="Time" data-target="#time" data-toggle="datetimepicker">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <select class="custom-select bg-transparent border-primary px-4" style="height: 49px;">
-                                    <option selected="">Person</option>
-                                    <option value="1">Person 1</option>
-                                    <option value="2">Person 2</option>
-                                    <option value="3">Person 3</option>
-                                    <option value="3">Person 4</option>
-                                </select>
-                            </div>
-                            
-                            <div>
-                                <button class="btn btn-primary btn-block font-weight-bold py-3" type="submit">Book Now</button>
-                            </div>
-                        </form>
+                <i class="fas fa-chevron-right"></i>
+              </div>
+            </div>
+        
+            <div class="col-md-6">
+              <div class="product-item">
+                <img src="../../scripts/Images/beefeater.jpg" alt="Producto 2" class="product-image">
+                <div class="product-details">
+                  <p class="product-name">Nombre del Producto 2</p>
+                  <p class="brand">Marca del Producto 2</p>
+                  <p class="price">Precio: $120.00</p>
+                </div>
+                <i class="fas fa-chevron-right"></i>
+              </div>
+            </div>
+            
+            <!-- Agrega más elementos según sea necesario -->
+          </div>
+        </div>
+        
+                                        
+                    
+        <!-- <div class="col-md-4 section-1-box wow fadeInUp">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="section-1-box-icon">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <h3>Branding</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                            incididunt ut labore et.</p>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="col-md-4 section-1-box wow fadeInDown">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="section-1-box-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <h3>Web design</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                            incididunt ut labore et.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 section-1-box wow fadeInUp">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="section-1-box-icon">
+                            <i class="fab fa-twitter"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <h3>Social media</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                            incididunt ut labore et.</p>
+                    </div>
+                </div>
+            </div> -->
     </div>
 </div>
-<!-- 
-<div class="container">
-    <h3>Productos de Licorera</h3>
-    <table class="striped">
-        <thead>
-            <tr>
-                <th>Nombre del Producto</th>
-                <th>fecha</th>
-                <th>usuario</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="x in Lists.Productos">
-                <td>{{x.attributes.Nombre}}</td>
-                <td>{{x.attributes.FechaCreacion}}</td>
-                <td>{{x.attributes.UsuarioCreacion}}</td>
-            </tr>
-        </tbody>
-    </table>
 </div>
-
-<script>
-    $(document).ready(function(){
-        $('.striped').DataTable(); // Inicializa la tabla con Materialize CSS
-    });
-</script> -->

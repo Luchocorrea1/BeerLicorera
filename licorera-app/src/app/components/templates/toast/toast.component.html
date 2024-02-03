@@ -1,0 +1,14 @@
+<div #toastElement class="fade show custom-toast">
+    <div [ngClass]="['toast', getTypeClass()]">
+      <div class="toast-header">
+        <strong class="me-auto">{{ title }}</strong>
+        <button type="button" class="btn-close close" (click)="hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">
+        {{ message }}
+      </div>
+    </div>
+  </div>
+  

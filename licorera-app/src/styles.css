@@ -1,0 +1,52 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+/* @import '@angular/material/prebuilt-themes/purple-green.css'; */
+@import '@angular/material/prebuilt-themes/pink-bluegrey.css';
+/* @import '~font-awesome/css/font-awesome.min.css'; */
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+/* 
+@import '~bootstrap/css/bootstrap';*/
+/* @import '~@fortawesome/css/all.css'; */
+/* @import '~@fortawesome/fontawesome-free/css/fontawesome'; */
+/* @import '~@fortawesome/fontawesome-free/css/solid';
+@import '~@fortawesome/fontawesome-free/css/regular'; */
+/* @import '~perfect-scrollbar/css/perfect-scrollbar.css'; */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+body {
+    font-size: .9rem;
+  }
+  
+  .page-wrapper.toggled .sidebar {
+    left: -300px;
+  }
+  
+  /* // angular perfect scrollbar style */
+  .sidebar .ps.ps--scrolling-y>.ps__rail-y,
+  .sidebar>.ps.ps--scrolling-x>.ps__rail-x,
+  .ps .ps__rail-x:hover,
+  .ps .ps__rail-y:hover,
+  .ps .ps__rail-x:focus,
+  .ps .ps__rail-y:focus,
+  .ps .ps__rail-x.ps--clicking,
+  .ps .ps__rail-y.ps--clicking {
+    background-color: transparent !important;
+  }
+  
+  .sidebar .ps.ps--active-y>.ps__rail-y:hover,
+  .sidebar>.ps.ps--active-y>.ps__rail-y.ps--clicking {
+    width: 10px !important;
+  }
+  
+  .ps__thumb-y {
+    background-color: #fff !important;
+    width: 6px!important;
+    border-radius: 0px!important;
+    opacity: .5;
+  
+  }
+  
