@@ -28,21 +28,18 @@ angular.module('spBaseSvc', [])
 spServicebase.$inject = ["$q", "$http", "IS_APP_WEB"];
 function spServicebase($q, $http, isAppWeb) {
 
-	var _baseUrl = "http://localhost:1337";
+	var _baseUrl = "http://localhost:1337/api/";
 	try {
-	var _baseUrl = "http://localhost:1337";
+	var _baseUrl = "http://localhost:1337/api/";
 	} catch (ex) {
 		console.log("Running on localhost");
-		_baseUrl = "http://localhost:1337";
+		_baseUrl = "http://localhost:1337/api/";
 	}
 
 	var _objQuery =
 	{
 		//* Obligatorio
-		listEndPoint: "/_api/web/lists",
-		// Si este campo tiene informacion, evade las siguientes validaciones 
-		// y solo envia la peticion con la informacion adjuntada, es obligatorio [typeprocess].
-		// Ex: https://www.shpbext + [onlyUrl]
+		// Ex: https://www.shpbext + [onlyUrl] Obligatorio
 		onlyUrl: "",
 		// Tipo de request async o syncr.. por defecto inicia en async
 		async: true,
@@ -104,75 +101,7 @@ function spServicebase($q, $http, isAppWeb) {
 		if (!String.isNullOrEmpty(obj.onlyUrl)) {
 			return _processRequestDao(obj.typeprocess, null,_baseUrl+ obj.onlyUrl, obj.data, obj.async, obj);
 		}
-
-		var query = "";
-		var retrievingItems = false;
-		var isFirstParam = true;
-
-		// Validacion de url SubSitio
-		if (!String.isNullOrEmpty(obj.subSiteUrl)) { query = "/" + obj.subSiteUrl; }
-
-		query = query + obj.listEndPoint;
-
-		// Validacion lista por Guid o por Nombre
-		if (!String.isNullOrEmpty(obj.getListByguid)) { query = query + "(guid'" + obj.getListByguid + "')"; retrievingItems = true; }
-		else if (!String.isNullOrEmpty(obj.getListByTitle)) { query = query + "/GetByTitle('" + obj.getListByTitle + "')"; retrievingItems = true; }
-		// Validacion upload archivo a Biblioteca
-		if (!String.isNullOrEmpty(obj.fileName) && String.isNullOrEmpty(obj.attachFileToItemByID)) {
-			// Validacion Folder
-
-			query = query + "/" + obj.uploadFileToUrlFolder;
-			if (!String.isNullOrEmpty(obj.newFolder))
-				query = query + "/folders('" + obj.newFolder + "')";
-
-			query = query + "/files/Add(url='" + obj.fileName + "', overwrite=" + obj.overwrite + ")";
-			return _processRequestDao(obj.typeprocess, query, null, obj.data, obj.async, obj)
-		}
-
-		// Validacion GetItemById
-		if (!String.isNullOrEmpty(obj.getItemById)) { query = query + "/Items(" + obj.getItemById + ")" }
-		else if (retrievingItems) { query = query + "/Items"; }
-
-		// Validacion de archivo Adjunto 
-		if (!String.isNullOrEmpty(obj.fileName) && !String.isNullOrEmpty(obj.attachFileToItemByID)) {
-			query = query + "(" + obj.attachFileToItemByID + ")"
-			query = query + "/AttachmentFiles/add(FileName='" + obj.fileName + "')";
-			return _processRequestDao(obj.typeprocess, query, null, obj.data, obj.async, obj)
-		}
-
-		// Header item 
-		if (!String.isNullOrEmpty(obj.metadataTypeItem)) { obj.data["__metadata"] = { 'type': obj.metadataTypeItem }; }
-		else if (retrievingItems) { obj.data["__metadata"] = { 'type': 'SP.Data.' + String.replaceAll(obj.getListByTitle, " ", "_x0020_") + 'ListItem' }; }
-		// SELECT 
-		if (!String.isNullOrEmpty(obj.selectFields)) { query = query + "?$select=" + obj.selectFields; isFirstParam = false; }
-
-		//FILTER
-		if (!String.isNullOrEmpty(obj.filter)) {
-			query = query + (isFirstParam ? "?" : "&");
-			query = query + "$filter=" + obj.filter;
-			isFirstParam = false;
-		}
-		// EXPAND Fields lookUp
-		if (!String.isNullOrEmpty(obj.extendFieldsLookUp)) {
-			query = query + "&$expand=" + obj.extendFieldsLookUp;
-		}
-		//orderBy
-		if (!String.isNullOrEmpty(obj.orderBy)) {
-			query = query + (isFirstParam ? "?" : "&");
-			query = query + "$orderby=" + obj.orderBy;
-			isFirstParam = false;
-		}
-		//top
-		if (!String.isNullOrEmpty(obj.top)) {
-			query = query + (isFirstParam ? "?" : "&");
-			query = query + "$top=" + obj.top;
-			isFirstParam = false;
-		}
-		//afterUrl
-		if (!String.isNullOrEmpty(obj.afterUrl)) { query = query + obj.afterUrl; }
-
-		return _processRequestDao(obj.typeprocess, query, null, obj.data, obj.async, obj)
-
+		return null;
 	}
 
 	function _processRequestDao(TypeProcessRequest, query, endPoint, data, isAsync, obj) {
@@ -204,7 +133,6 @@ function spServicebase($q, $http, isAppWeb) {
 				break;
 			// POST - Guardar un nuevo registro
 			case 2:
-				objRequest.headers["X-RequestDigest"] = obj.FormDigestValue || document.getElementById("__REQUESTDIGEST").value;
 				if (obj.UpdateMetadata) {
 					objRequest.headers["X-HTTP-Method"] = "MERGE";
 					objRequest.headers["If-Match"] = "*"
@@ -217,7 +145,6 @@ function spServicebase($q, $http, isAppWeb) {
 				objRequest.method = "POST";
 				objRequest.headers = {
 					"accept": "application/json;odata=verbose",
-					"X-RequestDigest": obj.FormDigestValue || document.getElementById("__REQUESTDIGEST").value,
 					"content-Type": "application/json;odata=verbose",
 					"X-Http-Method": "MERGE",
 					"If-Match": "*"
@@ -230,7 +157,6 @@ function spServicebase($q, $http, isAppWeb) {
 				objRequest.headers = {
 					"Accept": "application/json;odata=verbose",
 					"Content-Type": "application/json;odata=verbose",
-					"X-RequestDigest": obj.FormDigestValue || $("#__REQUESTDIGEST").val(),
 					"X-HTTP-Method": "DELETE",
 					"If-Match": "*"
 				}
@@ -241,10 +167,8 @@ function spServicebase($q, $http, isAppWeb) {
 				objRequest.transformRequest = angular.identity;
 				objRequest.headers = {
 					Accept: "application/json;odata=verbose",
-					"X-RequestDigest": obj.FormDigestValue || jQuery("#__REQUESTDIGEST").val(),
 					"Content-Length": data.byteLength
 				}
-				objRequest.headers["X-RequestDigest"] = obj.FormDigestValue || document.getElementById("__REQUESTDIGEST").value;
 				objRequest.headers["Content-Type"] = undefined;
 				objRequest.headers["If-Match"] = "*";
 				objRequest.headers["Content-Length"] = data.byteLength;
@@ -252,7 +176,6 @@ function spServicebase($q, $http, isAppWeb) {
 				break;
 			case 6:
 				objRequest.binaryStringRequestBody = true;
-				objRequest.headers["X-RequestDigest"] = obj.FormDigestValue || document.getElementById("__REQUESTDIGEST").value;
 				objRequest.data = JSON.stringify({ 'properties': data });
 
 				break;
@@ -260,7 +183,6 @@ function spServicebase($q, $http, isAppWeb) {
 				objRequest.method = "POST";
 				objRequest.headers = {
 					"accept": "application/json;odata=verbose",
-					"X-RequestDigest": obj.FormDigestValue || document.getElementById("__REQUESTDIGEST").value,
 					"content-Type": "application/json;odata=verbose",
 					"X-Http-Method": "PATCH",
 					"If-Match": "*"
@@ -348,199 +270,6 @@ function spUtility($rootScope, $q, spServicebase,  $timeout) {
 		// 	plain: true
 		// });
 	};
-	var _getUser = function (fnSucces) {
-		if ($rootScope.Usuario !== undefined && $rootScope.Usuario != null) {
-			fnSucces($rootScope.Usuario);
-		}
-		try {
-			_showLoading();
-
-			var objQuery = Object.cloneObj(spServicebase.objQuery);
-			objQuery.listEndPoint = "/_api/web/GetUserById(" + _spPageContextInfo.userId + ")/Groups";
-			objQuery.async = false;
-			spServicebase.processRequest(objQuery).then(function (respuesta) {
-				_hideLoading();
-				$rootScope.Usuario = {
-					Title: _spPageContextInfo.userDisplayName, UserId: _spPageContextInfo.userId,
-					Usuario: {
-						Email: _spPageContextInfo.userEmail,
-						Groups: respuesta.data.d.results
-					}
-				};
-				fnSucces($rootScope.Usuario);
-			}).catch(function (err) {
-				_hideLoading();
-				console.log(err);
-				fnSucces(err);
-			});
-		}
-		catch (err) {
-			$rootScope.Usuario = null;
-			console.log(err);
-		}
-	};
-	var _getCurrentUserGroups = function (fnSucces) {
-		try {
-			_showLoading();
-
-			var objQuery = Object.cloneObj(spServicebase.objQuery);
-			objQuery.listEndPoint = "/_api/Web/currentuser/?$expand=groups";
-			objQuery.async = false;
-			spServicebase.processRequest(objQuery).then(function (respuesta) {
-				_hideLoading();
-				fnSucces(respuesta);
-			}).catch(function (err) {
-				_hideLoading();
-				console.log(err);
-				fnSucces(err);
-			});
-		}
-		catch (err) {
-			$rootScope.Usuario = null;
-			console.log(err);
-		}
-	};
-	var _getUserById = function (Id, fnSucces) {
-		try {
-			_showLoading();
-
-			var objQuery = Object.cloneObj(spServicebase.objQuery);
-			objQuery.listEndPoint = "/_api/web/GetUserById(" + Id + ")/Groups";
-			objQuery.async = false;
-			spServicebase.processRequest(objQuery).then(function (respuesta) {
-				_hideLoading();
-
-				fnSucces(respuesta);
-			}).catch(function (err) {
-				console.log();
-				_hideLoading();
-				console.log(err);
-				fnSucces(err);
-			});
-		}
-		catch (err) {
-			$rootScope.Usuario = null;
-			console.log(err);
-		}
-	};
-	var _getUsersGroup = function (gName, gId, fnSucces) {
-
-		var filter = '';
-		if (!String.isNullOrEmpty(gName)) {
-			filter = "/_api/web/sitegroups/getbyname('" + gName + "')/users";
-		} else if (!String.isNullOrEmpty(gId)) {
-			filter = "/_api/web/sitegroups/getbyid(" + gId + ")/users";
-		} else {
-			console.log('No se definió parámetros para el método GetUsersByGroup()');
-			return null;
-		}
-
-		try {
-			_showLoading();
-			var objQuery = Object.cloneObj(spServicebase.objQuery);
-			objQuery.listEndPoint = filter;
-			objQuery.async = false;
-			spServicebase.processRequest(objQuery).then(function (respuesta) {
-				_hideLoading();
-				var dataresults = respuesta.data.d.results;
-				fnSucces(dataresults);
-			}).catch(function (err) {
-				console.log();
-				console.log();
-				_hideLoading();
-				console.log(err);
-				fnSucces(err);
-			});
-		}
-		catch (err) {
-			$rootScope.Usuario = null;
-			console.log(err);
-		}
-	}
-
-	var _SetComentarios = function (arr) {
-		$rootScope.Comentarios = arr;
-	}
-	var _SetVersionesSolicitud = function (versionesSolicitud) {
-		$rootScope.VersionesSolicitud = {};
-		angular.forEach(versionesSolicitud, function (value, key) {
-			var Historico = JSON.parse(value.ObjSolicitud);
-			setHistory(Historico, value);
-			if (!$rootScope.VersionesSolicitud["FechaHistorico"])
-				$rootScope.VersionesSolicitud["FechaHistorico"] = [];
-			$rootScope.VersionesSolicitud["FechaHistorico"].push({ Valorcampo: "N/A", Editor: value.Author.Title, Modified: FormatStrDate(value.Modified) })
-		});
-
-		function setHistory(Historico, Version, preProperty, postProperty) {
-			angular.forEach(Historico, function (vHistorico, campo) {
-				var NombreCampo = "";
-				if (typeof vHistorico == "object" && !String.isNullOrEmpty(vHistorico) && vHistorico.length !== undefined) {
-					if (campo != "Ubicaciones" && campo != "Piezas") {
-						angular.forEach(vHistorico, function (vLstHistorico, key) {
-							if (!vLstHistorico.OneResponse) {
-								setHistory(vLstHistorico, Version, campo, key.toString());
-							} else {
-								NombreCampo = (preProperty || "") + (key.toString() || "") + campo;
-								if (!$rootScope.VersionesSolicitud[NombreCampo])
-									$rootScope.VersionesSolicitud[NombreCampo] = [];
-								$rootScope.VersionesSolicitud[NombreCampo].push({ Valorcampo: vLstHistorico, Editor: Version.Author.Title, Modified: FormatStrDate(Version.Modified) });
-							}
-						});
-					} else {
-						NombreCampo = (preProperty || "") + campo;
-						if (!$rootScope.VersionesSolicitud[NombreCampo])
-							$rootScope.VersionesSolicitud[NombreCampo] = [];
-						$rootScope.VersionesSolicitud[NombreCampo].push({ Valorcampo: vHistorico, Editor: Version.Author.Title, Modified: FormatStrDate(Version.Modified) });
-					}
-				} else if (typeof vHistorico == "object" && vHistorico) {
-					if (campo == "IdUsuarioFba") {
-						setHistory(vHistorico, Version, campo, postProperty);
-					} else {
-						NombreCampo = (preProperty || "") + (postProperty || "") + campo;
-						if (!$rootScope.VersionesSolicitud[NombreCampo])
-							$rootScope.VersionesSolicitud[NombreCampo] = [];
-						$rootScope.VersionesSolicitud[NombreCampo].push({ Valorcampo: vHistorico, Editor: Version.Author.Title, Modified: FormatStrDate(Version.Modified) });
-					}
-				} else {
-					NombreCampo = (preProperty || "") + (postProperty || "") + campo;
-					if (!$rootScope.VersionesSolicitud[NombreCampo])
-						$rootScope.VersionesSolicitud[NombreCampo] = [];
-					$rootScope.VersionesSolicitud[NombreCampo].push({ Valorcampo: vHistorico, Editor: Version.Author.Title, Modified: FormatStrDate(Version.Modified) });
-				}
-			});
-		}
-		console.log($rootScope.VersionesSolicitud);
-	}
-	var FormatStrDate = function (fechaSHP) {
-		var fecha = new Date(fechaSHP);
-		var hh = fecha.getHours();
-		var mm = fecha.getMinutes();
-		var ss = fecha.getSeconds();
-		return getFechaNormal(fechaSHP) + " " + ((hh > 9 ? '' : '0') + hh) + ":" + ((mm > 9 ? '' : '0') + mm) + ":" + ((ss > 9 ? '' : '0') + ss);
-	}
-	var getFechaNormal = function (fecha) {
-		var fechastr = "";
-		if (fecha) {
-			var fechaDate = new Date(fecha);
-			fechaDate.setHours(fechaDate.getHours() - 5);
-			fechastr = fechaDate.getUTCFullYear().toString() + "/" + ((fechaDate.getUTCMonth() + 1) <= 9 ? "0" + (fechaDate.getUTCMonth() + 1) : (fechaDate.getUTCMonth() + 1)) + "/" + (fechaDate.getUTCDate() <= 9 ? "0" + fechaDate.getUTCDate() : fechaDate.getUTCDate())
-		} else {
-			return null;
-		}
-		return fechastr;
-	}
-	var _GetComentarios = function () {
-		if ($rootScope.Comentarios != undefined && $rootScope.Comentarios.length != undefined) {
-			return $rootScope.Comentarios;
-		}
-		return null;
-	}
-	var _GetVersionesSolicitud = function () {
-		if ($rootScope.VersionesSolicitud != undefined && !String.isNullOrEmpty($rootScope.VersionesSolicitud)) {
-			return $rootScope.VersionesSolicitud;
-		}
-		return null;
-	}
 
 	var _then = function (respuesta, obj, fnSucces, fnError, info, hideProcessing) {
 		var data = null;
@@ -678,37 +407,6 @@ function spUtility($rootScope, $q, spServicebase,  $timeout) {
 		hideLoading: function () {
 			_hideLoading();
 		},
-		SetComentarios: function (arr) {
-			_SetComentarios(arr);
-		},
-		SetVersionesSolicitud: function (arr) {
-			_SetVersionesSolicitud(arr);
-		},
-		GetComentarios: function () {
-			return _GetComentarios();
-		},
-		GetVersionesSolicitud: function () {
-			return _GetVersionesSolicitud();
-		},
-		UpdateFileProperties: function (fileUrl, FormDigestValue, properties, fnSucces, fnError) {
-			var objQuery = this.objQuery();
-			objQuery.typeprocess = baseEnum.TypeProcessRequest.getRequest;
-			objQuery.onlyUrl = fileUrl;
-			var instance = this;
-			this.Execute(objQuery, function (data) {
-				var objQueryDos = instance.objQuery();
-				objQueryDos.FormDigestValue = FormDigestValue;
-				objQueryDos.recordCenter = enums.RecordCenter;
-				objQueryDos.getListByTitle = enums.Lists.RecordCenterLibrary;
-				objQueryDos.getItemById = data.ID;
-				objQueryDos.typeprocess = baseEnum.TypeProcessRequest.postRequest;
-				objQueryDos.metadataTypeItem = data['__metadata']['type'];
-				objQueryDos.data = properties;
-				objQueryDos.UpdateMetadata = true;
-				instance.Execute(objQueryDos, fnSucces, fnError, null, null, null, null);
-
-			}, fnError, null, null, null, null);
-		},
 		FindItem: function (items, key, compareValue) {
 			var result = null;
 			key = key.split(".");
@@ -758,10 +456,6 @@ function spUtility($rootScope, $q, spServicebase,  $timeout) {
 
 			return res;
 		},
-		GetUser: function (fnSucces) { return _getUser(fnSucces); },
-		GetUserById: function (Id, fnSucces) { return _getUserById(Id, fnSucces); },
-		GetCurrentUserGroups: function (fnSucces) { return _getCurrentUserGroups(fnSucces); },
-		GetUsersGroup: function (gName, gId, fnSucces) { return _getUsersGroup(gName, gId, fnSucces); },
 		GetDtOptions2: function ($scope, DTOptionsBuilder, settingskeyQueryExportar, item) {
 			var dtOptions = DTOptionsBuilder.newOptions().withOption("sort", [[0, "desc"]]).withOption("className", 'compact');
 
@@ -816,36 +510,6 @@ function spUtility($rootScope, $q, spServicebase,  $timeout) {
 				}
 			};
 		},
-		SendEmail: function (data, fnSucess, fnError) {
-			var objQuery = this.objQuery();
-			objQuery.listEndPoint = "/_api/SP.Utilities.Utility.SendEmail"
-			objQuery.typeprocess = baseEnum.TypeProcessRequest.sendEmail;
-			objQuery.metadataTypeItem = "SP.Utilities.EmailProperties";
-			if (data.To && data.To.results.length > 0)
-				data = this.addAdditionalHeaders(data);
-			data.Body += "<br><br><b>Este correo es Ãºnicamente informativo, por favor no responder a este mensaje.</b>"
-			objQuery.data = data;
-			this.Execute(objQuery, fnSucess, fnError, null, null, null, null);
-		},
-		addAdditionalHeaders: function (data) {
-			data.AdditionalHeaders = {
-				"__metadata": { "type": "Collection(SP.KeyValue)" },
-				"results": [{
-					"__metadata": { "type": 'SP.KeyValue' },
-					"Key": "X-Message-Flag",
-					"Value": 'Follow up',
-					"ValueType": "Edm.String"
-				},
-				{
-					"__metadata": { "type": 'SP.KeyValue' },
-					"Key": "Reply-By",
-					"Value": 'Wed, 23 Nov 2016 13:30:00 +0530',
-					"ValueType": "Edm.DateTime"
-				}
-				]
-			}
-			return data;
-		},
 		RemoveData: function (data) {
 			var obj = {};
 			$.each(data, function (index, value) {
@@ -893,32 +557,68 @@ function spUtility($rootScope, $q, spServicebase,  $timeout) {
 			else
 				return "";
 		},
-		addMiga: function (params) {
-			if (Array.isArray(params)) {
-				angular.forEach(params, function (value, key) {
-					if (key != 0)
-						$($('#breadcrumbGeneral a')[$('#breadcrumbGeneral a').length - 1]).before($('<span/>', { html: "â€º" }));
-					$($('#breadcrumbGeneral a')[$('#breadcrumbGeneral a').length - 1]).before($('<span/>').append(value.Url ? $('<a/>', { href: value.Url, html: value.Title }) : $('<a/>', { html: value.Title })));
-
-				});
+		inicializarDataTable: function(idTabla) {
+			// Verifica si la tabla ya tiene DataTable
+			var dataTableInstance = $('#' + idTabla).DataTable();
+		
+			if (dataTableInstance) {
+				// Si ya tiene DataTable, destrúyelo
+				dataTableInstance.destroy();
 			}
-		},
-		FormatDateObject: function (dateString) {
-			var dd = dateString.getDate();
-			var mm = dateString.getMonth() + 1;
-			var yy = dateString.getFullYear();
-
-			if (dd < 10) {
-				dd = '0' + dd;
-			}
-			if (mm < 10) {
-				mm = '0' + mm;
-			}
-
-			return yy + '/' + mm + '/' + dd;
-		},
-		FormatStrDate: function (fechaSHP) {
-			return FormatStrDate(fechaSHP);
+		
+			// Inicializa DataTable en la tabla
+			$('#' + idTabla).DataTable({
+				"language": {
+					"decimal": ",",
+					"thousands": ".",
+					"info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+					"infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+					"infoPostFix": "",
+					"infoFiltered": "(filtrado de un total de _MAX_ registros)",
+					"loadingRecords": "Cargando...",
+					"lengthMenu": "Mostrar _MENU_ registros",
+					"paginate": {
+						"first": "Primero",
+						"last": "Último",
+						"next": "Siguiente",
+						"previous": "Anterior"
+					},
+					"processing": "Procesando...",
+					"search": "Buscar:",
+					"searchPlaceholder": "Término de búsqueda",
+					"zeroRecords": "No se encontraron resultados",
+					"emptyTable": "Ningún dato disponible en esta tabla",
+					"aria": {
+						"sortAscending":  ": Activar para ordenar la columna de manera ascendente",
+						"sortDescending": ": Activar para ordenar la columna de manera descendente"
+					},
+					//only works for built-in buttons, not for custom buttons
+					"buttons": {
+						"create": "Nuevo",
+						"edit": "Cambiar",
+						"remove": "Borrar",
+						"copy": "Copiar",
+						"csv": "fichero CSV",
+						"excel": "tabla Excel",
+						"pdf": "documento PDF",
+						"print": "Imprimir",
+						"colvis": "Visibilidad columnas",
+						"collection": "Colección",
+						"upload": "Seleccione fichero...."
+					},
+					"select": {
+						"rows": {
+							_: '%d filas seleccionadas',
+							0: 'clic fila para seleccionar',
+							1: 'una fila seleccionada'
+						}
+					}
+				},
+				"paging": true,
+				"ordering": true,
+				"info": true,
+				// Agrega más opciones según tus necesidades
+			});
 		}
 	};
 }

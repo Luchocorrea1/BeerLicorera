@@ -1,0 +1,36 @@
+<div class="page-wrapper" [class.toggled]="getSideBarState()">
+    <!-- <button type="button" class="btn btn-outline-secondary mr-1 mb-1" (click)="toggleSidebar()" >Menú</button> -->
+
+    <app-sidebar></app-sidebar>
+    <div class="row">
+        <div class="main-header" [class.navbaroculto]="!getSideBarState()">
+            <nav class="navbar navbar-static-top" role="navigation">
+                <button class="sidebar-toggle" data-toggle="push-menu" role="button" (click)="toggleSidebar()">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <main class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <h2> <img src="assets/images/angular.png" alt="angular logo" width="70px"> Angular Sidebar Template
+                    </h2>
+                    <hr>
+                    <p>This is a responsive sidebar template with dropdown menu built with angular 7 and bootstrap 4.
+                    </p>
+                    <hr>
+                    <!-- <a href="" class="btn btn-outline-secondary mr-1 mb-1" (click)="toggleSidebar()">Toggle Sidebar</a> -->
+                    <button type="button" class="btn btn-outline-secondary" (click)="toggleBackgroundImage()">Toggle
+                        Background Image</button>
+                </div>
+            </div>
+            <div class="attribution text-center badge badge-warning">
+                Creado por <strong>Luis Correa</strong>
+            </div>
+        </div>
+        <div class="overlay" (click)="toggleSidebar()" [class.show]="!getSideBarState()"></div>
+    </main>
+</div>

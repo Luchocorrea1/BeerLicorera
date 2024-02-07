@@ -1,0 +1,123 @@
+/* @import '~bootstrap/dist/css/bootstrap.min.css'; */
+
+
+.page-wrapper {
+    height: 100vh;
+  
+    .page-content {
+      display: inline-block;
+      width: 100%;
+      padding-top: 20px;
+      transition: padding-left .3s ease;
+  
+      @media screen and (min-width: 768px) {
+        padding-left: 300px;
+      }
+  
+      .overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 998;
+        background: #000;
+        opacity: .5;
+        display: none;
+  
+        &.show {
+  
+          @media screen and (max-width: 768px) {
+            display: block;
+          }
+        }
+      }
+    }
+  
+    /* .sidebar {
+      left: 0px;
+    } */
+  
+    &.toggled {
+  
+      .page-content {
+        padding-left: 0;
+      }
+    }
+  
+    .attribution{
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      padding: 5px;
+      margin: 5px;
+      letter-spacing: 1px;
+    }
+  }
+  
+  
+  .page-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .toggle-sidebar-button {
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .toggle-sidebar-button i {
+    color: #333; /* Color del ícono */
+  }
+
+
+
+
+
+  /* Header */
+
+.navbaroculto {
+  -webkit-transition: margin-left .3s ease-in-out;
+  -o-transition: margin-left .3s ease-in-out;
+  transition: margin-left .3s ease-in-out;
+  margin-bottom: 0;
+  margin-left: 285px;
+  border: none;
+  min-height: 50px;
+  border-radius: 0
+}
+
+.main-header .sidebar-toggle {
+  float: left;
+  background-color: transparent;
+  background-image: none;
+  padding: 15px 15px;
+  font-family: fontAwesome
+}
+
+.main-header .sidebar-toggle:before {
+  content: "\f0c9"
+}
+
+.main-header .sidebar-toggle:hover {
+  color: #89b726
+}
+
+.main-header .sidebar-toggle:focus,.main-header .sidebar-toggle:active {
+  background: transparent
+}
+
+.main-header .sidebar-toggle.fa5 {
+  font-family: "Font Awesome\ 5 Free"
+}
+
+.main-header .sidebar-toggle.fa5:before {
+  content: "\f0c9";
+  font-weight: 900
+}
+
+.main-header .sidebar-toggle .icon-bar {
+  display: none
+}

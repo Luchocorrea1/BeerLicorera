@@ -510,7 +510,7 @@ angular.module('components', [])
             isDisabledHistory: '<'
         }
     })
-    .component('menu', {
+    .component('menuItems', {
         templateUrl: 'components/menu.html',
         controller: function ($scope, $routeParams, $window, $location, spUtility, $timeout) {
             $scope.Persona = "";
@@ -522,112 +522,19 @@ angular.module('components', [])
             $scope.CargarMenu = function () {
                 var objQuery = spUtility.objQuery();
                 objQuery.typeprocess = baseEnum.TypeProcessRequest.getRequest;
-                objQuery.onlyUrl = "/api/menus";
+                objQuery.onlyUrl = "menus";
                 spUtility.Execute(objQuery, function (response) {
                     var data = Enumerable.From(response.data)
-                    .Select(function(x) {
-                        x.attributes.Id = x.id;
-                        return x.attributes;
-                      }).ToArray();
+                        .Select(function (x) {
+                            x.attributes.Id = x.id;
+                            return x.attributes;
+                        }).ToArray();
                     $scope.Lists.Menu = Enumerable.From(data)
                         .Where(function (x) { return x.PadreId == null })
                         .OrderBy(function (x) { return x.Orden })
                         .ToArray();
 
                     $scope.Lists.Menu = GetChildrenMenu($scope.Lists.Menu, data);
-                    $('.NavLateral-DropDown').on('click', function(e){
-                        e.preventDefault();
-                        var DropMenu=$(this).next('ul');
-                        var CaretDown=$(this).children('i.NavLateral-CaretDown');
-                        DropMenu.slideToggle('fast');
-                        if(CaretDown.hasClass('NavLateral-CaretDownRotate')){
-                            CaretDown.removeClass('NavLateral-CaretDownRotate');    
-                        }else{
-                            CaretDown.addClass('NavLateral-CaretDownRotate');    
-                        }
-                         
-                    });
-                    $('.ShowHideMenu').on('click', function(){
-                        var MobileMenu=$('.NavLateral');
-                        if(MobileMenu.css('opacity')==="0"){
-                            MobileMenu.addClass('Show-menu');   
-                        }else{
-                            MobileMenu.removeClass('Show-menu'); 
-                        }   
-                    }); 
-                    $(".NavLateral-content").mCustomScrollbar({
-                        theme:"light-thin",
-                        scrollbarPosition: "inside",
-                        autoHideScrollbar: true,
-                        scrollButtons:{ enable: true }
-                    });
-
-                    $(".ContentPage, .NotificationArea").mCustomScrollbar({
-                        theme:"dark-thin",
-                        scrollbarPosition: "inside",
-                        autoHideScrollbar: true,
-                        scrollButtons:{ enable: true }
-                    });
-
-                    
-    $('.btn-ExitSystem').on('click', function(e){
-        e.preventDefault();
-        swal({ 
-            title: "You want out of the system?",   
-            text: "The current session will be closed and will leave the system",   
-            type: "warning",   
-            showCancelButton: true,   
-            confirmButtonColor: "#DD6B55",   
-            confirmButtonText: "Yes",
-            animation: "slide-from-top",   
-            closeOnConfirm: false,
-            cancelButtonText: "Cancel"
-        }, function(){   
-            window.location='index.html'; 
-        });
-    }); 
-    $('.btn-Search').on('click', function(e){
-        e.preventDefault();
-        swal({   
-            title: "What are you looking for?",   
-            text: "Write what you want",   
-            type: "input",   
-            showCancelButton: true,   
-            closeOnConfirm: false,   
-            animation: "slide-from-top",   
-            inputPlaceholder: "Write here",
-            confirmButtonText: "Search",
-            cancelButtonText: "Cancel" 
-        }, function(inputValue){   
-            if (inputValue === false) return false;      
-            if (inputValue === "") {     swal.showInputError("You must write something");     
-            return false   
-            }      
-            swal("Nice!", "You wrote: " + inputValue, "success"); 
-        });    
-    });
-    $('.btn-Notification').on('click', function(){
-        var NotificationArea=$('.NotificationArea');
-        if(NotificationArea.hasClass('NotificationArea-show')){
-            NotificationArea.removeClass('NotificationArea-show');
-        }else{
-            NotificationArea.addClass('NotificationArea-show');
-        }
-    });
-                    // $timeout(function(){
-                    //     var submenuItems = document.querySelectorAll('.submenu > a');
-                    //     submenuItems.forEach(function(item) {
-                    //       item.addEventListener('click', function(e) {
-                    //         e.preventDefault();
-                    //         var submenu = this.nextElementSibling;
-                    //         if (submenu.style.display === 'block') {
-                    //           submenu.style.display = 'none';
-                    //         } else {
-                    //           submenu.style.display = 'block';
-                    //         }
-                    //       });
-                    //     });
-                    // },200);
                 }, function (errorrResponse) {
                     console.log(errorrResponse);
                 }, null, null, null, null);
