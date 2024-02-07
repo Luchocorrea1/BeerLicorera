@@ -1,4 +1,4 @@
-@import '~bootstrap/dist/css/bootstrap.min.css';
+/* @import '~bootstrap/dist/css/bootstrap.min.css'; */
 
 
 .page-wrapper {
@@ -34,9 +34,9 @@
       }
     }
   
-    .sidebar {
+    /* .sidebar {
       left: 0px;
-    }
+    } */
   
     &.toggled {
   
@@ -56,3 +56,68 @@
   }
   
   
+  .page-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .toggle-sidebar-button {
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .toggle-sidebar-button i {
+    color: #333; /* Color del ícono */
+  }
+
+
+
+
+
+  /* Header */
+
+.navbaroculto {
+  -webkit-transition: margin-left .3s ease-in-out;
+  -o-transition: margin-left .3s ease-in-out;
+  transition: margin-left .3s ease-in-out;
+  margin-bottom: 0;
+  margin-left: 285px;
+  border: none;
+  min-height: 50px;
+  border-radius: 0
+}
+
+.main-header .sidebar-toggle {
+  float: left;
+  background-color: transparent;
+  background-image: none;
+  padding: 15px 15px;
+  font-family: fontAwesome
+}
+
+.main-header .sidebar-toggle:before {
+  content: "\f0c9"
+}
+
+.main-header .sidebar-toggle:hover {
+  color: #89b726
+}
+
+.main-header .sidebar-toggle:focus,.main-header .sidebar-toggle:active {
+  background: transparent
+}
+
+.main-header .sidebar-toggle.fa5 {
+  font-family: "Font Awesome\ 5 Free"
+}
+
+.main-header .sidebar-toggle.fa5:before {
+  content: "\f0c9";
+  font-weight: 900
+}
+
+.main-header .sidebar-toggle .icon-bar {
+  display: none
+}

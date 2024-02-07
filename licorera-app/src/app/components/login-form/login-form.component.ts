@@ -58,7 +58,7 @@ export class LoginFormComponent implements OnInit {
       // Puedes mostrar un mensaje de error al usuario si es necesario.
         });
     } else {
-      this.toastService.showToast('Datos incorrectos','Usuario y contraseña son requeridos.',EventTypes.Warning);
+      this.toastService.showToast('Datos incorrectos','Usuario y contraseña son requeridos.',EventTypes.Error);
       // El formulario no es válido, puedes mostrar mensajes de error o realizar otras acciones.
       // console.error('Formulario no válido. Verifica los campos requeridos.');
     }

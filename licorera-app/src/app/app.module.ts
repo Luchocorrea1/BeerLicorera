@@ -11,7 +11,7 @@ import { AuthGuard } from './services/auth.guard';
 //Componentes
 import { LoginComponent } from './components/login/login.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+// import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { ToastComponent } from './components/templates/toast/toast.component';
 import { ToasterComponent } from './components/templates/toaster/toaster.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,7 +32,7 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
     AppComponent,
     LoginComponent,
     LoginFormComponent,
-    DashboardComponent,
+    // DashboardComponent,
     ToastComponent,
     ToasterComponent
   ],

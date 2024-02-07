@@ -4,6 +4,8 @@ import { SidebarService } from './sidebar.service';
 import { MenuItem } from './menu-item';
 
 import { AuthService } from 'src/app/services/auth.service';
+import { BackendCommunicationService } from 'src/app/services/backend-communication.service';
+import { Usuario } from '../../../models/enums';
 
 @Component({
   selector: 'app-sidebar',
@@ -21,10 +23,15 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SidebarComponent implements OnInit {
 
   menus: MenuItem[];
-  constructor(public sidebarservice: SidebarService, private authService:AuthService) {
-    this.menus = sidebarservice.getMenuList();
-   }
+  usuario: Usuario = {Nombre:'', Apellido:'', Rol:''}
 
+  constructor(public sidebarservice: SidebarService, private authService:AuthService, private Execute:BackendCommunicationService) {
+    this.menus = sidebarservice.getMenuList();
+    this.getUserData();
+   }
+   toggleSidebar() {
+    this.sidebarservice.setSidebarState(!this.sidebarservice.getSidebarState());
+  }
   ngOnInit() {
   }
 
@@ -58,5 +65,16 @@ export class SidebarComponent implements OnInit {
   }
   logOut(){
     this.authService.logout();
+  }
+
+  getUserData() {
+    this.Execute.get<any>('users/me?populate=role')
+      .subscribe((response: any) => {
+        // Manejar la respuesta del backend.
+        this.usuario.Nombre=response.Nombre;
+        this.usuario.Apellido=response.Apellido;
+        this.usuario.Rol=response.role?.name;
+        
+      });
   }
 }

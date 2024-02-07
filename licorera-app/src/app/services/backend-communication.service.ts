@@ -36,7 +36,16 @@ export class BackendCommunicationService {
   }
 
   get<T>(endpoint: string): Observable<T> {
-    return this.http.get<T>(`${this.apiUrl}/${endpoint}`, { headers: this.getHeaders() });
+    return this.http.get<T>(`${this.apiUrl}/${endpoint}`, { headers: this.getHeaders() })
+    .pipe(
+      catchError((error: any) => {
+        // const errorMessage = this.getErrorMessage(error);
+        // this.notificationService.showError('Error en la solicitud: ' + error.message);
+        this.toastService.showToast('Error', error.message, EventTypes.Error)
+        throw error;
+      })
+
+    );
   }
 
   post<T>(endpoint: string, body: any): Observable<T> {

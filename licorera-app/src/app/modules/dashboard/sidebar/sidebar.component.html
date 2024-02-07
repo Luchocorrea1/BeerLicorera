@@ -1,8 +1,8 @@
-<nav id="sidebar" class="sidebar" [ngClass]="{'sidebar-bg' : hasBackgroundImage()}">
+<nav id="sidebar" class="sidebar sidebar-bg">
     <div class="sidebar-content">
         <perfect-scrollbar>
             <div class="sidebar-header">
-                <a href="">Pro Sidebar
+                <a href="">Inicio
 
                     <i class="fa-solid fa-house"></i>
                 </a>
@@ -13,12 +13,12 @@
                     <img class="img-responsive img-rounded" src="assets/images/user.jpg" alt="User picture">
                 </div>
                 <div class="user-info">
-                    <span class="user-name">Jhon
-                        <strong>Smith</strong>
+                    <span class="user-name">{{usuario.Nombre}}
+                        <strong>{{usuario.Apellido}}</strong>
                     </span>
-                    <span class="user-role">Administrator</span>
+                    <span class="user-role">{{usuario.Rol}}</span>
                     <span class="user-status">
-                        <i class="fa fa-circle"></i>
+                        <i class="fa fa-circle text-success"></i>
                         <span>Online</span>
                     </span>
                 </div>
