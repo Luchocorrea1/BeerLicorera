@@ -6,6 +6,7 @@ import { MenuItem } from './menu-item';
 import { AuthService } from 'src/app/services/auth.service';
 import { BackendCommunicationService } from 'src/app/services/backend-communication.service';
 import { Usuario } from '../../../models/enums';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -25,7 +26,7 @@ export class SidebarComponent implements OnInit {
   menus: MenuItem[];
   usuario: Usuario = {Nombre:'', Apellido:'', Rol:''}
 
-  constructor(public sidebarservice: SidebarService, private authService:AuthService, private Execute:BackendCommunicationService) {
+  constructor(private configService: ConfigService,public sidebarservice: SidebarService, private authService:AuthService, private Execute:BackendCommunicationService) {
     this.menus = sidebarservice.getMenuList();
     this.getUserData();
    }
@@ -48,6 +49,10 @@ export class SidebarComponent implements OnInit {
           element.active = false;
         }
       });
+    }else{
+      if(currentMenu.href){
+    this.configService.navigate(currentMenu.href);
+      }
     }
   }
 

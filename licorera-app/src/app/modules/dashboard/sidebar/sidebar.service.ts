@@ -10,138 +10,108 @@ export class SidebarService {
 
   menus: MenuItem[] = [
     {
-      title: 'general',
+      title: 'General',
       type: 'header'
     },
+    // {
+    //   title: 'Dashboard',
+    //   icon: 'fa fa-tachometer',
+    //   active: false,
+    //   type: 'dropdown',
+    //   badge: {
+    //     text: 'New ',
+    //     class: 'badge-warning'
+    //   },
+    //   submenus: [
+    //     {
+    //       title: 'Dashboard 1',
+    //       badge: {
+    //         text: 'Pro ',
+    //         class: 'badge-success'
+    //       }
+    //     },
+    //     {
+    //       title: 'Dashboard 2'
+    //     },
+    //     {
+    //       title: 'Dashboard 3'
+    //     }
+    //   ]
+    // },
     {
-      title: 'Dashboard',
-      icon: 'fa fa-tachometer',
-      active: false,
-      type: 'dropdown',
-      badge: {
-        text: 'New ',
-        class: 'badge-warning'
-      },
-      submenus: [
-        {
-          title: 'Dashboard 1',
-          badge: {
-            text: 'Pro ',
-            class: 'badge-success'
-          }
-        },
-        {
-          title: 'Dashboard 2'
-        },
-        {
-          title: 'Dashboard 3'
-        }
-      ]
-    },
-    {
-      title: 'E-commerce',
+      title: 'Ventas',
       icon: 'fa fa-shopping-cart',
       active: false,
-      type: 'dropdown',
-      badge: {
-        text: '3',
-        class: 'badge-danger'
-      },
-      submenus: [
-        {
-          title: 'Products',
-        },
-        {
-          title: 'Orders'
-        },
-        {
-          title: 'Credit cart'
-        }
-      ]
-    },
-    {
-      title: 'Components',
-      icon: 'fa fa-diamond',
-      active: false,
-      type: 'dropdown',
-      submenus: [
-        {
-          title: 'General',
-        },
-        {
-          title: 'Panels'
-        },
-        {
-          title: 'Tables'
-        },
-        {
-          title: 'Icons'
-        },
-        {
-          title: 'Forms'
-        }
-      ]
-    },
-    {
-      title: 'Charts',
-      icon: 'fa fa-line-chart',
-      active: false,
-      type: 'dropdown',
-      submenus: [
-        {
-          title: 'Pie chart',
-        },
-        {
-          title: 'Line chart'
-        },
-        {
-          title: 'Bar chart'
-        },
-        {
-          title: 'Histogram'
-        }
-      ]
-    },
-    {
-      title: 'Maps',
-      icon: 'fa fa-globe',
-      active: false,
-      type: 'dropdown',
-      submenus: [
-        {
-          title: 'Google maps',
-        },
-        {
-          title: 'Open street map'
-        }
-      ]
-    },
-    {
-      title: 'Extra',
-      type: 'header'
-    },
-    {
-      title: 'Documentation',
-      icon: 'fa fa-book',
-      active: false,
       type: 'simple',
-      badge: {
-        text: 'Beta',
-        class: 'badge-primary'
-      },
+      href: '/dashboard/ventas'
     },
     {
-      title: 'Calendar',
-      icon: 'fa fa-calendar',
-      active: false,
-      type: 'simple'
+      title: 'Productos',
+      icon: 'fa fa-diamond',
+      active: true,
+      type: 'simple',
+      href: '/dashboard/productos'
     },
-    {
-      title: 'Examples',
-      icon: 'fa fa-folder',
-      active: false,
-      type: 'simple'
-    }
+    // {
+    //   title: 'Charts',
+    //   icon: 'fa fa-line-chart',
+    //   active: false,
+    //   type: 'dropdown',
+    //   submenus: [
+    //     {
+    //       title: 'Pie chart',
+    //     },
+    //     {
+    //       title: 'Line chart'
+    //     },
+    //     {
+    //       title: 'Bar chart'
+    //     },
+    //     {
+    //       title: 'Histogram'
+    //     }
+    //   ]
+    // },
+    // {
+    //   title: 'Maps',
+    //   icon: 'fa fa-globe',
+    //   active: false,
+    //   type: 'dropdown',
+    //   submenus: [
+    //     {
+    //       title: 'Google maps',
+    //     },
+    //     {
+    //       title: 'Open street map'
+    //     }
+    //   ]
+    // },
+    // {
+    //   title: 'Extra',
+    //   type: 'header'
+    // },
+    // {
+    //   title: 'Documentation',
+    //   icon: 'fa fa-book',
+    //   active: false,
+    //   type: 'simple',
+    //   badge: {
+    //     text: 'Beta',
+    //     class: 'badge-primary'
+    //   },
+    // },
+    // {
+    //   title: 'Calendar',
+    //   icon: 'fa fa-calendar',
+    //   active: false,
+    //   type: 'simple'
+    // },
+    // {
+    //   title: 'Examples',
+    //   icon: 'fa fa-folder',
+    //   active: false,
+    //   type: 'simple'
+    // }
   ];
   constructor() { }
 

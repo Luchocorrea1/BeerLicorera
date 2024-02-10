@@ -362,6 +362,115 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiCategoriaProductoCategoriaProducto
+  extends Schema.CollectionType {
+  collectionName: 'categoria_productos';
+  info: {
+    singularName: 'categoria-producto';
+    pluralName: 'categoria-productos';
+    displayName: 'CategoriaProducto';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Categoria: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::categoria-producto.categoria-producto',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::categoria-producto.categoria-producto',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiComplementoProductoComplementoProducto
+  extends Schema.CollectionType {
+  collectionName: 'complemento_productos';
+  info: {
+    singularName: 'complemento-producto';
+    pluralName: 'complemento-productos';
+    displayName: 'ComplementoProducto';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Codigo: Attribute.String;
+    Marca: Attribute.String;
+    Presentacion: Attribute.String;
+    Tamano: Attribute.String;
+    Medida: Attribute.String;
+    Descripcion: Attribute.String;
+    Foto: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::complemento-producto.complemento-producto',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::complemento-producto.complemento-producto',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProductoProducto extends Schema.CollectionType {
+  collectionName: 'productos';
+  info: {
+    singularName: 'producto';
+    pluralName: 'productos';
+    displayName: 'Producto';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Producto: Attribute.String;
+    PrecioVenta: Attribute.Float;
+    categoria_producto: Attribute.Relation<
+      'api::producto.producto',
+      'oneToOne',
+      'api::categoria-producto.categoria-producto'
+    >;
+    complemento_producto: Attribute.Relation<
+      'api::producto.producto',
+      'oneToOne',
+      'api::complemento-producto.complemento-producto'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::producto.producto',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::producto.producto',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -792,6 +901,9 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::categoria-producto.categoria-producto': ApiCategoriaProductoCategoriaProducto;
+      'api::complemento-producto.complemento-producto': ApiComplementoProductoComplementoProducto;
+      'api::producto.producto': ApiProductoProducto;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;

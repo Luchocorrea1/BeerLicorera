@@ -1,0 +1,21 @@
+.example-card {
+    
+    max-width: 300px;
+    max-height: 600px;
+  }
+  
+  .example-header-image {
+    background-size: cover;
+  }
+  .ripple-container{
+    cursor: pointer;
+  }
+
+  .example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}
+
+.example-disabled {
+  display: inline-block;
+}

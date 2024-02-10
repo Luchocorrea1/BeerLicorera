@@ -3,3 +3,8 @@ export interface Usuario {
     Apellido: string;
     Rol: string;
 }
+
+export interface Lista {
+    Value: string;
+    Texto: string;
+}

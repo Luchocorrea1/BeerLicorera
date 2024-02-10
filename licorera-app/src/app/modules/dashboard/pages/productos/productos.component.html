@@ -1,1 +1,235 @@
-<p>productos works!</p>
+
+<button mat-raised-button (click)="openDialog()">Añadir nuevo</button>
+
+<!-- <ol>
+    <li>
+      <mat-form-field>
+        <mat-label>What's your name?</mat-label>
+        <input matInput [(ngModel)]="name">
+      </mat-form-field>
+    </li>
+    <li>
+      <button mat-raised-button (click)="openDialog()">Añadir nuevo</button>
+    </li>
+      <li *ngIf="animal">You chose: <em>{{animal}}</em></li>
+  </ol> -->
+
+<div class="row">
+    <div class="col-md-3 p-1">
+        <mat-card class="example-card">
+            <div class="ripple-container" matRipple [matRippleCentered]="true">
+                <mat-card-title>Cerveza águila botella</mat-card-title>
+                <mat-card-subtitle>Cervezas Nacionales</mat-card-subtitle>
+                <div class="text-center">
+                    <img mat-card-lg-image
+                        src="https://www.cervezaaguila.com/sites/g/files/seuoyk441/files/2023-01/aguila-original-750.png"
+                        alt="Photo of a Shiba Inu">
+                </div>
+                <mat-card-content>
+                    <mat-list>
+                        <mat-list-item><b>Cantidad:</b> 10</mat-list-item>
+                        <mat-list-item><b>Precio venta:</b> $3.000</mat-list-item>
+                        <mat-list-item><b>Precio compra:</b> $1.980</mat-list-item>
+                    </mat-list>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button>Editar</button>
+
+                </mat-card-actions>
+            </div>
+        </mat-card>
+    </div>
+    <div class="col-md-3 p-1">
+        <mat-card class="example-card">
+            <div class="ripple-container" matRipple [matRippleCentered]="true">
+                <mat-card-title>Cerveza águila lata</mat-card-title>
+                <mat-card-subtitle>Cervezas Nacionales</mat-card-subtitle>
+                <div class="text-center">
+                    <img mat-card-lg-image
+                        src="https://www.cervezaaguila.com/sites/g/files/seuoyk441/files/2023-01/aguila-original-lata-330.png"
+                        alt="Photo of a Shiba Inu">
+                </div>
+                <mat-card-content>
+                    <mat-list>
+                        <mat-list-item><b>Cantidad:</b> 10</mat-list-item>
+                        <mat-list-item><b>Precio venta:</b> $3.000</mat-list-item>
+                        <mat-list-item><b>Precio compra:</b> $1.980</mat-list-item>
+                    </mat-list>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button>Editar</button>
+
+                </mat-card-actions>
+            </div>
+        </mat-card>
+    </div>
+    <div class="col-md-3 p-1">
+        <mat-card class="example-card">
+            <div class="ripple-container" matRipple [matRippleCentered]="false">
+                <mat-card-title>Cerveza águila lata</mat-card-title>
+                <mat-card-subtitle>Cervezas Nacionales</mat-card-subtitle>
+                <div class="text-center">
+                    <img mat-card-lg-image
+                        src="https://www.cervezaaguila.com/sites/g/files/seuoyk441/files/2023-01/aguila-original-lata-330.png"
+                        alt="Photo of a Shiba Inu">
+                </div>
+                <mat-card-content>
+                    <mat-list>
+                        <mat-list-item><b>Cantidad:</b> 10</mat-list-item>
+                        <mat-list-item><b>Precio venta:</b> $3.000</mat-list-item>
+                        <mat-list-item><b>Precio compra:</b> $1.980</mat-list-item>
+                    </mat-list>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button>Editar</button>
+
+                </mat-card-actions>
+            </div>
+        </mat-card>
+    </div>
+    <div class="col-md-3 p-1">
+        <mat-card class="example-card">
+            <div class="ripple-container" matRipple [matRippleCentered]="false">
+                <mat-card-title>Cerveza águila lata</mat-card-title>
+                <mat-card-subtitle>Cervezas Nacionales</mat-card-subtitle>
+                <div class="text-center">
+                    <img mat-card-lg-image
+                        src="https://www.cervezaaguila.com/sites/g/files/seuoyk441/files/2023-01/aguila-original-lata-330.png"
+                        alt="Photo of a Shiba Inu">
+                </div>
+                <mat-card-content>
+                    <mat-list>
+                        <mat-list-item><b>Cantidad:</b> 10</mat-list-item>
+                        <mat-list-item><b>Precio venta:</b> $3.000</mat-list-item>
+                        <mat-list-item><b>Precio compra:</b> $1.980</mat-list-item>
+                    </mat-list>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button>Editar</button>
+
+                </mat-card-actions>
+            </div>
+        </mat-card>
+    </div>
+
+    <div class="col-md-3 p-1">
+        <mat-card class="example-card">
+            <div class="ripple-container" matRipple [matRippleCentered]="false">
+                <mat-card-title>Cerveza águila lata</mat-card-title>
+                <mat-card-subtitle>Cervezas Nacionales</mat-card-subtitle>
+                <div class="text-center">
+                    <img mat-card-lg-image
+                        src="https://www.cervezaaguila.com/sites/g/files/seuoyk441/files/2023-01/aguila-original-lata-330.png"
+                        alt="Photo of a Shiba Inu">
+                </div>
+                <mat-card-content>
+                    <mat-list>
+                        <mat-list-item><b>Cantidad:</b> 10</mat-list-item>
+                        <mat-list-item><b>Precio venta:</b> $3.000</mat-list-item>
+                        <mat-list-item><b>Precio compra:</b> $1.980</mat-list-item>
+                    </mat-list>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button>Editar</button>
+
+                </mat-card-actions>
+            </div>
+        </mat-card>
+    </div>
+    <div class="col-md-3 p-1">
+        <mat-card class="example-card">
+            <div class="ripple-container" matRipple [matRippleCentered]="false">
+                <mat-card-title>Cerveza águila lata</mat-card-title>
+                <mat-card-subtitle>Cervezas Nacionales</mat-card-subtitle>
+                <div class="text-center">
+                    <img mat-card-lg-image
+                        src="https://www.cervezaaguila.com/sites/g/files/seuoyk441/files/2023-01/aguila-original-lata-330.png"
+                        alt="Photo of a Shiba Inu">
+                </div>
+                <mat-card-content>
+                    <mat-list>
+                        <mat-list-item><b>Cantidad:</b> 10</mat-list-item>
+                        <mat-list-item><b>Precio venta:</b> $3.000</mat-list-item>
+                        <mat-list-item><b>Precio compra:</b> $1.980</mat-list-item>
+                    </mat-list>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button>Editar</button>
+
+                </mat-card-actions>
+            </div>
+        </mat-card>
+    </div>
+    <div class="col-md-3 p-1">
+        <mat-card class="example-card">
+            <div class="ripple-container" matRipple [matRippleCentered]="false">
+                <mat-card-title>Cerveza águila lata</mat-card-title>
+                <mat-card-subtitle>Cervezas Nacionales</mat-card-subtitle>
+                <div class="text-center">
+                    <img mat-card-lg-image
+                        src="https://www.cervezaaguila.com/sites/g/files/seuoyk441/files/2023-01/aguila-original-lata-330.png"
+                        alt="Photo of a Shiba Inu">
+                </div>
+                <mat-card-content>
+                    <mat-list>
+                        <mat-list-item><b>Cantidad:</b> 10</mat-list-item>
+                        <mat-list-item><b>Precio venta:</b> $3.000</mat-list-item>
+                        <mat-list-item><b>Precio compra:</b> $1.980</mat-list-item>
+                    </mat-list>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button>Editar</button>
+
+                </mat-card-actions>
+            </div>
+        </mat-card>
+    </div>
+    <div class="col-md-3 p-1">
+        <mat-card class="example-card">
+            <div class="ripple-container" matRipple [matRippleCentered]="false">
+                <mat-card-title>Cerveza águila lata</mat-card-title>
+                <mat-card-subtitle>Cervezas Nacionales</mat-card-subtitle>
+                <div class="text-center">
+                    <img mat-card-lg-image
+                        src="https://www.cervezaaguila.com/sites/g/files/seuoyk441/files/2023-01/aguila-original-lata-330.png"
+                        alt="Photo of a Shiba Inu">
+                </div>
+                <mat-card-content>
+                    <mat-list>
+                        <mat-list-item><b>Cantidad:</b> 10</mat-list-item>
+                        <mat-list-item><b>Precio venta:</b> $3.000</mat-list-item>
+                        <mat-list-item><b>Precio compra:</b> $1.980</mat-list-item>
+                    </mat-list>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button>Editar</button>
+
+                </mat-card-actions>
+            </div>
+        </mat-card>
+    </div>
+    <div class="col-md-3 p-1">
+        <mat-card class="example-card">
+            <div class="ripple-container" matRipple [matRippleCentered]="false">
+                <mat-card-title>Cerveza águila lata</mat-card-title>
+                <mat-card-subtitle>Cervezas Nacionales</mat-card-subtitle>
+                <div class="text-center">
+                    <img mat-card-lg-image
+                        src="https://www.cervezaaguila.com/sites/g/files/seuoyk441/files/2023-01/aguila-original-lata-330.png"
+                        alt="Photo of a Shiba Inu">
+                </div>
+                <mat-card-content>
+                    <mat-list>
+                        <mat-list-item><b>Cantidad:</b> 10</mat-list-item>
+                        <mat-list-item><b>Precio venta:</b> $3.000</mat-list-item>
+                        <mat-list-item><b>Precio compra:</b> $1.980</mat-list-item>
+                    </mat-list>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button>Editar</button>
+
+                </mat-card-actions>
+            </div>
+        </mat-card>
+    </div>
+</div>

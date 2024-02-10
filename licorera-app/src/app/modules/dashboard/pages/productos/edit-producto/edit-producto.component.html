@@ -1,0 +1,101 @@
+<h2 mat-dialog-title>Hi {{data.name}}</h2>
+<mat-dialog-content>
+
+    <mat-accordion>
+        <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Welcome
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-form-field>
+                <mat-label>First name</mat-label>
+                <input matInput>
+            </mat-form-field>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field>
+                    <mat-label>Nombre Producto/Servicio</mat-label>
+                    <input matInput placeholder="Ej: Cerveza botella" [(ngModel)]="data.Producto" name="Producto"
+                        required>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field>
+                    <mat-label>Precio de Venta</mat-label>
+                    <input matInput currencyMask placeholder="$0.00" [(ngModel)]="data.PrecioVenta" name="PrecioVenta"
+                        required />
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field>
+                    <mat-label>Categoría</mat-label>
+                    <mat-select [(ngModel)]="data.category" name="food">
+                        <mat-option *ngFor="let item of Categorias" [value]="item.Value">{{item.Texto}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button (click)="NuevaCategoria = !NuevaCategoria"><i class="fa-solid fa-plus"></i></button>
+                <form [formGroup]="frmCategoria" (ngSubmit)="addCategoria()" *ngIf="NuevaCategoria">
+                    <mat-form-field>
+                        <mat-label>Nueva categoría</mat-label>
+                        <input matInput placeholder="Ej: Cervezas" formControlName="Categoria" />
+                        <hr>
+                        <mat-progress-bar mode="buffer"></mat-progress-bar>
+                    </mat-form-field>
+                    <button type="submit" mat-raised-button color="primary">Agregar</button>
+                </form>
+
+            </div>
+
+            <div class="col-md-6">
+                <ngx-dropzone (change)="onSelect($event)">
+                    <ngx-dropzone-label>Cargar imagen</ngx-dropzone-label>
+                    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f"
+                        [removable]="true" (removed)="onRemove(f)">
+                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                    </ngx-dropzone-image-preview>
+                </ngx-dropzone>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- Sección de Datos Complementarios -->
+    <div class="panel">
+        <mat-form-field>
+            <input matInput placeholder="Código de Barras" [(ngModel)]="data.barcode" name="barcode">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Marca" [(ngModel)]="data.brand" name="brand">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Presentación" [(ngModel)]="data.presentation" name="presentation">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Tamaño" [(ngModel)]="data.size" name="size">
+        </mat-form-field>
+
+        <mat-form-field>
+            <textarea matInput placeholder="Descripción" [(ngModel)]="data.description" name="description"></textarea>
+        </mat-form-field>
+    </div>
+
+    <mat-form-field>
+        <mat-label>Favorite Animal</mat-label>
+        <input matInput [(ngModel)]="data.animal">
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>

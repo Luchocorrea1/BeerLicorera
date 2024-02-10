@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "complemento_productos",
+  "info": {
+    "singularName": "complemento-producto",
+    "pluralName": "complemento-productos",
+    "displayName": "ComplementoProducto"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Codigo": {
+      "type": "string"
+    },
+    "Marca": {
+      "type": "string"
+    },
+    "Presentacion": {
+      "type": "string"
+    },
+    "Tamano": {
+      "type": "string"
+    },
+    "Medida": {
+      "type": "string"
+    },
+    "Descripcion": {
+      "type": "string"
+    },
+    "Foto": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}
