@@ -7,6 +7,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { BackendCommunicationService } from 'src/app/services/backend-communication.service';
 import { Usuario } from '../../../models/enums';
 import { ConfigService } from 'src/app/services/config.service';
+import { ToastService } from 'src/app/services/toast.service';
+import { EventTypes } from 'src/app/models/event-types';
 
 @Component({
   selector: 'app-sidebar',
@@ -26,7 +28,7 @@ export class SidebarComponent implements OnInit {
   menus: MenuItem[];
   usuario: Usuario = {Nombre:'', Apellido:'', Rol:''}
 
-  constructor(private configService: ConfigService,public sidebarservice: SidebarService, private authService:AuthService, private Execute:BackendCommunicationService) {
+  constructor(private configService: ConfigService,public sidebarservice: SidebarService, private authService:AuthService, private Execute:BackendCommunicationService, private toastService: ToastService) {
     this.menus = sidebarservice.getMenuList();
     this.getUserData();
    }
@@ -80,6 +82,11 @@ export class SidebarComponent implements OnInit {
         this.usuario.Apellido=response.Apellido;
         this.usuario.Rol=response.role?.name;
         
+      }, error => {
+        // console.error('Error en la autenticación:', error);
+        this.toastService.showToast('Ocurrió un error', 'Error inesperado ' + error.message, EventTypes.Error);
+        this.logOut();
+        // Puedes mostrar un mensaje de error al usuario si es necesario.
       });
   }
 }

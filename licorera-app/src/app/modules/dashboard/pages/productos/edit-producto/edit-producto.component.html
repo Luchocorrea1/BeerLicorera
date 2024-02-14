@@ -1,71 +1,84 @@
-<h2 mat-dialog-title>Hi {{data.name}}</h2>
+<h2 mat-dialog-title>Crear nuevo producto</h2>
+
 <mat-dialog-content>
+    <form [formGroup]="frmProductos" (ngSubmit)="addProductos()">
+        <div class="container">
+            <div class="row">
 
-    <mat-accordion>
-        <mat-expansion-panel [expanded]="true">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    Welcome
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-
-            <mat-form-field>
-                <mat-label>First name</mat-label>
-                <input matInput>
-            </mat-form-field>
-
-        </mat-expansion-panel>
-    </mat-accordion>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <mat-form-field>
-                    <mat-label>Nombre Producto/Servicio</mat-label>
-                    <input matInput placeholder="Ej: Cerveza botella" [(ngModel)]="data.Producto" name="Producto"
-                        required>
-                </mat-form-field>
-            </div>
-            <div class="col-md-6">
-                <mat-form-field>
-                    <mat-label>Precio de Venta</mat-label>
-                    <input matInput currencyMask placeholder="$0.00" [(ngModel)]="data.PrecioVenta" name="PrecioVenta"
-                        required />
-                </mat-form-field>
-            </div>
-            <div class="col-md-6">
-                <mat-form-field>
-                    <mat-label>Categoría</mat-label>
-                    <mat-select [(ngModel)]="data.category" name="food">
-                        <mat-option *ngFor="let item of Categorias" [value]="item.Value">{{item.Texto}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <button (click)="NuevaCategoria = !NuevaCategoria"><i class="fa-solid fa-plus"></i></button>
-                <form [formGroup]="frmCategoria" (ngSubmit)="addCategoria()" *ngIf="NuevaCategoria">
+                <div class="col-md-6">
                     <mat-form-field>
-                        <mat-label>Nueva categoría</mat-label>
-                        <input matInput placeholder="Ej: Cervezas" formControlName="Categoria" />
-                        <hr>
-                        <mat-progress-bar mode="buffer"></mat-progress-bar>
+                        <mat-label>Nombre Producto/Servicio</mat-label>
+                        <input matInput placeholder="Ej: Cerveza botella" formControlName="Producto">
                     </mat-form-field>
-                    <button type="submit" mat-raised-button color="primary">Agregar</button>
-                </form>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field>
+                        <mat-label>Precio de Venta</mat-label>
+                        <input matInput currencyMask placeholder="$0.00" formControlName="PrecioVenta" />
+                    </mat-form-field>
+                </div>
+                <!--  -->
+                <div class="col-md-6">
+                    <mat-form-field>
+                        <mat-label>Categoría</mat-label>
+                        <mat-select formControlName="Categoria" placeholder="Categoría">
+                            <mat-option *ngFor="let item of Categorias" [value]="item.Value">{{item.Texto}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
 
-            </div>
 
-            <div class="col-md-6">
-                <ngx-dropzone (change)="onSelect($event)">
-                    <ngx-dropzone-label>Cargar imagen</ngx-dropzone-label>
-                    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f"
-                        [removable]="true" (removed)="onRemove(f)">
-                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-                    </ngx-dropzone-image-preview>
-                </ngx-dropzone>
+                    <button mat-raised-button (click)="NuevaCategoria = !NuevaCategoria" type="button"><i
+                            class="fa-solid fa-plus"></i> Crear nueva categoría</button>
+                    <form [formGroup]="frmCategoria" (ngSubmit)="addCategoria()" *ngIf="NuevaCategoria">
+                        <mat-form-field>
+                            <mat-label>Nueva categoría</mat-label>
+                            <input matInput placeholder="Ej: Cervezas" formControlName="Categoria" />
+                            <hr>
+                            <mat-progress-bar mode="buffer"></mat-progress-bar>
+                        </mat-form-field>
+                        <button type="submit" mat-raised-button color="primary">Agregar</button>
+                        <button type="button" (click)="NuevaCategoria = !NuevaCategoria" mat-raised-button
+                            color="secundary">Cancelar</button>
+                    </form>
+                </div>
+
+                <div class="col-md-6">
+                    <ngx-dropzone (change)="onSelect($event)">
+                        <ngx-dropzone-label>Cargar imagen</ngx-dropzone-label>
+                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
+                            [file]="f" [removable]="true" (removed)="onRemove(f)">
+                            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                        </ngx-dropzone-image-preview>
+                    </ngx-dropzone>
+                </div>
+                <!-- Datos complementarios -->
+                <div class="col-md-12">
+                    <hr>
+                    <mat-accordion class="example-headers-align">
+                        <mat-expansion-panel [expanded]="true" (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Datos complementarios
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    Escanea e ingresa información adicional de tu producto
+
+                                </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <app-escaner></app-escaner>
+                            <mat-form-field>
+                                <mat-label>First name</mat-label>
+                                <input matInput>
+                            </mat-form-field>
+
+                        </mat-expansion-panel>
+                    </mat-accordion>
+
+                </div>
             </div>
         </div>
-
-    </div>
-
-
+    </form>
 
     <!-- Sección de Datos Complementarios -->
     <div class="panel">

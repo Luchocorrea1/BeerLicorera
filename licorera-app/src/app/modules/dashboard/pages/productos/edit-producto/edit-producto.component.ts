@@ -13,9 +13,11 @@ import { Lista } from 'src/app/models/enums';
 import { BackendCommunicationService } from 'src/app/services/backend-communication.service';
 
 import { List } from 'linqts';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EventTypes } from 'src/app/models/event-types';
 import { ToastService } from 'src/app/services/toast.service';
+
+
 
 @Component({
   selector: 'app-edit-producto',
@@ -26,13 +28,16 @@ import { ToastService } from 'src/app/services/toast.service';
 
 export class EditProductoComponent implements OnInit {
   frmCategoria: FormGroup;
-
+  frmProductos: FormGroup;
   Categorias: Lista[] = [
     { Value: '', Texto: 'Seleccione' }
   ];
 
+  bankCtrl:FormControl = new FormControl();
+  bankFilterCtrl:FormControl = new FormControl();
 
   NuevaCategoria: boolean = false;
+  panelOpenState = false;
 
 
   constructor(
@@ -42,6 +47,13 @@ export class EditProductoComponent implements OnInit {
     this.frmCategoria = this.fb.group({
       // Crea el FormGroup (formulario reactivo) con controles definidos.
       Categoria: ['', Validators.required]
+    });
+    this.frmProductos = this.fb.group({
+      // Crea el FormGroup (formulario reactivo) con controles definidos.
+      Producto: ['', Validators.required],
+      PrecioVenta: ['', Validators.required],
+      Categoria: ['', Validators.required],
+      CategoriaCtrl: ['', Validators.required],
     });
   }
 
@@ -53,7 +65,7 @@ export class EditProductoComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  getCategoria(): void {
+  getCategoria(seleccionado: string = ""): void {
 
     this.Execute.get<any>('categoria-productos')
       .subscribe((response: any) => {
@@ -62,6 +74,11 @@ export class EditProductoComponent implements OnInit {
             .Select(x => ({ Value: x.id, Texto: x.attributes.Categoria }))
             .OrderBy(x => x.Texto)
             .ToArray();
+          if (seleccionado) {
+            this.frmProductos.value.Categoria = seleccionado;
+            this.frmProductos.patchValue({ Categoria: seleccionado });
+            this.frmProductos.get('Categoria')?.setValue(seleccionado);
+          }
         }
       });
   }
@@ -92,9 +109,9 @@ export class EditProductoComponent implements OnInit {
         .subscribe((response: any) => {
           // Manejar la respuesta del backend.
           console.log('Respuesta del backend:', response);
+          this.getCategoria(this.frmCategoria.value.Categoria);
           this.frmCategoria.reset();
           this.NuevaCategoria = false;
-          this.getCategoria();
 
         }, error => {
           // console.error('Error en la autenticación:', error);
@@ -103,7 +120,15 @@ export class EditProductoComponent implements OnInit {
         });
 
     } else {
-      this.toastService.showToast('Datos incorrectos', 'La categoría es requerida.', EventTypes.Error);
+      this.toastService.showToast('Datos incorrectos', 'La nueva categoría es requerida.', EventTypes.Error);
+    }
+  }
+
+  addProductos() {
+    if (this.frmProductos.valid) {
+
+    } else {
+      this.toastService.showToast('Datos incorrectos', 'Campos requeridos.', EventTypes.Error);
     }
   }
 

@@ -2,7 +2,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router'; 
+import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Components
@@ -11,6 +11,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { ProductosComponent } from './pages/productos/productos.component';
 import { VentasComponent } from './pages/ventas/ventas.component';
 import { EditProductoComponent } from './pages/productos/edit-producto/edit-producto.component';
+import { EscanerComponent } from 'src/app/components/escaner/escaner.component';
 
 
 //Services
@@ -29,25 +30,31 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatRippleModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatSelectModule} from '@angular/material/select';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSelectModule } from '@angular/material/select';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
-import {  CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from "ng2-currency-mask";
+import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from "ng2-currency-mask";
 
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
+
+import { SafePipe } from 'src/app/pipes/safe.pipe';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
+
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "left",
@@ -73,11 +80,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, ProductosComponent, VentasComponent, SidebarComponent, EditProductoComponent], //PageOneComponent, PageTwoComponent],
+  declarations: [DashboardComponent, ProductosComponent, VentasComponent, SidebarComponent, EditProductoComponent, EscanerComponent, SafePipe], //PageOneComponent, PageTwoComponent],
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     //Material Angular
     MatSidenavModule,
     MatToolbarModule,
@@ -98,17 +105,20 @@ const routes: Routes = [
     // MatExpansionModule,
     // MatAccordion,
     // BsDropdownModule.forRoot(),
+    
     CurrencyMaskModule,
     NgxDropzoneModule,
+    BrowserModule,
+    NgxScannerQrcodeModule,
 
     RouterModule.forChild(routes),
     PerfectScrollbarModule
   ],
-  providers: [ {
+  providers: [{
     provide: PERFECT_SCROLLBAR_CONFIG,
     useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
   },
   { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }],
   bootstrap: [DashboardComponent]
 })
-export class DashboardModule {}
+export class DashboardModule { }
