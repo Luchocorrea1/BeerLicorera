@@ -1,34 +1,28 @@
-h1,
-h5,
-p {
-  font-weight: 600;
-  word-break: break-all;
-  font-family: 'Courier New', Courier, monospace;
-}
-div {
-  text-align: center;
-  background: #fdfdfd;
-  
-  button {
-    border-radius: 50%;
-    height: 60px;
-    width: 60px;
-    margin: 4px;
-    &disabled {
-      cursor: no-drop;
-    }
-  }
-
-  .data {
-    background: antiquewhite;
-    border-radius: 5px;
-  }
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.origin-overlay {
-  .qrcode-tooltip {
-    .qrcode-tooltip-temp{
-      padding: min(5px) !important;
-    }
-  }
+.camera-section {
+  width: 50%; /* Ajusta el ancho de la sección de la cámara según tus necesidades */
+  border: 2px solid #ddd; /* Puedes agregar un borde para resaltar la sección de la cámara */
+  overflow: hidden;
+}
+
+ngx-scanner-qrcode {
+  width: 100%;
+  max-width: 100%; /* Asegura que el ngx-scanner-qrcode no se extienda más allá de su contenedor */
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Ajusta el espacio entre los botones según tus necesidades */
+  margin-top: 10px; /* Ajusta el margen superior según tus necesidades */
+}
+
+.button-group button {
+  min-width: 0; /* Permite que el ancho del botón sea ajustado automáticamente según su contenido */
+  font-size: 14px; /* Ajusta el tamaño de la fuente del botón */
 }

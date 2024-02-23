@@ -24,6 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { BarcodeScannerComponent } from './components/barcode-scanner/barcode-scanner.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
     LoginFormComponent,
     // DashboardComponent,
     ToastComponent,
-    ToasterComponent
+    ToasterComponent,
+    BarcodeScannerComponent
   ],
   imports: [
     BrowserModule,

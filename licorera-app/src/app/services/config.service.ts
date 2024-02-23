@@ -12,6 +12,7 @@ export class ConfigService {
   constructor(private router:Router) {
     // Obtener la IP del servidor actual
     const serverIp = window.location.hostname;
+    // const serverIp = "192.168.3.44";
     this.backendUrl = `http://${serverIp}:1337/api`;
   }
   navigate(Pagina: string): void {

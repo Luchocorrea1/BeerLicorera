@@ -1,7 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, AfterViewInit, Output, ViewChild } from '@angular/core';
 import { Toast } from 'bootstrap';
-import { fromEvent, take } from 'rxjs';
-import { EventTypes } from 'src/app/models/event-types';
 
 @Component({
   selector: 'app-toast',
@@ -32,19 +30,18 @@ export class ToastComponent implements AfterViewInit {
   show() {
     this.toast = new Toast(
       this.toastEl.nativeElement,
-      // this.type === EventTypes.Error {}
-         {
-          animation:true,
-            autohide: true,
-            delay: 5000,
-          }
+      {
+        animation: true,
+        autohide: true,
+        delay: 5000,
+      }
     );
 
     this.toast.show();
 
-    setTimeout(()=>{
+    setTimeout(() => {
       this.hide();
-    },6000);
+    }, 6000);
   }
 
   hide() {

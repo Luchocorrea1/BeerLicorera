@@ -50,10 +50,40 @@ export class EscanerComponent implements AfterViewInit {
     });
   }
 
+  public respuesta: string = "";
+  public qrCodeFrequencies: { [key: string]: number } = {};
+  public count = 0;
   public onEvent(e: ScannerQRCodeResult[], action?: any): void {
-    // e && action && action.pause();
-    console.log(e);
+    if (e && e.length > 0) {
+      // Almacena los resultados en un objeto para contar su frecuencia
+      // const qrCodeFrequencies: { [key: string]: number } = {};
+
+      // Contabiliza la frecuencia de cada código QR en los resultados
+      e.forEach((result: any) => {
+        const qrCode = result.value;
+        this.qrCodeFrequencies[qrCode] = (this.qrCodeFrequencies[qrCode] || 0) + 1;
+      });
+
+      // Encuentra el código QR más frecuente
+      const mostFrequentQRCode = Object.keys(this.qrCodeFrequencies).reduce((a, b) => this.qrCodeFrequencies[a] > this.qrCodeFrequencies[b] ? a : b);
+
+      // Detiene la lectura
+      // action && action.pause();
+      if (this.count == 10){
+        this.handle(action, action.isStart ? 'stop' : 'start');
+        this.count=0;
+      }
+      else
+        this.count++;
+      // Apaga la cámara
+      // action && action.turnOffCamera();
+      this.respuesta = mostFrequentQRCode;
+      // Muestra el código QR más frecuente en la consola
+      console.log("Código QR más frecuente:", mostFrequentQRCode);
+    }
   }
+
+
 
   public handle(action: any, fn: string): void {
     const playDeviceFacingBack = (devices: any[]) => {
@@ -65,7 +95,7 @@ export class EscanerComponent implements AfterViewInit {
     if (fn === 'start') {
       action[fn](playDeviceFacingBack).subscribe((r: any) => {
 
-      console.log(fn, r), alert
+        console.log(fn, r), alert
       });
     } else {
       action[fn]().subscribe((r: any) => console.log(fn, r), alert);
@@ -93,7 +123,7 @@ export class EscanerComponent implements AfterViewInit {
     const constrains = this.action.getConstraints();
     console.log(constrains);
   }
-  
+
   public applyConstraints() {
     const constrains = this.action.applyConstraints({
       ...this.action.getConstraints(),
