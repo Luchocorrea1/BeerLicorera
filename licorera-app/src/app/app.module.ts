@@ -25,6 +25,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { BarcodeScannerComponent } from './components/barcode-scanner/barcode-scanner.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 
 @NgModule({
@@ -54,7 +57,9 @@ import { BarcodeScannerComponent } from './components/barcode-scanner/barcode-sc
     MatCheckboxModule,
     MatButtonModule,
     MatGridListModule,
-    MatCardModule
+    MatCardModule,
+    MatIconModule,
+    MatTooltipModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

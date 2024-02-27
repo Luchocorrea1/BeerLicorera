@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import Quagga from '@ericblade/quagga2';
+// import Quagga from '@ericblade/quagga2';
 
 @Component({
   selector: 'app-barcode-scanner',
