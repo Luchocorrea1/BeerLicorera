@@ -27,6 +27,7 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { BarcodeScannerComponent } from './components/barcode-scanner/barcode-scanner.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { RecordarUsuarioComponent } from './components/recordar-usuario/recordar-usuario.component';
 
 
 
@@ -38,7 +39,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     // DashboardComponent,
     ToastComponent,
     ToasterComponent,
-    BarcodeScannerComponent
+    BarcodeScannerComponent,
+    RecordarUsuarioComponent
   ],
   imports: [
     BrowserModule,

@@ -49,7 +49,7 @@ export class SidebarComponent implements OnInit {
           icon: x.attributes.Icono,
           active: x.attributes.Activo,
           type: x.attributes.Tipo,
-          badge:x.attributes.Badge?JSON.parse(x.attributes.Badge):undefined,
+          badge:x.attributes.Badge,
           submenus: x.attributes.submenu
         }))
         .ToArray();
