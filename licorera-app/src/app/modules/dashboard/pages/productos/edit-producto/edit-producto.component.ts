@@ -103,13 +103,12 @@ export class EditProductoComponent implements OnInit {
 
     if (this.frmCategoria.valid) {
       const formData = { "data": this.frmCategoria.value };
-      // Convertir los datos a una cadena JSON.
-      const jsonData = JSON.stringify(formData);
       this.Execute.post<any>('categoria-productos', formData)
         .subscribe((response: any) => {
           // Manejar la respuesta del backend.
           console.log('Respuesta del backend:', response);
           this.getCategoria(this.frmCategoria.value.Categoria);
+          this.toastService.showToast('¡Correcto!', 'La categoría '+this.frmCategoria.value.Categoria + ' se agregó correctamente.', EventTypes.Success);
           this.frmCategoria.reset();
           this.NuevaCategoria = false;
 

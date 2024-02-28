@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "menus",
+  "info": {
+    "singularName": "menu",
+    "pluralName": "menus",
+    "displayName": "Menu",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Titulo": {
+      "type": "string"
+    },
+    "Href": {
+      "type": "string"
+    },
+    "Icono": {
+      "type": "string"
+    },
+    "Activo": {
+      "type": "boolean"
+    },
+    "Tipo": {
+      "type": "enumeration",
+      "enum": [
+        "header",
+        "dropdown",
+        "simple"
+      ]
+    },
+    "Badge": {
+      "type": "json"
+    },
+    "submenus": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::menu.menu"
+    }
+  }
+}

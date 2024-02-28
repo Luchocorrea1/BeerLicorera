@@ -9,6 +9,7 @@ import { Usuario } from '../../../models/enums';
 import { ConfigService } from 'src/app/services/config.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { EventTypes } from 'src/app/models/event-types';
+import { List } from 'linqts';
 
 @Component({
   selector: 'app-sidebar',
@@ -25,17 +26,34 @@ import { EventTypes } from 'src/app/models/event-types';
 
 export class SidebarComponent implements OnInit {
 
-  menus: MenuItem[];
-  usuario: Usuario = {Nombre:'', Apellido:'', Rol:''}
+  menus: MenuItem[] = [];
+  usuario: Usuario = { Nombre: '', Apellido: '', Rol: '' }
 
-  constructor(private configService: ConfigService,public sidebarservice: SidebarService, private authService:AuthService, private Execute:BackendCommunicationService, private toastService: ToastService) {
-    this.menus = sidebarservice.getMenuList();
+  constructor(private configService: ConfigService, public sidebarservice: SidebarService, private authService: AuthService,
+    private Execute: BackendCommunicationService, private toastService: ToastService) {
+    // this.menus = sidebarservice.getMenuList();
+    // this.menus = new List<MenuItem>;
     this.getUserData();
-   }
-   toggleSidebar() {
+  }
+  toggleSidebar() {
     this.sidebarservice.setSidebarState(!this.sidebarservice.getSidebarState());
   }
   ngOnInit() {
+    this.Execute.get<any>('menus')
+      .subscribe((response: any) => {
+        
+        this.menus = new List<MenuItem>(response.data) 
+        .Select((x:any)=> ({
+          title : x.attributes.Titulo,
+          href: x.attributes.Href,
+          icon: x.attributes.Icono,
+          active: x.attributes.Activo,
+          type: x.attributes.Tipo,
+          badge:x.attributes.Badge?JSON.parse(x.attributes.Badge):undefined,
+          submenus: x.attributes.submenu
+        }))
+        .ToArray();
+      });
   }
 
   getSideBarState() {
@@ -51,14 +69,14 @@ export class SidebarComponent implements OnInit {
           element.active = false;
         }
       });
-    }else{
-      if(currentMenu.href){
-    this.configService.navigate(currentMenu.href);
+    } else {
+      if (currentMenu.href) {
+        this.configService.navigate(currentMenu.href);
       }
     }
   }
 
-  getState(currentMenu:MenuItem) {
+  getState(currentMenu: MenuItem) {
 
     if (currentMenu.active) {
       return 'down';
@@ -70,7 +88,7 @@ export class SidebarComponent implements OnInit {
   hasBackgroundImage() {
     return this.sidebarservice.hasBackgroundImage;
   }
-  logOut(){
+  logOut() {
     this.authService.logout();
   }
 
@@ -78,10 +96,10 @@ export class SidebarComponent implements OnInit {
     this.Execute.get<any>('users/me?populate=role')
       .subscribe((response: any) => {
         // Manejar la respuesta del backend.
-        this.usuario.Nombre=response.Nombre;
-        this.usuario.Apellido=response.Apellido;
-        this.usuario.Rol=response.role?.name;
-        
+        this.usuario.Nombre = response.Nombre;
+        this.usuario.Apellido = response.Apellido;
+        this.usuario.Rol = response.role?.name;
+
       }, error => {
         // console.error('Error en la autenticación:', error);
         this.toastService.showToast('Ocurrió un error', 'Error inesperado ' + error.message, EventTypes.Error);
