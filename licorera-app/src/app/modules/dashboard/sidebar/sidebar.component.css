@@ -445,15 +445,6 @@
   border-top: 1px solid #3a3a3a;
 }
 
-
-/* Styles with background image */
-/* .sidebar.sidebar-bg {
-  background-image: url(/assets/images/bg1.jpg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-} */
-
 .sidebar.sidebar-bg:before {
   content: '';
   position: absolute;
